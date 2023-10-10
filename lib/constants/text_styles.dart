@@ -129,6 +129,12 @@ abstract class TextStyles {
     fontWeight: FontWeight.w400,
   );
 
+      static const s400r18Grey = TextStyle(
+    color: Pallate.darkGreyColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+  );
+
     static const s700r32Black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 32,
