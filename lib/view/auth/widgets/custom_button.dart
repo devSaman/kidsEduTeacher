@@ -7,32 +7,36 @@ class CustomButton extends StatelessWidget {
   final double width;
   final Color color;
   final String text;
+  final VoidCallback onTap;
   const CustomButton(
       {super.key,
       required this.height,
       required this.width,
       required this.color,
-      required this.text});
+      required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(100),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: color == Pallate.mainColor
+            ? Text(
+                text,
+                style: TextStyles.s700r16White,
+              )
+            : Text(
+                text,
+                style: TextStyles.s700r16Main,
+              ),
       ),
-      child: color == Pallate.mainColor
-          ? Text(
-              text,
-              style: TextStyles.s700r16White,
-            )
-          : Text(
-              text,
-              style: TextStyles.s700r16Main,
-            ),
     );
   }
 }

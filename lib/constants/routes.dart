@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
 
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart';
@@ -45,6 +46,8 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:
         return MaterialPageRoute(builder: (_) => const InfoScreen());
+      case CreateAccountPage.routeName:
+        return MaterialPageRoute(builder: (_) => const CreateAccountPage());
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());
     }

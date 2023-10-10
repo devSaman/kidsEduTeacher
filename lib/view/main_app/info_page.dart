@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -53,7 +55,7 @@ class _InfoScreenState extends State<InfoScreen> {
                         children: [
                           Image(
                             image: AssetImage("assets/images/1frame.png"),
-                            height: 295,
+                            height: 250,
                             width: 340,
                           ),
                           Text(
@@ -95,20 +97,24 @@ class _InfoScreenState extends State<InfoScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              const CustomButton(
-                text: "НАЧАТЬ",
+              CustomButton(
+                onTap: (){
+                  Navigator.pushNamed(context, CreateAccountPage.routeName);
+                },
+                text: tr("start"),
                 color: Pallate.mainColor,
                 width: 350,
                 height: 58,
               ),
               const SizedBox(height: 24),
               CustomButton(
-                text: "У МЕНЯ УЖЕ ЕСТЬ АККАУНТ",
+                onTap: (){},
+                text: tr('have_account'),
                 color: Pallate.mainColor.withOpacity(.2),
                 width: 350,
                 height: 58,
               ),
-              SizedBox(height: 60)
+              const SizedBox(height: 50)
             ],
           ),
         ),

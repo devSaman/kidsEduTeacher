@@ -27,5 +27,22 @@
     "categories":"Categories",
     "popular":"Popular",
     "clothes":"Clothes",
-    "shoes":"Shoes"
+    "shoes":"Shoes",
+    "start":"GET STARTED",
+    "have_account":"I ALREADY HAVE AN ACCOUNT",
+    "create_account":"Create an account",
+    "create_account_definition":"Please complete your profile. Don't worry, your data will remain private and only you can see it.",
+    "full_name":"Full Name",
+    "date_of_birth":"Date of Birth",
+    "phone_number":"Phone Number",
+    "password":"Password",
+    "re_password":"Re-password",
+    "continue":"Continue",
+    "sent_sms":"You've got sms",
+    "sent_sms_definition":"We have sent the OTP verification code to your phone number. Enter the code below.",
+    "didn't_receive_email":"Didn't receive email?",
+    "you_can_resend_code":"You can resend code in",
+    "confirm":"Confirm",
+    "successful":"Successful!",
+    "wait":"Please wait a moment, we are preparing for you..."
 }
