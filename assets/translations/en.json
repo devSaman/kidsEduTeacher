@@ -44,5 +44,6 @@
     "you_can_resend_code":"You can resend code in",
     "confirm":"Confirm",
     "successful":"Successful!",
-    "wait":"Please wait a moment, we are preparing for you..."
+    "wait":"Please wait a moment, we are preparing for you...",
+    "hint_date":"dd/mm/yyyy"
 }

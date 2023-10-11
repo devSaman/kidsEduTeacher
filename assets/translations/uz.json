@@ -43,5 +43,6 @@
     "you_can_resend_code":"Siz kodni qaytadan yuborishingiz mumkin",
     "confirm":"Tasdiqlang",
     "successful":"Muvaffaqiyatli!",
-    "wait":"Iltimos, biroz kuting, biz siz uchun tayyorlanyapmiz..."
+    "wait":"Iltimos, biroz kuting, biz siz uchun tayyorlanyapmiz...",
+    "hint_date":"kk/oo/yyyy"
 }

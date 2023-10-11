@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/logic/create_account_bloc/create_account_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
+import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
 
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart';
@@ -47,7 +50,13 @@ abstract class Routes {
       case InfoScreen.routeName:
         return MaterialPageRoute(builder: (_) => const InfoScreen());
       case CreateAccountPage.routeName:
-        return MaterialPageRoute(builder: (_) => const CreateAccountPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => CreateAccountBloc(),
+                  child: const CreateAccountPage(),
+                ));
+      case VerificationPage.routeName:
+        return MaterialPageRoute(builder: (_) => const VerificationPage());
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());
     }

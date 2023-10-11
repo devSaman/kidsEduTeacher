@@ -28,5 +28,6 @@ com.example.kids_edu_teacher.app-mergeDebugResources-26 C:\Users\saman\OneDrive\
 com.example.kids_edu_teacher.app-mergeDebugResources-27 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
 com.example.kids_edu_teacher.app-merged_res-28 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\app\intermediates\merged_res\debug
 com.example.kids_edu_teacher.app-packaged_res-29 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\packaged_res\debug
-com.example.kids_edu_teacher.app-packaged_res-30 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\path_provider_android\intermediates\packaged_res\debug
-com.example.kids_edu_teacher.app-packaged_res-31 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\shared_preferences_android\intermediates\packaged_res\debug
+com.example.kids_edu_teacher.app-packaged_res-30 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\fluttertoast\intermediates\packaged_res\debug
+com.example.kids_edu_teacher.app-packaged_res-31 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\path_provider_android\intermediates\packaged_res\debug
+com.example.kids_edu_teacher.app-packaged_res-32 C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\shared_preferences_android\intermediates\packaged_res\debug

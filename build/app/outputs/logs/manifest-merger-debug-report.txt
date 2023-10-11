@@ -27,6 +27,7 @@ INJECTED from C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\mai
 MERGED from C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:1:1-33:12
 MERGED from [:shared_preferences_android] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-50:12
+MERGED from [:fluttertoast] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider_android] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\ae81e06d24c799147c26814497a2a305\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
@@ -86,6 +87,8 @@ MERGED from [:shared_preferences_android] C:\Users\saman\OneDrive\Desktop\kidsEd
 MERGED from [:shared_preferences_android] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:fluttertoast] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:fluttertoast] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\fluttertoast\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:path_provider_android] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:path_provider_android] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\ae81e06d24c799147c26814497a2a305\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
