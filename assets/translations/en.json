@@ -45,5 +45,10 @@
     "confirm":"Confirm",
     "successful":"Successful!",
     "wait":"Please wait a moment, we are preparing for you...",
-    "hint_date":"dd/mm/yyyy"
+    "hint_date":"dd/mm/yyyy",
+    "fill_name":"Fill Name Input",
+    "fill_dtf":"Please enter correctly date of your birth",
+    "fill_number":"Please enter correctly your number",
+    "password_fill":"Please enter password/re-password",
+    "not_match_password":"Your password and re-password not match!"
 }

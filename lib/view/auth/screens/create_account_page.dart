@@ -177,8 +177,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                       print("dd");
                       Fluttertoast.showToast(
                           msg: state.errorModel.message.toString(),
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.TOP,
                           timeInSecForIosWeb: 1,
                           backgroundColor: Pallate.mainColor,
                           textColor: Colors.white,
@@ -188,13 +188,63 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   builder: (context, state) {
                     return CustomButton(
                       onTap: () {
-                        context.read<CreateAccountBloc>().add(
-                            CreateAccountDataEvent(
-                                fullName: nameController.text,
-                                psw: passwordControoller.text,
-                                birthDate: birthController.text,
-                                phone:
-                                    phoneController.text.replaceAll("-", "")));
+                        if (nameController.text.length<4) {
+                          Fluttertoast.showToast(
+                              msg: tr('fill_name'),
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Pallate.mainColor,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else if (birthController.text.length < 10) {
+                          Fluttertoast.showToast(
+                              msg: tr('fill_dtf'),
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Pallate.mainColor,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else if (phoneController.text.length < 12) {
+                          Fluttertoast.showToast(
+                              msg: tr('fill_number'),
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Pallate.mainColor,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else if (passwordControoller.text.isEmpty ||
+                            rePasswordControoller.text.isEmpty ||
+                            passwordControoller.text.length < 4) {
+                          Fluttertoast.showToast(
+                              msg: tr('password_fill'),
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Pallate.mainColor,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else if (passwordControoller.text !=
+                            rePasswordControoller.text) {
+                          Fluttertoast.showToast(
+                              msg: tr('not_match_password'),
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.TOP,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Pallate.mainColor,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else {
+                          context.read<CreateAccountBloc>().add(
+                              CreateAccountDataEvent(
+                                  fullName: nameController.text,
+                                  psw: passwordControoller.text,
+                                  birthDate: birthController.text.replaceAll("/", "-"),
+                                  phone: phoneController.text
+                                      .replaceAll("-", "")));
+                        }
                       },
                       text: tr("continue"),
                       color: Pallate.mainColor,

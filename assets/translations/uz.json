@@ -44,5 +44,10 @@
     "confirm":"Tasdiqlang",
     "successful":"Muvaffaqiyatli!",
     "wait":"Iltimos, biroz kuting, biz siz uchun tayyorlanyapmiz...",
-    "hint_date":"kk/oo/yyyy"
+    "hint_date":"kk/oo/yyyy",
+    "fill_name":"Ismingizni kiriting",
+    "fill_dtf":"Iltimos, tug'ilgan kuningizni to'g'ri kiriting",
+    "fill_number":"Iltimos, raqamingizni to'g'ri kiriting",
+    "password_fill":"Iltimos, parolni/takroriy parolni kiriting",
+    "not_match_password":"Sizning parolingiz va takroriy parolingiz mos kelmadi!"
 }
