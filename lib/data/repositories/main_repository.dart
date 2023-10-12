@@ -64,4 +64,29 @@ class MainRepository {
       return ResponseError.noInternet;
     }
   }
+
+  static Future<ResponseData> login(String phone, String psw) async {
+    try {
+      final response =
+          await http.post(Uri.parse('${ApiPaths.basicUrl}/teachers/login'),
+              headers: {'Content-Type': 'application/json'},
+              body: json.encode(
+                {
+                  "phoneNumber": "998$phone".replaceAll("-", ""),
+                  "password": psw
+                },
+              ));
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return CretaedAccountModel.fromJson(response.body);
+        case StatusCodes.alreadyTaken:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/create_account_bloc/create_account_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/logic/login_bloc/login_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/verification_bloc/verification_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
+import 'package:kids_edu_teacher/view/auth/screens/login_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
 
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
@@ -64,6 +66,12 @@ abstract class Routes {
                   child: VerificationPage(
                     phoneNumber: phoneNumber,
                   ),
+                ));
+      case LoginPage.routeName:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => LoginBloc(),
+                  child: const LoginPage(),
                 ));
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());

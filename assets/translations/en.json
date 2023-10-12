@@ -45,11 +45,15 @@
     "confirm":"Confirm",
     "successful":"Successful!",
     "wait":"Please wait a moment, we are preparing for you...",
-    "hint_date":"dd/mm/yyyy",
+    "hint_date":"mm/dd/yyyy",
     "fill_name":"Fill Name Input",
     "fill_dtf":"Please enter correctly date of your birth",
     "fill_number":"Please enter correctly your number",
     "password_fill":"Please enter password/re-password",
     "not_match_password":"Your password and re-password not match!",
-    "please_fill_verification":"Please fill verification"
+    "please_fill_verification":"Please fill verification",
+    "login":"Login",
+    "forgot_password":"Forgot Password",
+    "forgot_password_definition":"Enter your email address to get an OTP code to reset your password.",
+    "sign_in":"Sign In"
 }
