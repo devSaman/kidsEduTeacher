@@ -20,9 +20,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
     if (response is CretaedAccountModel) {
       emit(CreateAccountSuccess(createdAccount: response));
     } else if (response is ErrorModel) {
-      print("geege");
       emit(CreateAccountFail(errorModel: response));
-      print("ERROR");
     }
   }
 }

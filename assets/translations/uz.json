@@ -49,5 +49,6 @@
     "fill_dtf":"Iltimos, tug'ilgan kuningizni to'g'ri kiriting",
     "fill_number":"Iltimos, raqamingizni to'g'ri kiriting",
     "password_fill":"Iltimos, parolni/takroriy parolni kiriting",
-    "not_match_password":"Sizning parolingiz va takroriy parolingiz mos kelmadi!"
+    "not_match_password":"Sizning parolingiz va takroriy parolingiz mos kelmadi!",
+    "please_fill_verification":"Iltimos, tasdiqlash kodini toʻldiring"
 }

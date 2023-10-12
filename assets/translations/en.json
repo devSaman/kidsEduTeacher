@@ -50,5 +50,6 @@
     "fill_dtf":"Please enter correctly date of your birth",
     "fill_number":"Please enter correctly your number",
     "password_fill":"Please enter password/re-password",
-    "not_match_password":"Your password and re-password not match!"
+    "not_match_password":"Your password and re-password not match!",
+    "please_fill_verification":"Please fill verification"
 }

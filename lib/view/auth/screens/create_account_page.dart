@@ -8,9 +8,8 @@ import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/auth/logic/create_account_bloc/create_account_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
-import 'package:kids_edu_teacher/view/auth/widgets/date_input.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/input_widget.dart';
-import 'package:kids_edu_teacher/view/auth/widgets/phone_number_mask.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CreateAccountPage extends StatefulWidget {
   static const routeName = '/createAccountPage';
@@ -29,6 +28,16 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   TextEditingController birthController = TextEditingController();
   bool _isVisible = false;
   bool _isVisible1 = false;
+
+  var dateFormatter = MaskTextInputFormatter(
+      mask: '##/##/####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
+
+  var phoneFormatter = MaskTextInputFormatter(
+      mask: '##-###-##-##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +88,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   maxLength: 10,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
-                    DateOfBirthTextInputFormatter()
+                    dateFormatter
                   ],
                   inputType: TextInputType.number,
                   hintText: tr('hint_date'),
@@ -104,7 +113,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   maxLength: 12,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
-                    CustomPhoneNumberTextInputFormatter()
+                    phoneFormatter
                   ],
                   inputType: TextInputType.number,
                   prefixIcon: const Text(
@@ -172,9 +181,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 child: BlocConsumer<CreateAccountBloc, CreateAccountState>(
                   listener: (context, state) {
                     if (state is CreateAccountSuccess) {
-                      Navigator.pushNamed(context, VerificationPage.routeName);
+                      Navigator.pushNamed(context, VerificationPage.routeName,
+                          arguments: phoneController.text);
                     } else if (state is CreateAccountFail) {
-                      print("dd");
                       Fluttertoast.showToast(
                           msg: state.errorModel.message.toString(),
                           toastLength: Toast.LENGTH_LONG,
@@ -188,7 +197,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   builder: (context, state) {
                     return CustomButton(
                       onTap: () {
-                        if (nameController.text.length<4) {
+                        if (nameController.text.length < 4) {
                           Fluttertoast.showToast(
                               msg: tr('fill_name'),
                               toastLength: Toast.LENGTH_LONG,
@@ -241,7 +250,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                               CreateAccountDataEvent(
                                   fullName: nameController.text,
                                   psw: passwordControoller.text,
-                                  birthDate: birthController.text.replaceAll("/", "-"),
+                                  birthDate:
+                                      birthController.text.replaceAll("/", "-"),
                                   phone: phoneController.text
                                       .replaceAll("-", "")));
                         }

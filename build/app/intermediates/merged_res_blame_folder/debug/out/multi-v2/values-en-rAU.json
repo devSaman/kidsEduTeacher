@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.kids_edu_teacher.app-mergeDebugResources-26:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.example.kids_edu_teacher.app-mergeDebugResources-29:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\saman\\.gradle\\caches\\transforms-3\\6d3bbaf4594b8ed85e4722883be764b3\\transformed\\browser-1.4.0\\res\\values-en-rAU\\values-en-rAU.xml",
