@@ -182,7 +182,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   listener: (context, state) {
                     if (state is CreateAccountSuccess) {
                       Navigator.pushNamed(context, VerificationPage.routeName,
-                          arguments: phoneController.text);
+                          arguments: VerificationPage(
+                            phoneNumber: phoneController.text,
+                            fromCreate: true,
+                          ));
                     } else if (state is CreateAccountFail) {
                       Fluttertoast.showToast(
                           msg: state.errorModel.message.toString(),

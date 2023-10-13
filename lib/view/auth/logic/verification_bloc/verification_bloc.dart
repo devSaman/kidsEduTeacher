@@ -15,7 +15,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   Future<void> verification(
       VerificationDataEvent event, Emitter<VerificationState> emit) async {
     emit(VerificationInitial());
-    final response = await MainRepository.verification(event.phone, event.code);
+    final response = await MainRepository.verification(event.phone, event.code, event.fromCreate);
     if (response is VerificationModel) {
       emit(VerificationSuccess(verificationData: response));
     } else if (response is ErrorModel) {

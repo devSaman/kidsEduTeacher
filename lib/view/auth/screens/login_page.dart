@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/auth/logic/login_bloc/login_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/screens/forgot_password.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/input_widget.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
@@ -96,7 +97,9 @@ class _LoginPageState extends State<LoginPage> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 40, bottom: 40),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, ForgotPasswordPage.routeName);
+                  },
                   child: Text(
                     tr('forgot_password'),
                     style: TextStyles.s700r20Main,

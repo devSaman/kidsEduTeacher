@@ -6,15 +6,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/auth/logic/verification_bloc/verification_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/screens/change_paasword.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
 import 'package:pinput/pinput.dart';
 
 class VerificationPage extends StatefulWidget {
   final String phoneNumber;
+  final bool fromCreate;
   static const routeName = '/verificationPage';
 
-  const VerificationPage({super.key, required this.phoneNumber});
+  const VerificationPage(
+      {super.key, required this.phoneNumber, required this.fromCreate});
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -92,7 +95,9 @@ class _VerificationPageState extends State<VerificationPage> {
                   hapticFeedbackType: HapticFeedbackType.lightImpact,
                   onCompleted: (pin) {
                     context.read<VerificationBloc>().add(VerificationDataEvent(
-                        phone: widget.phoneNumber, code: pinController.text));
+                        phone: widget.phoneNumber,
+                        code: pinController.text,
+                        fromCreate: widget.fromCreate));
                   },
                   cursor: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -154,8 +159,12 @@ class _VerificationPageState extends State<VerificationPage> {
                 child: BlocConsumer<VerificationBloc, VerificationState>(
                   listener: (context, state) {
                     if (state is VerificationSuccess) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, MainAppScreen.routeName, (route) => false);
+                      widget.fromCreate
+                          ? Navigator.pushNamedAndRemoveUntil(context,
+                              MainAppScreen.routeName, (route) => false)
+                          : Navigator.pushNamedAndRemoveUntil(context,
+                              ChangePasswordPage.routeName, (route) => false,
+                              arguments: widget.phoneNumber);
                     } else if (state is VerificationError) {
                       Fluttertoast.showToast(
                           msg: state.errorData.message.toString(),
@@ -183,7 +192,8 @@ class _VerificationPageState extends State<VerificationPage> {
                           context.read<VerificationBloc>().add(
                               VerificationDataEvent(
                                   phone: widget.phoneNumber,
-                                  code: pinController.text));
+                                  code: pinController.text,
+                                  fromCreate: widget.fromCreate));
                         }
                       },
                       text: tr("confirm"),

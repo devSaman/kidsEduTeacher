@@ -1,0 +1,224 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.kids_edu_teacher"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml
+10
+11    <queries>
+11-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:9:5-13:15
+12        <intent>
+12-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:10:9-12:18
+13            <action android:name="android.support.customtabs.action.CustomTabsService" />
+13-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-90
+13-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:11:21-87
+14        </intent>
+15    </queries>
+16
+17    <application
+18        android:name="android.app.Application"
+18-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:4:9-42
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.8.0] C:\Users\saman\.gradle\caches\transforms-3\2fa18b2f544a798470f6ba6d29f55f60\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+20        android:icon="@mipmap/ic_launcher"
+20-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:5:9-43
+21        android:label="kids_edu_teacher" >
+21-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:3:9-41
+22        <activity
+22-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:6:9-26:20
+23            android:name="com.example.kids_edu_teacher.MainActivity"
+23-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:7:13-41
+24            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+24-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:11:13-163
+25            android:exported="true"
+25-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:8:13-36
+26            android:hardwareAccelerated="true"
+26-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:12:13-47
+27            android:launchMode="singleTop"
+27-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:9:13-43
+28            android:theme="@style/LaunchTheme"
+28-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:10:13-47
+29            android:windowSoftInputMode="adjustResize" >
+29-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:13:13-55
+30
+31            <!--
+32                 Specifies an Android theme to apply to this Activity as soon as
+33                 the Android process has started. This theme is visible to the user
+34                 while the Flutter UI initializes. After that, this theme continues
+35                 to determine the Window background behind the Flutter UI.
+36            -->
+37            <meta-data
+37-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:18:13-21:17
+38                android:name="io.flutter.embedding.android.NormalTheme"
+38-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:19:15-70
+39                android:resource="@style/NormalTheme" />
+39-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:20:15-52
+40
+41            <intent-filter>
+41-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:22:13-25:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:23:17-68
+42-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:23:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:24:17-76
+44-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:24:27-74
+45            </intent-filter>
+46        </activity>
+47        <!--
+48             Don't delete the meta-data below.
+49             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+50        -->
+51        <meta-data
+51-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:29:9-31:33
+52            android:name="flutterEmbedding"
+52-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:30:13-44
+53            android:value="2" />
+53-->C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\android\app\src\main\AndroidManifest.xml:31:13-30
+54
+55        <activity
+55-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:16:9-20:47
+56            android:name="com.pichillilorenzo.flutter_inappwebview.in_app_browser.InAppBrowserActivity"
+56-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:17:13-104
+57            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+57-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:18:13-137
+58            android:exported="false"
+58-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-37
+59            android:theme="@style/AppTheme" />
+59-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-44
+60        <activity
+60-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:21:9-24:55
+61            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivity"
+61-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:22:13-112
+62            android:exported="false"
+62-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:23:13-37
+63            android:theme="@style/ThemeTransparent" />
+63-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:24:13-52
+64        <activity
+64-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:25:9-28:55
+65            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivity"
+65-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:26:13-106
+66            android:exported="false"
+66-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:27:13-37
+67            android:theme="@style/ThemeTransparent" />
+67-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:28:13-52
+68        <activity
+68-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:29:9-33:55
+69            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance"
+69-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:30:13-126
+70            android:exported="false"
+70-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:31:13-37
+71            android:launchMode="singleInstance"
+71-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:32:13-48
+72            android:theme="@style/ThemeTransparent" />
+72-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:33:13-52
+73        <activity
+73-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:34:9-38:55
+74            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivitySingleInstance"
+74-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:35:13-120
+75            android:exported="false"
+75-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:36:13-37
+76            android:launchMode="singleInstance"
+76-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:37:13-48
+77            android:theme="@style/ThemeTransparent" />
+77-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:38:13-52
+78
+79        <receiver
+79-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:40:9-43:40
+80            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ActionBroadcastReceiver"
+80-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:41:13-111
+81            android:enabled="true"
+81-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:42:13-35
+82            android:exported="false" />
+82-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:43:13-37
+83
+84        <meta-data
+84-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:45:9-47:36
+85            android:name="io.flutter.embedded_views_preview"
+85-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:46:13-61
+86            android:value="true" />
+86-->[:flutter_inappwebview] C:\Users\saman\OneDrive\Desktop\kidsEduTeacher\build\flutter_inappwebview\intermediates\merged_manifest\release\AndroidManifest.xml:47:13-33
+87
+88        <uses-library
+88-->[androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+89            android:name="androidx.window.extensions"
+89-->[androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+90            android:required="false" />
+90-->[androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+91        <uses-library
+91-->[androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+92            android:name="androidx.window.sidecar"
+92-->[androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+93            android:required="false" />
+93-->[androidx.window:window:1.0.0-beta04] C:\Users\saman\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+94
+95        <activity
+95-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:23:9-27:75
+96            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+96-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:24:13-93
+97            android:excludeFromRecents="true"
+97-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:25:13-46
+98            android:exported="false"
+98-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:26:13-37
+99            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+99-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:27:13-72
+100        <!--
+101            Service handling Google Sign-In user revocation. For apps that do not integrate with
+102            Google Sign-In, this service will never be started.
+103        -->
+104        <service
+104-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:33:9-37:51
+105            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+105-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:34:13-89
+106            android:exported="true"
+106-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:35:13-36
+107            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+107-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:36:13-107
+108            android:visibleToInstantApps="true" />
+108-->[com.google.android.gms:play-services-auth:20.4.0] C:\Users\saman\.gradle\caches\transforms-3\9fbd8b6fada67877222f712826ad1a35\transformed\jetified-play-services-auth-20.4.0\AndroidManifest.xml:37:13-48
+109
+110        <activity
+110-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\saman\.gradle\caches\transforms-3\aba8f806953ea3dd8f794da3aeb78a12\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+111            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+111-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\saman\.gradle\caches\transforms-3\aba8f806953ea3dd8f794da3aeb78a12\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+112            android:exported="false"
+112-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\saman\.gradle\caches\transforms-3\aba8f806953ea3dd8f794da3aeb78a12\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+113            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+113-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\saman\.gradle\caches\transforms-3\aba8f806953ea3dd8f794da3aeb78a12\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+114
+115        <meta-data
+115-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\saman\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+116            android:name="com.google.android.gms.version"
+116-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\saman\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+117            android:value="@integer/google_play_services_version" />
+117-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\saman\.gradle\caches\transforms-3\58aa1384bde170d075503b845cfcf44c\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+118
+119        <provider
+119-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+120            android:name="androidx.startup.InitializationProvider"
+120-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+121            android:authorities="com.example.kids_edu_teacher.androidx-startup"
+121-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+122            android:exported="false" >
+122-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+123            <meta-data
+123-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+124                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+124-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+125                android:value="androidx.startup" />
+125-->[androidx.emoji2:emoji2:1.2.0] C:\Users\saman\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+126            <meta-data
+126-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\saman\.gradle\caches\transforms-3\8c1e738388b632b23acecc5b0cf3e292\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+127                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+127-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\saman\.gradle\caches\transforms-3\8c1e738388b632b23acecc5b0cf3e292\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+128                android:value="androidx.startup" />
+128-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\saman\.gradle\caches\transforms-3\8c1e738388b632b23acecc5b0cf3e292\transformed\jetified-lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+129        </provider>
+130    </application>
+131
+132</manifest>

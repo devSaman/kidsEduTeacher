@@ -10,8 +10,10 @@ abstract class VerificationEvent extends Equatable {
 class VerificationDataEvent extends VerificationEvent {
   final String phone;
   final String code;
+  final bool fromCreate;
 
-  const VerificationDataEvent({required this.phone, required this.code});
+  const VerificationDataEvent(
+      {required this.fromCreate, required this.phone, required this.code});
   @override
-  List<Object> get props => [phone, code];
+  List<Object> get props => [fromCreate, phone, code];
 }

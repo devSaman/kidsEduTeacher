@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/logic/change_password_bloc/change_password_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/create_account_bloc/create_account_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/logic/forgot_password_bloc/forgot_password_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/login_bloc/login_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/verification_bloc/verification_bloc.dart';
+import 'package:kids_edu_teacher/view/auth/screens/change_paasword.dart';
 import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
+import 'package:kids_edu_teacher/view/auth/screens/forgot_password.dart';
 import 'package:kids_edu_teacher/view/auth/screens/login_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
 
@@ -59,12 +63,13 @@ abstract class Routes {
                   child: const CreateAccountPage(),
                 ));
       case VerificationPage.routeName:
-        String phoneNumber = settings.arguments as String;
+        var data = settings.arguments as VerificationPage;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => VerificationBloc(),
                   child: VerificationPage(
-                    phoneNumber: phoneNumber,
+                    phoneNumber: data.phoneNumber,
+                    fromCreate: data.fromCreate,
                   ),
                 ));
       case LoginPage.routeName:
@@ -72,6 +77,21 @@ abstract class Routes {
             builder: (_) => BlocProvider(
                   create: (context) => LoginBloc(),
                   child: const LoginPage(),
+                ));
+      case ForgotPasswordPage.routeName:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ForgotPasswordBloc(),
+                  child: const ForgotPasswordPage(),
+                ));
+      case ChangePasswordPage.routeName:
+        final phone = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => ChangePasswordBloc(),
+                  child: ChangePasswordPage(
+                    phone: phone,
+                  ),
                 ));
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());
