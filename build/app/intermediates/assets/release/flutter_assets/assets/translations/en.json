@@ -55,5 +55,15 @@
     "login":"Login",
     "forgot_password":"Forgot Password",
     "forgot_password_definition":"Enter your email address to get an OTP code to reset your password.",
-    "sign_in":"Sign In"
+    "sign_in":"Sign In",
+    "create_new_password":"Create new password",
+    "create_new_password_definition":"Save the new password in a safe place, if you forget it then you have to do a forgot password again.",
+    "confirm_new_passwordd":"Confirm new password",
+    "log_out":"Log Out",
+    "change_language":"Change language",
+    "cancel":"Cancel",
+    "yes":"Yes",
+    "confirm_log_out":"Are you sure you wont to log out?",
+    "languages":"Languages"
+
 }
