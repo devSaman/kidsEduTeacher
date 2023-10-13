@@ -16,6 +16,7 @@ import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart'
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
+import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
@@ -93,6 +94,8 @@ abstract class Routes {
                     phone: phone,
                   ),
                 ));
+      case ChangeLanguagePage.routeName:
+        return MaterialPageRoute(builder: (_) => const ChangeLanguagePage());
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());
     }

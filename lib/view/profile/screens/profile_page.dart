@@ -5,6 +5,7 @@ import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
 
 class ProfilePage extends StatelessWidget {
   static const routeName = '/profileScreen';
@@ -137,6 +138,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                   Text(
                                     tr('confirm_log_out'),
+                                    textAlign: TextAlign.center,
                                     style: TextStyles.s700r20Black,
                                   ),
                                   Row(
@@ -189,24 +191,28 @@ class ProfilePage extends StatelessWidget {
                     trailing: const Icon(Icons.arrow_forward_ios_rounded),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 5),
-                //   child: ListTile(
-                //     leading: CircleAvatar(
-                //       backgroundColor: Pallate.blueGradient1.withOpacity(.2),
-                //       child: Image.asset(
-                //         'assets/icons/language.png',
-                //         width: 20,
-                //         height: 20,
-                //       ),
-                //     ),
-                //     title: Text(
-                //       tr('change_language'),
-                //       style: TextStyles.s700r20Black,
-                //     ),
-                //     trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, ChangeLanguagePage.routeName);
+                    },
+                    leading: CircleAvatar(
+                      backgroundColor: Pallate.blueGradient1.withOpacity(.2),
+                      child: Image.asset(
+                        'assets/icons/language.png',
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                    title: Text(
+                      tr('change_language'),
+                      style: TextStyles.s700r20Black,
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios_rounded),
+                  ),
+                ),
               ],
             ),
           )
