@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/collection_widget.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
-
 
 class LibraryPage extends StatefulWidget {
   static const routeName = '/libraryScreen';
@@ -132,10 +132,12 @@ class _LibraryPageState extends State<LibraryPage>
                               (context, index) {
                                 return InkWell(
                                     onTap: () {
-                                      Navigator.pushNamed(
-                                          context, LibraryCollectionScreen.routeName);
+                                      Navigator.pushNamed(context,
+                                          LibraryCollectionScreen.routeName);
                                     },
-                                    child: const CollectionWidget());
+                                    child: CollectionWidget(
+                                      data: VideoCollectionModel(),
+                                    ));
                               },
                               childCount: 7,
                             ),
@@ -162,8 +164,9 @@ class _LibraryPageState extends State<LibraryPage>
                                     // Navigator.pushNamed(
                                     //     context, VideoPlayerScreen.routeName);
                                   },
-                                  child: const FavoritedVideoWidget(
+                                  child:  FavoritedVideoWidget(
                                     isLibrary: true,
+                                    video: VideoModel(),
                                   )),
                             ),
                           ),

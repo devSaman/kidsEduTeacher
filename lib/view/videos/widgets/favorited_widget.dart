@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
-
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 
 class FavoritedVideoWidget extends StatelessWidget {
+  final VideoModel video;
   final bool isLibrary;
-  const FavoritedVideoWidget({super.key, required this.isLibrary});
+  const FavoritedVideoWidget(
+      {super.key, required this.isLibrary, required this.video});
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +46,9 @@ class FavoritedVideoWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Text(
-                              "Can You Imagine, World data",
+                              video.name.toString(),
                               style: TextStyles.s700r18Black,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -59,10 +61,10 @@ class FavoritedVideoWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const SizedBox(
+                    SizedBox(
                       width: 180,
                       child: Text(
-                        "3K likes • 4.9K views",
+                        "${video.favorited} likes • ${video.views!} views",
                         style: TextStyles.s500r10Grey,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

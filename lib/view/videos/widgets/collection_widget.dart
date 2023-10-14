@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
-
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 
 class CollectionWidget extends StatelessWidget {
-  const CollectionWidget({super.key});
+  final VideoCollectionModel data;
+  const CollectionWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,10 @@ class CollectionWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: CachedNetworkImageProvider(data
+                    .cover!.additionalParameters![0].size320x180
+                    .toString())),
             color: Pallate.blueGradient2,
             borderRadius: BorderRadius.circular(16.0),
           ),
@@ -32,11 +38,11 @@ class CollectionWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        const Positioned(
+        Positioned(
           bottom: 12,
           left: 12,
           child: Text(
-            "Name",
+            data.name.toString(),
             style: TextStyles.s700r16White,
           ),
         ),

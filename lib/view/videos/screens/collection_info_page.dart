@@ -2,14 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_player_page.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
-
 class CollectionInfoPage extends StatefulWidget {
+  final VideoCollectionModel data;
+
   static const routeName = '/collectionInfoScreen';
 
-  const CollectionInfoPage({super.key});
+  const CollectionInfoPage({super.key, required this.data});
 
   @override
   State<CollectionInfoPage> createState() => _CollectionInfoPageState();
@@ -30,8 +32,8 @@ class _CollectionInfoPageState extends State<CollectionInfoPage> {
             )),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          "Education Collection",
+        title: Text(
+          widget.data.name.toString(),
           style: TextStyles.s700r24Black,
         ),
         centerTitle: true,
@@ -138,13 +140,15 @@ class _CollectionInfoPageState extends State<CollectionInfoPage> {
               padding: const EdgeInsets.only(top: 20),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 7,
+                  childCount: widget.data.videos!.length,
                   (context, index) => InkWell(
                       onTap: () {
                         Navigator.pushNamed(
-                            context, VideoPlayerScreen.routeName);
+                            context, VideoPlayerScreen.routeName,
+                            arguments: widget.data.videos![index]);
                       },
-                      child: const FavoritedVideoWidget(
+                      child: FavoritedVideoWidget(
+                        video: widget.data.videos![index],
                         isLibrary: false,
                       )),
                 ),

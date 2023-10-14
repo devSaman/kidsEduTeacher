@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
+  final VideoModel video;
+
   static const routeName = '/videoPlayerScreen';
 
-  const VideoPlayerScreen({super.key});
+  const VideoPlayerScreen({super.key, required this.video});
 
   @override
   State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
@@ -66,8 +69,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     child: YoutubePlayerBuilder(
                       player: YoutubePlayer(
                         controller: YoutubePlayerController(
-                          initialVideoId: extractVideoId(
-                              'https://www.youtube.com/watch?v=QBCix2zAuiI&list=RDQBCix2zAuiI&start_radio=1&ab_channel=SamsungGalaxy'),
+                          initialVideoId:
+                              extractVideoId(widget.video.link.toString()),
                           flags: const YoutubePlayerFlags(
                             autoPlay: true,
                             mute: false,
@@ -88,8 +91,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Back to School Quiz Game",
+                    Text(
+                      widget.video.name.toString(),
                       style: TextStyles.s700r24Black,
                     ),
                     Padding(
@@ -105,7 +108,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Text('123',
+                                  Text(widget.video.views.toString(),
                                       style: TextStyles.s700r20Black),
                                   Text(tr('view'),
                                       style: TextStyles.s500r16grey),
@@ -117,7 +120,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Text('56',
+                                  Text(widget.video.favorited.toString(),
                                       style: TextStyles.s700r20Black),
                                   Text(tr('favorited'),
                                       style: TextStyles.s500r16grey),
@@ -129,7 +132,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Text('23',
+                                  Text(widget.video.shared.toString(),
                                       style: TextStyles.s700r20Black),
                                   Text(tr('shared'),
                                       style: TextStyles.s500r16grey),
@@ -145,8 +148,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       style: TextStyles.s700r20Black,
                     ),
                     const SizedBox(height: 12),
-                    const Text(
-                      "This is a back to school quizzo. Let's make this game in your class to revive the classroom atmosphere after the holidays. Let's have fun at school! 🔥",
+                    Text(
+                      widget.video.description.toString(),
                       textAlign: TextAlign.justify,
                       style: TextStyles.s500r18grey,
                     ),
@@ -168,7 +171,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     onTap: () {
                       Navigator.pushNamed(context, VideoPlayerScreen.routeName);
                     },
-                    child: const FavoritedVideoWidget(
+                    child: FavoritedVideoWidget(
+                      video: VideoModel(),
                       isLibrary: false,
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/auth/logic/change_password_bloc/change_password_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/create_account_bloc/create_account_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/forgot_password_bloc/forgot_password_bloc.dart';
@@ -21,6 +22,7 @@ import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_video_collections_bloc/get_video_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/screens/collection_info_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_player_page.dart';
@@ -35,19 +37,33 @@ abstract class Routes {
       case initialPage:
         return MaterialPageRoute(builder: (_) => const InitialPage());
       case MainAppScreen.routeName:
-        return MaterialPageRoute(builder: (_) => const MainAppScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetVideoCollectionsBloc(),
+                  child: const MainAppScreen(),
+                ));
       case LibraryPage.routeName:
         return MaterialPageRoute(builder: (_) => const LibraryPage());
       case VideoPage.routeName:
-        return MaterialPageRoute(builder: (_) => const VideoPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetVideoCollectionsBloc(),
+                  child: const VideoPage(),
+                ));
       case ShopPage.routeName:
         return MaterialPageRoute(builder: (_) => const ShopPage());
       case ProfilePage.routeName:
         return MaterialPageRoute(builder: (_) => const ProfilePage());
       case CollectionInfoPage.routeName:
-        return MaterialPageRoute(builder: (_) => const CollectionInfoPage());
+        final collection = settings.arguments as VideoCollectionModel;
+        return MaterialPageRoute(
+            builder: (_) => CollectionInfoPage(
+                  data: collection,
+                ));
       case VideoPlayerScreen.routeName:
-        return MaterialPageRoute(builder: (_) => const VideoPlayerScreen());
+        final video = settings.arguments as VideoModel;
+        return MaterialPageRoute(
+            builder: (_) => VideoPlayerScreen(video: video));
       case LibraryCollectionScreen.routeName:
         return MaterialPageRoute(
             builder: (_) => const LibraryCollectionScreen());

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
 
@@ -78,8 +79,9 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
                         // Navigator.pushNamed(
                         //     context, VideoPlayerScreen.routeName);
                       },
-                      child: const FavoritedVideoWidget(
+                      child:  FavoritedVideoWidget(
                         isLibrary: true,
+                        video: VideoModel(),
                       )),
                 ),
               ),

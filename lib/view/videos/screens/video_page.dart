@@ -1,13 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_video_collections_bloc/get_video_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/screens/collection_info_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_player_page.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/collection_widget.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
-
 
 class VideoPage extends StatefulWidget {
   static const routeName = '/videoScreen';
@@ -28,6 +31,7 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   @override
   void initState() {
     controllerTab = TabController(length: 2, vsync: this);
+    context.read<GetVideoCollectionsBloc>().add(GetVideoCollectionsDataEvent());
     super.initState();
   }
 
@@ -82,38 +86,54 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
               child: TabBarView(
                 controller: controllerTab,
                 children: [
-                  CustomScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Text(
-                          "7 ${"collections".tr()}",
-                          style: TextStyles.s700r20Black,
-                        ),
-                      ),
-                      SliverPadding(
-                        padding: const EdgeInsets.only(top: 20),
-                        sliver: SliverGrid(
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  childAspectRatio: 1.6,
-                                  crossAxisSpacing: 16.0,
-                                  maxCrossAxisExtent: 180.0,
-                                  mainAxisSpacing: 20.0),
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              return InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, CollectionInfoPage.routeName);
+                  BlocBuilder<GetVideoCollectionsBloc,
+                      GetVideoCollectionsState>(
+                    builder: (context, state) {
+                      if (state is GetVideoCollectionsSuccess) {
+                        return CustomScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          slivers: [
+                            SliverToBoxAdapter(
+                              child: Text(
+                                "${state.videoCollections.data!.length.toString()} ${"collections".tr()}",
+                                style: TextStyles.s700r20Black,
+                              ),
+                            ),
+                            SliverPadding(
+                              padding: const EdgeInsets.only(top: 20),
+                              sliver: SliverGrid(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                                        childAspectRatio: 1.6,
+                                        crossAxisSpacing: 16.0,
+                                        maxCrossAxisExtent: 180.0,
+                                        mainAxisSpacing: 20.0),
+                                delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                    return InkWell(
+                                        onTap: () {
+                                          Navigator.pushNamed(context,
+                                              CollectionInfoPage.routeName,
+                                              arguments: state.videoCollections
+                                                  .data![index]);
+                                        },
+                                        child: CollectionWidget(
+                                          data: state
+                                              .videoCollections.data![index],
+                                        ));
                                   },
-                                  child: const CollectionWidget());
-                            },
-                            childCount: 7,
-                          ),
-                        ),
-                      )
-                    ],
+                                  childCount:
+                                      state.videoCollections.data!.length,
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      }
+                      return const CupertinoActivityIndicator(
+                        color: Pallate.mainColor,
+                      );
+                    },
                   ),
                   CustomScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -132,9 +152,11 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
                             (context, index) => InkWell(
                                 onTap: () {
                                   Navigator.pushNamed(
-                                      context, VideoPlayerScreen.routeName);
+                                      context, VideoPlayerScreen.routeName,
+                                      );
                                 },
-                                child: const FavoritedVideoWidget(
+                                child: FavoritedVideoWidget(
+                                  video: VideoModel(),
                                   isLibrary: false,
                                 )),
                           ),
