@@ -10,10 +10,11 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final VideoModel video;
-
+  final List<VideoModel> listOfVideos;
   static const routeName = '/videoPlayerScreen';
 
-  const VideoPlayerScreen({super.key, required this.video});
+  const VideoPlayerScreen(
+      {super.key, required this.video, required this.listOfVideos});
 
   @override
   State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
@@ -58,6 +59,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
@@ -72,7 +74,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           initialVideoId:
                               extractVideoId(widget.video.link.toString()),
                           flags: const YoutubePlayerFlags(
-                            autoPlay: true,
+                            autoPlay: false,
                             mute: false,
                           ),
                         ),
@@ -111,6 +113,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                   Text(widget.video.views.toString(),
                                       style: TextStyles.s700r20Black),
                                   Text(tr('view'),
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyles.s500r16grey),
                                 ],
                               ),
@@ -123,6 +126,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                   Text(widget.video.favorited.toString(),
                                       style: TextStyles.s700r20Black),
                                   Text(tr('favorited'),
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyles.s500r16grey),
                                 ],
                               ),
@@ -135,6 +139,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                   Text(widget.video.shared.toString(),
                                       style: TextStyles.s700r20Black),
                                   Text(tr('shared'),
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyles.s500r16grey),
                                 ],
                               ),
@@ -166,13 +171,17 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               padding: const EdgeInsets.only(top: 20),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 7,
+                  childCount: widget.listOfVideos.length,
                   (context, index) => InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, VideoPlayerScreen.routeName);
+                      Navigator.pushNamed(context, VideoPlayerScreen.routeName,
+                          arguments: VideoPlayerScreen(
+                            video: widget.listOfVideos[index],
+                            listOfVideos: widget.listOfVideos,
+                          ));
                     },
                     child: FavoritedVideoWidget(
-                      video: VideoModel(),
+                      video: widget.listOfVideos[index],
                       isLibrary: false,
                     ),
                   ),

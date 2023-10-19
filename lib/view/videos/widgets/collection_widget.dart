@@ -15,9 +15,10 @@ class CollectionWidget extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: CachedNetworkImageProvider(data
-                    .cover!.additionalParameters![0].size320x180
-                    .toString())),
+                image: CachedNetworkImageProvider(
+                  data.cover!.additionalParameters![2].cover3.toString(),
+                ),
+                fit: BoxFit.cover),
             color: Pallate.blueGradient2,
             borderRadius: BorderRadius.circular(16.0),
           ),

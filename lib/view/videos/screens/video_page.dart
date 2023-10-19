@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
-import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_video_collections_bloc/get_video_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/screens/collection_info_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_player_page.dart';
@@ -32,6 +32,7 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   void initState() {
     controllerTab = TabController(length: 2, vsync: this);
     context.read<GetVideoCollectionsBloc>().add(GetVideoCollectionsDataEvent());
+    context.read<GetUserDataBloc>().add(  GetUserData());
     super.initState();
   }
 
@@ -135,34 +136,47 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
                       );
                     },
                   ),
-                  CustomScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    slivers: [
-                      SliverToBoxAdapter(
-                        child: Text(
-                          "28 ${"favorites".tr()}",
-                          style: TextStyles.s700r20Black,
-                        ),
-                      ),
-                      SliverPadding(
-                        padding: const EdgeInsets.only(top: 20),
-                        sliver: SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            childCount: 28,
-                            (context, index) => InkWell(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, VideoPlayerScreen.routeName,
-                                      );
-                                },
-                                child: FavoritedVideoWidget(
-                                  video: VideoModel(),
-                                  isLibrary: false,
-                                )),
-                          ),
-                        ),
-                      )
-                    ],
+                  BlocBuilder<GetUserDataBloc, GetUserDataState>(
+                    builder: (context, state) {
+                      if (state is GetUserDataSuccess) {
+                        var videos = state.userData.data.favoritedVidoes;
+                        return CustomScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          slivers: [
+                            SliverToBoxAdapter(
+                              child: Text(
+                                "${videos!.length} ${"favorites".tr()}",
+                                style: TextStyles.s700r20Black,
+                              ),
+                            ),
+                            SliverPadding(
+                              padding: const EdgeInsets.only(top: 20),
+                              sliver: SliverList(
+                                delegate: SliverChildBuilderDelegate(
+                                  childCount: videos.length,
+                                  (context, index) => InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(context,
+                                            VideoPlayerScreen.routeName,
+                                            arguments: VideoPlayerScreen(
+                                              video: videos[index],
+                                              listOfVideos: videos,
+                                            ));
+                                      },
+                                      child: FavoritedVideoWidget(
+                                        video: videos[index],
+                                        isLibrary: false,
+                                      )),
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      }
+                      return const CupertinoActivityIndicator(
+                        color: Pallate.mainColor,
+                      );
+                    },
                   ),
                 ],
               ),

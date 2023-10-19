@@ -66,53 +66,54 @@ class VideoCollectionsModel extends ResponseData {
   int get hashCode => message.hashCode ^ data.hashCode;
 }
 
-class Size320x180 {
-  String? size320x180;
-  Size320x180({
-    this.size320x180,
+class Cover1 {
+  String? cover3;
+  Cover1({
+    this.cover3,
   });
+ 
 
-  Size320x180 copyWith({
-    String? size320x180,
+  Cover1 copyWith({
+    String? cover3,
   }) {
-    return Size320x180(
-      size320x180: size320x180 ?? this.size320x180,
+    return Cover1(
+      cover3: cover3 ?? this.cover3,
     );
   }
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-
-    if (size320x180 != null) {
-      result.addAll({'320x180': size320x180});
+  
+    if(cover3 != null){
+      result.addAll({'cover3': cover3});
     }
-
+  
     return result;
   }
 
-  factory Size320x180.fromMap(Map<String, dynamic> map) {
-    return Size320x180(
-      size320x180: map['320x180'],
+  factory Cover1.fromMap(Map<String, dynamic> map) {
+    return Cover1(
+      cover3: map['cover3'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Size320x180.fromJson(String source) =>
-      Size320x180.fromMap(json.decode(source));
+  factory Cover1.fromJson(String source) => Cover1.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Size320x180(320x180: $size320x180)';
+  String toString() => 'Cover1(cover3: $cover3)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-
-    return other is Size320x180 && other.size320x180 == size320x180;
+  
+    return other is Cover1 &&
+      other.cover3 == cover3;
   }
 
   @override
-  int get hashCode => size320x180.hashCode;
+  int get hashCode => cover3.hashCode;
 }
 
 class VideoCollectionModel {
@@ -261,7 +262,7 @@ class VideoModel {
   num? shared;
   num? views;
   String? originalName;
-  List<Size320x180>? additionalParameters;
+  VideoCoverModel? cover;
   String? mimetype;
   String? extension;
   String? filename;
@@ -278,7 +279,7 @@ class VideoModel {
     this.shared,
     this.views,
     this.originalName,
-    this.additionalParameters,
+    this.cover,
     this.mimetype,
     this.extension,
     this.filename,
@@ -298,7 +299,7 @@ class VideoModel {
     num? shared,
     num? views,
     String? originalName,
-    List<Size320x180>? additionalParameters,
+    VideoCoverModel? cover,
     String? mimetype,
     String? extension,
     String? filename,
@@ -316,7 +317,7 @@ class VideoModel {
       shared: shared ?? this.shared,
       views: views ?? this.views,
       originalName: originalName ?? this.originalName,
-      additionalParameters: additionalParameters ?? this.additionalParameters,
+      cover: cover ?? this.cover,
       mimetype: mimetype ?? this.mimetype,
       extension: extension ?? this.extension,
       filename: filename ?? this.filename,
@@ -352,8 +353,8 @@ class VideoModel {
     if(originalName != null){
       result.addAll({'originalName': originalName});
     }
-    if(additionalParameters != null){
-      result.addAll({'additionalParameters': additionalParameters!.map((x) => x.toMap()).toList()});
+    if(cover != null){
+      result.addAll({'cover': cover!.toMap()});
     }
     if(mimetype != null){
       result.addAll({'mimetype': mimetype});
@@ -392,7 +393,7 @@ class VideoModel {
       shared: map['shared'],
       views: map['views'],
       originalName: map['originalName'],
-      additionalParameters: map['additionalParameters'] != null ? List<Size320x180>.from(map['additionalParameters']?.map((x) => Size320x180.fromMap(x))) : null,
+      cover: map['cover'] != null ? VideoCoverModel.fromMap(map['cover']) : null,
       mimetype: map['mimetype'],
       extension: map['extension'],
       filename: map['filename'],
@@ -410,7 +411,7 @@ class VideoModel {
 
   @override
   String toString() {
-    return 'VideoModel(name: $name, link: $link, description: $description, favorited: $favorited, shared: $shared, views: $views, originalName: $originalName, additionalParameters: $additionalParameters, mimetype: $mimetype, extension: $extension, filename: $filename, size: $size, isDeleted: $isDeleted, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
+    return 'VideoModel(name: $name, link: $link, description: $description, favorited: $favorited, shared: $shared, views: $views, originalName: $originalName, cover: $cover, mimetype: $mimetype, extension: $extension, filename: $filename, size: $size, isDeleted: $isDeleted, createdAt: $createdAt, updatedAt: $updatedAt, id: $id)';
   }
 
   @override
@@ -425,7 +426,7 @@ class VideoModel {
       other.shared == shared &&
       other.views == views &&
       other.originalName == originalName &&
-      listEquals(other.additionalParameters, additionalParameters) &&
+      other.cover == cover &&
       other.mimetype == mimetype &&
       other.extension == extension &&
       other.filename == filename &&
@@ -445,7 +446,7 @@ class VideoModel {
       shared.hashCode ^
       views.hashCode ^
       originalName.hashCode ^
-      additionalParameters.hashCode ^
+      cover.hashCode ^
       mimetype.hashCode ^
       extension.hashCode ^
       filename.hashCode ^
@@ -462,7 +463,7 @@ class VideoCoverModel {
   String? mimetype;
   String? extension;
   String? filename;
-  List<Size320x180>? additionalParameters;
+  List<Cover1>? additionalParameters;
   num? size;
   bool? isDeleted;
   String? createdAt;
@@ -486,7 +487,7 @@ class VideoCoverModel {
     String? mimetype,
     String? extension,
     String? filename,
-    List<Size320x180>? additionalParameters,
+    List<Cover1>? additionalParameters,
     num? size,
     bool? isDeleted,
     String? createdAt,
@@ -550,7 +551,7 @@ class VideoCoverModel {
       mimetype: map['mimetype'],
       extension: map['extension'],
       filename: map['filename'],
-      additionalParameters: map['additionalParameters'] != null ? List<Size320x180>.from(map['additionalParameters']?.map((x) => Size320x180.fromMap(x))) : null,
+      additionalParameters: map['additionalParameters'] != null ? List<Cover1>.from(map['additionalParameters']?.map((x) => Cover1.fromMap(x))) : null,
       size: map['size'],
       isDeleted: map['isDeleted'],
       createdAt: map['createdAt'],

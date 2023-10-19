@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/main_app/bottom_bar_widget.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_page.dart';
-
 
 class MainAppScreen extends StatefulWidget {
   static const routeName = '/mainAppPage';
@@ -18,23 +19,18 @@ class MainAppScreen extends StatefulWidget {
 }
 
 class _MainAppScreenState extends State<MainAppScreen> {
-  List<Widget> _listOfScreens = [];
-  Widget? videosPage, libraryPage, homePage, shopPage, profilePage;
-  @override
-  void initState() {
-    super.initState();
-    videosPage = const VideoPage();
-    homePage = const HomePage();
-    libraryPage = const LibraryPage();
-    shopPage = const ShopPage();
-    profilePage = const ProfilePage();
-    _listOfScreens = [
-      videosPage!,
-      libraryPage!,
-      homePage!,
-      shopPage!,
-      profilePage!
-    ];
+  final List<Widget> _listOfScreens = [
+    const VideoPage(),
+    const LibraryPage(),
+    const HomePage(),
+    const ShopPage(),
+    const ProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   int _selectedIndex = 2;
@@ -43,76 +39,61 @@ class _MainAppScreenState extends State<MainAppScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: _listOfScreens[_selectedIndex],
-      bottomNavigationBar: ClipRRect(
-        child: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 4,
-          child: SizedBox(
-            height: 70,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BottomBarItem(
-                  label: "video".tr(),
-                  changeItem: () {
-                    setState(() {
-                      _selectedIndex = 0;
-                    });
-                  },
-                  iconPath: _selectedIndex == 0
-                      ? "assets/icons/video_filled.svg"
-                      : "assets/icons/video.svg",
-                ),
-                BottomBarItem(
-                  label: "library".tr(),
-                  changeItem: () {
-                    setState(() {
-                      _selectedIndex = 1;
-                    });
-                  },
-                  iconPath: _selectedIndex == 1
-                      ? "assets/icons/library_filled.svg"
-                      : "assets/icons/library.svg",
-                ),
-                BottomBarItem(
-                  label: "home".tr(),
-                  changeItem: () {
-                    setState(() {
-                      _selectedIndex = 2;
-                    });
-                  },
-                  iconPath: _selectedIndex == 2
-                      ? "assets/icons/home_filled.svg"
-                      : "assets/icons/home.svg",
-                ),
-                BottomBarItem(
-                  label: "shop".tr(),
-                  changeItem: () {
-                    setState(() {
-                      _selectedIndex = 3;
-                    });
-                  },
-                  iconPath: _selectedIndex == 3
-                      ? "assets/icons/shop_filled.svg"
-                      : "assets/icons/shop.svg",
-                ),
-                BottomBarItem(
-                  label: "profile".tr(),
-                  changeItem: () {
-                    setState(() {
-                      _selectedIndex = 4;
-                    });
-                  },
-                  iconPath: _selectedIndex == 4
-                      ? "assets/icons/profile_filled.svg"
-                      : "assets/icons/profile.svg",
-                ),
-              ],
+      body: Center(
+        child: _listOfScreens.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/icons/video_filled.svg",
+              color: _selectedIndex == 0 ? Pallate.mainColor : null,
+              height: 30,
+              width: 30,
             ),
+            label: "video".tr(),
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/icons/library_filled.svg",
+              color: _selectedIndex == 1 ? Pallate.mainColor : null,
+              height: 30,
+              width: 30,
+            ),
+            label: "library".tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/icons/home_filled.svg",
+              color: _selectedIndex == 2 ? Pallate.mainColor : null,
+              height: 30,
+              width: 30,
+            ),
+            label: "home".tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/icons/shop_filled.svg",
+              color: _selectedIndex == 3 ? Pallate.mainColor : null,
+              height: 30,
+              width: 30,
+            ),
+            label: "shop".tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              "assets/icons/profile_filled.svg",
+              color: _selectedIndex == 4 ? Pallate.mainColor : null,
+              height: 30,
+              width: 30,
+            ),
+            label: "profile".tr(),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Pallate.mainColor,
+        unselectedItemColor: Pallate.darkGreyColor,
+        onTap: _onItemTapped,
       ),
     );
   }

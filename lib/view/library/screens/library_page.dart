@@ -1,10 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
+import 'package:kids_edu_teacher/view/library/logic/get_document_collections_bloc/get_document_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/collection_widget.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
@@ -26,10 +30,13 @@ class _LibraryPageState extends State<LibraryPage>
     Tab(text: 'favorites'.tr()),
   ];
 
-  final List<String> datas = ["Books", "Notebooks", "Another"];
   @override
   void initState() {
     controllerTab = TabController(length: 2, vsync: this);
+    context
+        .read<GetDocumentCollectionsBloc>()
+        .add(GetDocumentCollectionsDataEvent());
+            context.read<GetUserDataBloc>().add(  GetUserData());
     super.initState();
   }
 
@@ -78,100 +85,104 @@ class _LibraryPageState extends State<LibraryPage>
               unselectedLabelColor: Pallate.darkGreyColor,
               tabs: _tabs,
             ),
-            const SizedBox(height: 24),
-            SizedBox(
-              height: 40,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Container(
-                      height: 38,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Pallate.mainColor,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Text(
-                        datas[index],
-                        style: TextStyles.s600r16White,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            const SizedBox(height: 5),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: TabBarView(
                   controller: controllerTab,
                   children: [
-                    CustomScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: Text(
-                            "7 ${"collections".tr()}",
-                            style: TextStyles.s700r20Black,
-                          ),
-                        ),
-                        SliverPadding(
-                          padding: const EdgeInsets.only(top: 20),
-                          sliver: SliverGrid(
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                    childAspectRatio: 1.6,
-                                    crossAxisSpacing: 16.0,
-                                    maxCrossAxisExtent: 180.0,
-                                    mainAxisSpacing: 20.0),
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(context,
-                                          LibraryCollectionScreen.routeName);
+                    BlocBuilder<GetDocumentCollectionsBloc,
+                        GetDocumentCollectionsState>(
+                      builder: (context, state) {
+                        if (state is GetDocumentCollectionsSuccess) {
+                          print(state.toString());
+                          var document = state.documentCollections.data;
+
+                          return CustomScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            slivers: [
+                              SliverToBoxAdapter(
+                                child: Text(
+                                  "${document!.length} ${"collections".tr()}",
+                                  style: TextStyles.s700r20Black,
+                                ),
+                              ),
+                              SliverPadding(
+                                padding: const EdgeInsets.only(top: 20),
+                                sliver: SliverGrid(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithMaxCrossAxisExtent(
+                                          childAspectRatio: 1.6,
+                                          crossAxisSpacing: 16.0,
+                                          maxCrossAxisExtent: 180.0,
+                                          mainAxisSpacing: 20.0),
+                                  delegate: SliverChildBuilderDelegate(
+                                    (context, index) {
+                                      return InkWell(
+                                          onTap: () {
+                                            Navigator.pushNamed(
+                                                context,
+                                                LibraryCollectionScreen
+                                                    .routeName);
+                                          },
+                                          child: CollectionWidget(
+                                            data: document[index],
+                                          ));
                                     },
-                                    child: CollectionWidget(
-                                      data: VideoCollectionModel(),
-                                    ));
-                              },
-                              childCount: 7,
-                            ),
-                          ),
-                        )
-                      ],
+                                    childCount: document.length,
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        }
+                        return const CupertinoActivityIndicator(
+                          color: Pallate.mainColor,
+                        );
+                      },
                     ),
-                    CustomScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: Text(
-                            "28 ${"favorites".tr()}",
-                            style: TextStyles.s700r20Black,
-                          ),
-                        ),
-                        SliverPadding(
-                          padding: const EdgeInsets.only(top: 20),
-                          sliver: SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              childCount: 28,
-                              (context, index) => InkWell(
-                                  onTap: () {
-                                    // Navigator.pushNamed(
-                                    //     context, VideoPlayerScreen.routeName);
-                                  },
-                                  child:  FavoritedVideoWidget(
-                                    isLibrary: true,
-                                    video: VideoModel(),
-                                  )),
-                            ),
-                          ),
-                        )
-                      ],
+                    BlocBuilder<GetUserDataBloc, GetUserDataState>(
+                      builder: (context, state) {
+                        if (state is GetUserDataSuccess) {
+                          var documents = state.userData.data.favoritedDocuments;
+                          return CustomScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            slivers: [
+                              SliverToBoxAdapter(
+                                child: Text(
+                                  "${documents!.length} ${"favorites".tr()}",
+                                  style: TextStyles.s700r20Black,
+                                ),
+                              ),
+                              SliverPadding(
+                                padding: const EdgeInsets.only(top: 20),
+                                sliver: SliverList(
+                                  delegate: SliverChildBuilderDelegate(
+                                    childCount: documents.length,
+                                    (context, index) => InkWell(
+                                        onTap: () {
+                                          // Navigator.pushNamed(context,
+                                          //     VideoPlayerScreen.routeName,
+                                          //     arguments: VideoPlayerScreen(
+                                          //       video: videos[index],
+                                          //       listOfVideos: videos,
+                                          //     ));
+                                        },
+                                        child: FavoritedVideoWidget(
+                                          video: documents[index],
+                                          isLibrary: false,
+                                        )),
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        }
+                        return const CupertinoActivityIndicator(
+                          color: Pallate.mainColor,
+                        );
+                      },
                     ),
                   ],
                 ),

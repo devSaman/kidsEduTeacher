@@ -28,6 +28,8 @@ dependencies:
   masked_text: ^1.1.2
   pinput: ^3.0.1
   cached_network_image: ^3.3.0
+  shared_preferences: ^2.2.2
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:

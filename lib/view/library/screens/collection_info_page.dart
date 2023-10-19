@@ -5,7 +5,6 @@ import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
-
 class LibraryCollectionScreen extends StatefulWidget {
   static const routeName = '/libraryCollectionScreen';
 
@@ -17,6 +16,8 @@ class LibraryCollectionScreen extends StatefulWidget {
 }
 
 class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,8 +66,10 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(top: 18),
-                child: Text("76 Books",
-                        style: TextStyles.s700r20Black,),
+                child: Text(
+                  "76 Books",
+                  style: TextStyles.s700r20Black,
+                ),
               ),
             ),
             SliverPadding(
@@ -79,7 +82,7 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
                         // Navigator.pushNamed(
                         //     context, VideoPlayerScreen.routeName);
                       },
-                      child:  FavoritedVideoWidget(
+                      child: FavoritedVideoWidget(
                         isLibrary: true,
                         video: VideoModel(),
                       )),

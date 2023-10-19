@@ -4,15 +4,16 @@ import 'package:kids_edu_teacher/data/responses/response_data.dart';
 
 class CretaedAccountModel extends ResponseData {
   final String? message;
-  final dynamic data;
+  final CreatedUserData data;
   CretaedAccountModel({
     this.message,
     required this.data,
   });
+  
 
   CretaedAccountModel copyWith({
     String? message,
-    dynamic data,
+    CreatedUserData? data,
   }) {
     return CretaedAccountModel(
       message: message ?? this.message,
@@ -26,7 +27,7 @@ class CretaedAccountModel extends ResponseData {
     if(message != null){
       result.addAll({'message': message});
     }
-    result.addAll({'data': data});
+    result.addAll({'data': data.toMap()});
   
     return result;
   }
@@ -34,7 +35,7 @@ class CretaedAccountModel extends ResponseData {
   factory CretaedAccountModel.fromMap(Map<String, dynamic> map) {
     return CretaedAccountModel(
       message: map['message'],
-      data: map['data'],
+      data: CreatedUserData.fromMap(map['data']),
     );
   }
 
@@ -56,4 +57,53 @@ class CretaedAccountModel extends ResponseData {
 
   @override
   int get hashCode => message.hashCode ^ data.hashCode;
+}
+
+class CreatedUserData {
+  String? userId;
+  CreatedUserData({
+    this.userId,
+  });
+
+  CreatedUserData copyWith({
+    String? userId,
+  }) {
+    return CreatedUserData(
+      userId: userId ?? this.userId,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    final result = <String, dynamic>{};
+  
+    if(userId != null){
+      result.addAll({'userId': userId});
+    }
+  
+    return result;
+  }
+
+  factory CreatedUserData.fromMap(Map<String, dynamic> map) {
+    return CreatedUserData(
+      userId: map['userId'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory CreatedUserData.fromJson(String source) => CreatedUserData.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'CreatedUserData(userId: $userId)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+  
+    return other is CreatedUserData &&
+      other.userId == userId;
+  }
+
+  @override
+  int get hashCode => userId.hashCode;
 }

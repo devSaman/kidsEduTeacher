@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
@@ -51,66 +52,82 @@ class _CollectionInfoPageState extends State<CollectionInfoPage> {
                   height: 230,
                   decoration: BoxDecoration(
                     color: Pallate.blackColor,
+                    image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                          widget.data.cover!.additionalParameters![2].cover3
+                              .toString(),
+                        ),
+                        fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 60,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text('45', style: TextStyles.s700r20Black),
-                            Text(tr('videos'), style: TextStyles.s500r16grey),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text('23K', style: TextStyles.s700r20Black),
-                            Text(tr('view'), style: TextStyles.s500r16grey),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text('105', style: TextStyles.s700r20Black),
-                            Text(tr('favorited'),
-                                style: TextStyles.s500r16grey),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text('459', style: TextStyles.s700r20Black),
-                            Text(tr('shared'), style: TextStyles.s500r16grey),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(top: 32),
+            //     child: SizedBox(
+            //       width: double.infinity,
+            //       height: 60,
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           SizedBox(
+            //             width: 80,
+            //             child: Column(
+            //               crossAxisAlignment: CrossAxisAlignment.center,
+            //               children: [
+            //                 Text(widget.data.videos!.length.toString(),
+            //                     style: TextStyles.s700r20Black),
+            //                 Text(
+            //                   tr('videos'),
+            //                   style: TextStyles.s500r16grey,
+            //                   overflow: TextOverflow.ellipsis,
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //           SizedBox(
+            //             width: 80,
+            //             child: Column(
+            //               crossAxisAlignment: CrossAxisAlignment.center,
+            //               children: [
+            //                 const Text('23K', style: TextStyles.s700r20Black),
+            //                 Text(
+            //                   tr('view'),
+            //                   style: TextStyles.s500r16grey,
+            //                   overflow: TextOverflow.ellipsis,
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //           SizedBox(
+            //             width: 80,
+            //             child: Column(
+            //               crossAxisAlignment: CrossAxisAlignment.center,
+            //               children: [
+            //                 const Text('105', style: TextStyles.s700r20Black),
+            //                 Text(tr('favorited'),
+            //                     overflow: TextOverflow.ellipsis,
+            //                     style: TextStyles.s500r16grey),
+            //               ],
+            //             ),
+            //           ),
+            //           SizedBox(
+            //             width: 80,
+            //             child: Column(
+            //               crossAxisAlignment: CrossAxisAlignment.center,
+            //               children: [
+            //                 const Text('459', style: TextStyles.s700r20Black),
+            //                 Text(tr('shared'), style: TextStyles.s500r16grey),
+            //               ],
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -122,8 +139,8 @@ class _CollectionInfoPageState extends State<CollectionInfoPage> {
                       style: TextStyles.s700r20Black,
                     ),
                     const SizedBox(height: 12),
-                    const Text(
-                      "This is a back to school quizzo. Let's make this game in your class to revive the classroom atmosphere after the holidays. Let's have fun at school! 🔥",
+                    Text(
+                      widget.data.description.toString(),
                       textAlign: TextAlign.justify,
                       style: TextStyles.s500r18grey,
                     ),
@@ -145,7 +162,10 @@ class _CollectionInfoPageState extends State<CollectionInfoPage> {
                       onTap: () {
                         Navigator.pushNamed(
                             context, VideoPlayerScreen.routeName,
-                            arguments: widget.data.videos![index]);
+                            arguments: VideoPlayerScreen(
+                              video: widget.data.videos![index],
+                              listOfVideos: widget.data.videos!,
+                            ));
                       },
                       child: FavoritedVideoWidget(
                         video: widget.data.videos![index],

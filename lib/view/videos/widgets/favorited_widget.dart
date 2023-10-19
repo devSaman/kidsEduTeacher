@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
@@ -24,9 +25,14 @@ class FavoritedVideoWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      video.cover!.additionalParameters![2].cover3.toString(),
+                    ),
+                    fit: BoxFit.cover),
                 color: Pallate.redGradient1,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(12),
                     bottomLeft: Radius.circular(12)),
               ),
@@ -64,7 +70,7 @@ class FavoritedVideoWidget extends StatelessWidget {
                     SizedBox(
                       width: 180,
                       child: Text(
-                        "${video.favorited} likes • ${video.views!} views",
+                        "${video.favorited} likes • ${video.views} views",
                         style: TextStyles.s500r10Grey,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

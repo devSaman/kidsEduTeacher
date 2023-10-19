@@ -18,16 +18,16 @@ class InitialPage extends StatefulWidget {
 
 class _InitialPageState extends State<InitialPage> {
   @override
-  void initState() {
-    // Timer(
-    //   const Duration(seconds: 3),
-    //   () {
-    //     Navigator.pushNamedAndRemoveUntil(
-    //         context, InfoScreen.routeName, (route) => false);
-    //   },
-    // );
-    super.initState();
-  }
+  // void initState() {
+  //   Timer(
+  //     const Duration(seconds: 3),
+  //     () {
+  //       Navigator.pushNamedAndRemoveUntil(
+  //           context, InfoScreen.routeName, (route) => false);
+  //     },
+  //   );
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
