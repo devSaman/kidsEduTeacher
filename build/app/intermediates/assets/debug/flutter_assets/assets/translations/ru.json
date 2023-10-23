@@ -64,5 +64,9 @@
     "cancel":"Отмена",
     "yes":"Да",
     "confirm_log_out":"Вы уверены, что хотите выйти из профиль?",
-    "languages":"Языки"
+    "languages":"Языки",
+    "books":"Книги",
+    "settings":"Настройки",
+    "cards":"Карты",
+    "subscription":"Подписка"
 }

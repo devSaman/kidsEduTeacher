@@ -86,6 +86,12 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static const s600r12White = TextStyle(
+    color: Pallate.whiteColor,
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+  );
+
    static const s600r16Block = TextStyle(
     color: Pallate.blackColor,
     fontSize: 16,

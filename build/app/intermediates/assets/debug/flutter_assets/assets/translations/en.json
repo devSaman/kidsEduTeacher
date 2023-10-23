@@ -64,6 +64,10 @@
     "cancel":"Cancel",
     "yes":"Yes",
     "confirm_log_out":"Are you sure you wont to log out?",
-    "languages":"Languages"
+    "languages":"Languages",
+    "books":"Books",
+    "settings":"Settings",
+    "cards":"Cards",
+    "subscription":"Subscription"
 
 }

@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
-import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/cards_page.dart';
 import 'package:kids_edu_teacher/view/profile/widgets/settings_button.dart';
 
 class BalancePage extends StatefulWidget {
@@ -88,7 +88,7 @@ class _BalancePageState extends State<BalancePage> {
               child: SettingsButton(
                 color: Pallate.orange,
                 onTap: () {
-                  // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
+                  Navigator.pushNamed(context, CardsPage.routeName);
                 },
                 text: tr('cards'),
                 iconPath: "assets/icons/profile_filled.svg",

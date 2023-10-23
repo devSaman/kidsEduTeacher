@@ -19,6 +19,7 @@ import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
 import 'package:kids_edu_teacher/view/profile/screens/balance_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/cards_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
@@ -93,6 +94,12 @@ abstract class Routes {
         return MaterialPageRoute(builder: (_) => const InfoScreen());
       case SettingsPage.routeName:
         return MaterialPageRoute(builder: (_) => const SettingsPage());
+      case CardsPage.routeName:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetUserDataBloc(),
+                  child: const CardsPage(),
+                ));
       case BalancePage.routeName:
         return MaterialPageRoute(builder: (_) => const BalancePage());
       case CreateAccountPage.routeName:

@@ -64,5 +64,9 @@
     "cancel":"Bekor qilish",
     "yes":"Ha",
     "confirm_log_out":"Profilingizdan chiqishga ishonchingiz komilmi?",
-    "languages":"Tillar"
+    "languages":"Tillar",
+    "books":"Kitoblar",
+    "settings":"Sozlamalar",
+    "cards":"Kartalar",
+    "subscription":"Obuna"
 }
