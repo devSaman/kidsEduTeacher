@@ -10,4 +10,6 @@ abstract class Pallate {
   static const Color blueGradient2 = Color(0xff5089FD);
   static const Color greyColor = Color(0xffEBEBEB);
   static const Color darkGreyColor = Color(0xff616161);
+  static const Color orange = Color(0xffffab38);
+  static const Color green = Color(0xff71e3bb);
 }

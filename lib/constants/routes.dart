@@ -18,8 +18,10 @@ import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart'
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
+import 'package:kids_edu_teacher/view/profile/screens/balance_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
@@ -77,14 +79,22 @@ abstract class Routes {
                   listOfVideos: data.listOfVideos,
                 ));
       case LibraryCollectionScreen.routeName:
+        final data = settings.arguments as VideoCollectionModel;
+
         return MaterialPageRoute(
-            builder: (_) => const LibraryCollectionScreen());
+            builder: (_) => LibraryCollectionScreen(
+                  collectionInfo: data,
+                ));
       case ProductDetailPage.routeName:
         return MaterialPageRoute(builder: (_) => const ProductDetailPage());
       case CartPage.routeName:
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:
         return MaterialPageRoute(builder: (_) => const InfoScreen());
+      case SettingsPage.routeName:
+        return MaterialPageRoute(builder: (_) => const SettingsPage());
+      case BalancePage.routeName:
+        return MaterialPageRoute(builder: (_) => const BalancePage());
       case CreateAccountPage.routeName:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

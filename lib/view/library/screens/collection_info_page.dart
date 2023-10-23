@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
@@ -6,9 +8,10 @@ import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_mo
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
 class LibraryCollectionScreen extends StatefulWidget {
+  final VideoCollectionModel collectionInfo;
   static const routeName = '/libraryCollectionScreen';
 
-  const LibraryCollectionScreen({super.key});
+  const LibraryCollectionScreen({super.key, required this.collectionInfo});
 
   @override
   State<LibraryCollectionScreen> createState() =>
@@ -16,8 +19,6 @@ class LibraryCollectionScreen extends StatefulWidget {
 }
 
 class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,17 +58,24 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
                   width: double.infinity,
                   height: 230,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: CachedNetworkImageProvider(
+                          widget.collectionInfo.cover!.additionalParameters![2]
+                              .cover3
+                              .toString(),
+                        ),
+                        fit: BoxFit.cover),
                     color: Pallate.blackColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(top: 18),
                 child: Text(
-                  "76 Books",
+                  "${widget.collectionInfo.documents!.length} ${tr('books')}",
                   style: TextStyles.s700r20Black,
                 ),
               ),
@@ -76,7 +84,7 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
               padding: const EdgeInsets.only(top: 20),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: 7,
+                  childCount: widget.collectionInfo.documents!.length,
                   (context, index) => InkWell(
                       onTap: () {
                         // Navigator.pushNamed(
@@ -84,7 +92,7 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
                       },
                       child: FavoritedVideoWidget(
                         isLibrary: true,
-                        video: VideoModel(),
+                        video: widget.collectionInfo.documents![index],
                       )),
                 ),
               ),

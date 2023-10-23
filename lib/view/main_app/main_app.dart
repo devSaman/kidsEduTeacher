@@ -4,16 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
-import 'package:kids_edu_teacher/view/main_app/bottom_bar_widget.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_page.dart';
 
 class MainAppScreen extends StatefulWidget {
   static const routeName = '/mainAppPage';
-
   const MainAppScreen({super.key});
-
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();
 }

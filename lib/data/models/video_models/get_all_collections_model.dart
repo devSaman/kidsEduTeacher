@@ -126,6 +126,7 @@ class VideoCollectionModel {
   String? updatedAt;
   String? createdAt;
   List<VideoModel>? videos;
+  List<VideoModel>? documents;
   VideoCollectionModel({
     this.id,
     this.name,
@@ -136,6 +137,7 @@ class VideoCollectionModel {
     this.updatedAt,
     this.createdAt,
     this.videos,
+    this.documents,
   });
 
   VideoCollectionModel copyWith({
@@ -148,6 +150,7 @@ class VideoCollectionModel {
     String? updatedAt,
     String? createdAt,
     List<VideoModel>? videos,
+    List<VideoModel>? documents,
   }) {
     return VideoCollectionModel(
       id: id ?? this.id,
@@ -159,6 +162,7 @@ class VideoCollectionModel {
       updatedAt: updatedAt ?? this.updatedAt,
       createdAt: createdAt ?? this.createdAt,
       videos: videos ?? this.videos,
+      documents: documents ?? this.documents,
     );
   }
 
@@ -192,6 +196,9 @@ class VideoCollectionModel {
     if (videos != null) {
       result.addAll({'videos': videos!.map((x) => x.toMap()).toList()});
     }
+     if (documents != null) {
+      result.addAll({'documents': documents!.map((x) => x.toMap()).toList()});
+    }
 
     return result;
   }
@@ -211,6 +218,10 @@ class VideoCollectionModel {
           ? List<VideoModel>.from(
               map['videos']?.map((x) => VideoModel.fromMap(x)))
           : null,
+          documents: map['documents'] != null
+          ? List<VideoModel>.from(
+              map['documents']?.map((x) => VideoModel.fromMap(x)))
+          : null,
     );
   }
 
@@ -221,7 +232,7 @@ class VideoCollectionModel {
 
   @override
   String toString() {
-    return 'VideoCollectionModel(id: $id, name: $name, cover: $cover, description: $description, auditory: $auditory, isDeleted: $isDeleted, updatedAt: $updatedAt, createdAt: $createdAt, videos: $videos)';
+    return 'VideoCollectionModel(id: $id, documents:$documents, name: $name, cover: $cover, description: $description, auditory: $auditory, isDeleted: $isDeleted, updatedAt: $updatedAt, createdAt: $createdAt, videos: $videos)';
   }
 
   @override
@@ -237,7 +248,8 @@ class VideoCollectionModel {
         other.isDeleted == isDeleted &&
         other.updatedAt == updatedAt &&
         other.createdAt == createdAt &&
-        listEquals(other.videos, videos);
+        listEquals(other.videos, videos)&&
+        listEquals(other.documents, documents);
   }
 
   @override
@@ -250,6 +262,7 @@ class VideoCollectionModel {
         isDeleted.hashCode ^
         updatedAt.hashCode ^
         createdAt.hashCode ^
+        documents.hashCode^
         videos.hashCode;
   }
 }

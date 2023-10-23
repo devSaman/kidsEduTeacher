@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
-import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/library/logic/get_document_collections_bloc/get_document_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
@@ -36,7 +35,7 @@ class _LibraryPageState extends State<LibraryPage>
     context
         .read<GetDocumentCollectionsBloc>()
         .add(GetDocumentCollectionsDataEvent());
-            context.read<GetUserDataBloc>().add(  GetUserData());
+    context.read<GetUserDataBloc>().add(GetUserData());
     super.initState();
   }
 
@@ -96,9 +95,7 @@ class _LibraryPageState extends State<LibraryPage>
                         GetDocumentCollectionsState>(
                       builder: (context, state) {
                         if (state is GetDocumentCollectionsSuccess) {
-                          print(state.toString());
                           var document = state.documentCollections.data;
-
                           return CustomScrollView(
                             physics: const BouncingScrollPhysics(),
                             slivers: [
@@ -124,7 +121,8 @@ class _LibraryPageState extends State<LibraryPage>
                                             Navigator.pushNamed(
                                                 context,
                                                 LibraryCollectionScreen
-                                                    .routeName);
+                                                    .routeName,
+                                                arguments: document[index]);
                                           },
                                           child: CollectionWidget(
                                             data: document[index],
@@ -145,7 +143,8 @@ class _LibraryPageState extends State<LibraryPage>
                     BlocBuilder<GetUserDataBloc, GetUserDataState>(
                       builder: (context, state) {
                         if (state is GetUserDataSuccess) {
-                          var documents = state.userData.data.favoritedDocuments;
+                          var documents =
+                              state.userData.data.favoritedDocuments;
                           return CustomScrollView(
                             physics: const BouncingScrollPhysics(),
                             slivers: [
