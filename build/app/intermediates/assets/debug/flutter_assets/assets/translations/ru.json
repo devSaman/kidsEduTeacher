@@ -68,5 +68,7 @@
     "books":"Книги",
     "settings":"Настройки",
     "cards":"Карты",
-    "subscription":"Подписка"
+    "subscription":"Подписка",
+    "main":"Основной",
+    "add_card":"Добавить карту"
 }

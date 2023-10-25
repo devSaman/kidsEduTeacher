@@ -68,5 +68,8 @@
     "books":"Kitoblar",
     "settings":"Sozlamalar",
     "cards":"Kartalar",
-    "subscription":"Obuna"
+    "subscription":"Obuna",
+    "main":"Asosiy",
+    "add_card":"Karta qo'shish"
+
 }

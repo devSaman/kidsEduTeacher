@@ -6,6 +6,7 @@ import 'package:kids_edu_teacher/data/models/auth_models/create_account_model.da
 import 'package:kids_edu_teacher/data/models/auth_models/vaerification_model.dart';
 import 'package:kids_edu_teacher/data/models/common_models/error_model.dart';
 import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
+import 'package:kids_edu_teacher/data/models/payment_card_models/card_create_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/data/responses/error_response.dart';
 import 'package:kids_edu_teacher/data/responses/response_data.dart';
@@ -187,6 +188,7 @@ class MainRepository {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var userId = _prefs.getString('userId');
     String fileName = "userDataCache.json";
+    print(userId);
     var cacheDir = await getTemporaryDirectory();
     if (await File("${cacheDir.path}/$fileName").exists()) {
       print("Loading from cache");
@@ -218,6 +220,67 @@ class MainRepository {
       } catch (e) {
         return ResponseError.noInternet;
       }
+    }
+  }
+
+  static Future<ResponseData> addCard(
+      String name, String number, String date, bool isMain) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var userId = _prefs.getString('userId');
+    try {
+      final response =
+          await http.post(Uri.parse('${ApiPaths.basicUrl}/teachers/cards'),
+              headers: {'Content-Type': 'application/json'},
+              body: json.encode({
+                "teacherId": userId,
+                "name": name,
+                "number": number.replaceAll(" ", ""),
+                "expiration": date.replaceAll("/", ""),
+                "isMain": isMain
+              }));
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return CreateCardModel.fromJson(response.body);
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> confirmCard(String number, String code) async {
+    try {
+      print(number);
+      print(code);
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/cards/verify'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "cardNumber": number.replaceAll(" ", ""),
+            "code": code,
+          },
+        ),
+      );
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
     }
   }
 }
