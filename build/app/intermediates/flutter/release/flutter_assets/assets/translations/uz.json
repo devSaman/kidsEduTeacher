@@ -64,5 +64,17 @@
     "cancel":"Bekor qilish",
     "yes":"Ha",
     "confirm_log_out":"Profilingizdan chiqishga ishonchingiz komilmi?",
-    "languages":"Tillar"
+    "languages":"Tillar",
+    "books":"Kitoblar",
+    "settings":"Sozlamalar",
+    "cards":"Kartalar",
+    "subscription":"Obuna",
+    "main":"Asosiy",
+    "add_card":"Karta qo'shish",
+    "name_required":"Nomi majburiy",
+    "number_required":"Raqam bo‘sh yoki yaroqsiz",
+    "date_not_valid":"Sana noto‘g‘ri",
+    "code_required":"Kod bo'sh yoki yaroqsiz",
+    "sent_code":"Tasdiqlash kodi yuborildi"
+
 }

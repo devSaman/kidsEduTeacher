@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             InkWell(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, BalancePage .routeName);
+                                    context, BalancePage.routeName);
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(

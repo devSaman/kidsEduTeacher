@@ -64,6 +64,17 @@
     "cancel":"Cancel",
     "yes":"Yes",
     "confirm_log_out":"Are you sure you wont to log out?",
-    "languages":"Languages"
+    "languages":"Languages",
+    "books":"Books",
+    "settings":"Settings",
+    "cards":"Cards",
+    "subscription":"Subscription",
+    "main":"Main",
+    "add_card":"Add Card",
+    "name_required":"Name is required",
+    "number_required":"Number is emty or not valid",
+    "date_not_valid":"Date is not valid",
+    "code_required":"Code is emty or not valid",
+    "sent_code":"Sent confirmation code"
 
 }

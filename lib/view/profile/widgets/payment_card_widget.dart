@@ -51,7 +51,7 @@ class PaymentCardWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  cardData.number.toString(),
+                                  "${cardData.number.toString().substring(0, 4)} **** **** ${cardData.number.toString().substring(12, 16)}",
                                   style: TextStyles.s700r18Black,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -61,7 +61,7 @@ class PaymentCardWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${cardData.type}  •  ${cardData.expiration}",
+                          "${cardData.type}  •  ${cardData.expiration.toString().substring(0,2)}/${cardData.expiration.toString().substring(2,4)} ",
                           style: TextStyles.s500r10Grey,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

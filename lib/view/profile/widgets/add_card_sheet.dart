@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/profile/logic/add_card_bloc/add_card_bloc.dart';
@@ -91,23 +92,65 @@ class _AddCardSheetState extends State<AddCardSheet> {
                         return BlocProvider(
                             create: (context) => AddCardBloc(),
                             child: ConfirmcardSheet(
+                              phone: state.successCard.data!.resultt!.phone
+                                  .toString(),
                               numberController: widget.numberController,
                             ));
                       },
                     );
+                  } else if (state is AddCardFail) {
+                      Fluttertoast.showToast(
+                        msg: state.errorData.msg.toString(),
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.TOP,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Pallate.mainColor,
+                        textColor: Colors.white,
+                      );
                   }
                 },
                 builder: (context, state) {
                   return InkWell(
                     onTap: () {
-                      context.read<AddCardBloc>().add(
-                            AddCardDataEvent(
-                              name: widget.typeController.text,
-                              number: widget.numberController.text,
-                              expiration: widget.dateController.text,
-                              isMain: true,
-                            ),
-                          );
+                      if (widget.typeController.text.isEmpty) {
+                        Fluttertoast.showToast(
+                          msg: tr('name_required'),
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.TOP,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Pallate.mainColor,
+                          textColor: Colors.white,
+                        );
+                      } else if (widget.numberController.text.isEmpty ||
+                          widget.numberController.text.length < 19) {
+                        Fluttertoast.showToast(
+                          msg: tr('number_required'),
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.TOP,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Pallate.mainColor,
+                          textColor: Colors.white,
+                        );
+                      } else if (widget.dateController.text.isEmpty ||
+                          widget.dateController.text.length < 5) {
+                        Fluttertoast.showToast(
+                          msg: tr('date_not_valid'),
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.TOP,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Pallate.mainColor,
+                          textColor: Colors.white,
+                        );
+                      } else {
+                        context.read<AddCardBloc>().add(
+                              AddCardDataEvent(
+                                name: widget.typeController.text,
+                                number: widget.numberController.text,
+                                expiration: widget.dateController.text,
+                                isMain: true,
+                              ),
+                            );
+                      }
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
