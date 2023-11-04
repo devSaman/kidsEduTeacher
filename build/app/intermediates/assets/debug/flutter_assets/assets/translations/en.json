@@ -70,6 +70,11 @@
     "cards":"Cards",
     "subscription":"Subscription",
     "main":"Main",
-    "add_card":"Add Card"
+    "add_card":"Add Card",
+    "name_required":"Name is required",
+    "number_required":"Number is emty or not valid",
+    "date_not_valid":"Date is not valid",
+    "code_required":"Code is emty or not valid",
+    "sent_code":"Sent confirmation code"
 
 }

@@ -4,10 +4,10 @@ import 'package:kids_edu_teacher/data/responses/response_data.dart';
 
 class CretaedAccountModel extends ResponseData {
   final String? message;
-  final CreatedUserData data;
+  final CreatedUserData? data;
   CretaedAccountModel({
     this.message,
-    required this.data,
+    this.data,
   });
   
 
@@ -27,7 +27,9 @@ class CretaedAccountModel extends ResponseData {
     if(message != null){
       result.addAll({'message': message});
     }
-    result.addAll({'data': data.toMap()});
+    if(data != null){
+      result.addAll({'data': data!.toMap()});
+    }
   
     return result;
   }
@@ -35,7 +37,7 @@ class CretaedAccountModel extends ResponseData {
   factory CretaedAccountModel.fromMap(Map<String, dynamic> map) {
     return CretaedAccountModel(
       message: map['message'],
-      data: CreatedUserData.fromMap(map['data']),
+      data: map['data'] != null ? CreatedUserData.fromMap(map['data']) : null,
     );
   }
 

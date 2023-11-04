@@ -18,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final response = await MainRepository.login(event.phone, event.psw);
     if (response is CretaedAccountModel) {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
-       await _prefs.setString('userId', response.data.userId!);
+       await _prefs.setString('userId', response.data!.userId!);
       emit(LoginSuccess(loginData: response));
     } else if (response is ErrorModel) {
       emit(LoginFail(errorData: response));

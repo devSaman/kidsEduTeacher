@@ -5,7 +5,6 @@ import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class InitialPage extends StatefulWidget {
   static const routeName = '/initialScreen';
@@ -24,18 +23,13 @@ class _InitialPageState extends State<InitialPage> {
   }
 
   void checkToken() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    _prefs.getString('userId') == null
-        ? {
-            Timer(
-              const Duration(seconds: 3),
-              () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, InfoScreen.routeName, (route) => false);
-              },
-            ),
-          }
-        : {};
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        Navigator.pushNamedAndRemoveUntil(
+            context, InfoScreen.routeName, (route) => false);
+      },
+    );
   }
 
   @override

@@ -1,9 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/view/library/logic/get_document_collections_bloc/get_document_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/main_app/initial_page.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_video_collections_bloc/get_video_collections_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,9 +50,25 @@ class KidsEduApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      initialRoute:
-          hasVerified ? MainAppScreen.routeName : InitialPage.routeName,
+      // initialRoute:
+      //     hasVerified ? MainAppScreen.routeName : InitialPage.routeName,
       onGenerateRoute: Routes.generateRoute,
+      home: hasVerified
+          ? MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetVideoCollectionsBloc(),
+                ),
+                BlocProvider(
+                  create: (context) => GetUserDataBloc(),
+                ),
+                BlocProvider(
+                  create: (context) => GetDocumentCollectionsBloc(),
+                ),
+              ],
+              child: const MainAppScreen(),
+            )
+          : const InitialPage(),
       theme: ThemeData(
         primaryColor: Pallate.mainColor,
         fontFamily: GoogleFonts.nunito().fontFamily,

@@ -28,7 +28,7 @@ class AddChildButton extends StatelessWidget {
             SizedBox(
               width: 220,
               child: Text(
-                tr('announment_text'),
+                tr('add_course_info'),
                 style: TextStyles.s700r16White,
               ),
             ),

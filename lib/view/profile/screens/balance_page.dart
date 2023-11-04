@@ -60,7 +60,7 @@ class _BalancePageState extends State<BalancePage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, BalancePage.routeName);
+                          // Navigator.pushNamed(context, BalancePage.routeName);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -104,7 +104,7 @@ class _BalancePageState extends State<BalancePage> {
                   // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
                 },
                 text: tr('coins'),
-                iconPath: "assets/icons/notification.svg",
+                iconPath: "assets/icons/notification_filled.svg",
               ),
             ),
           ),
@@ -117,7 +117,7 @@ class _BalancePageState extends State<BalancePage> {
                   // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
                 },
                 text: tr('shop'),
-                iconPath: "assets/icons/profile_filled.svg",
+                iconPath: "assets/icons/volume_filled.svg",
               ),
             ),
           ),
@@ -130,7 +130,7 @@ class _BalancePageState extends State<BalancePage> {
                   // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
                 },
                 text: tr('subscription'),
-                iconPath: "assets/icons/profile_filled.svg",
+                iconPath: "assets/icons/subscription.svg",
               ),
             ),
           ),

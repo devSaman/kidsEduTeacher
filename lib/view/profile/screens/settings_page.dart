@@ -5,7 +5,9 @@ import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
 import 'package:kids_edu_teacher/view/profile/widgets/settings_button.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -33,12 +35,104 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: CustomScrollView(slivers: [
         SliverToBoxAdapter(
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 30),
+            child: Container(
+              width: double.infinity,
+              height: 170,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                    image: AssetImage(
+                      'assets/images/main_balance.png',
+                    ),
+                    fit: BoxFit.cover),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 28, top: 10, bottom: 18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${'balance'.tr()}: ${0} ${'coins'.tr()}",
+                      style: TextStyles.s700r18White,
+                    ),
+                    Text(
+                      "${'status'.tr()}: ${'premium'.tr()}",
+                      style: TextStyles.s700r18White,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        // Navigator.pushNamed(context, BalancePage.routeName);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 6),
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: Pallate.whiteColor,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Text(
+                          tr('Premium'),
+                          style: TextStyles.s600r14Main,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: SettingsButton(
+              color: Pallate.orange,
+              onTap: () {
+                Navigator.pushNamed(context, UserPesonalInfoPage.routeName);
+              },
+              text: tr('personal_info'),
+              iconPath: "assets/icons/profile_filled.svg",
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: SettingsButton(
+              color: Pallate.redGradient2,
+              onTap: () {
+                // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
+              },
+              text: tr('notifications'),
+              iconPath: "assets/icons/notification_filled.svg",
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: SettingsButton(
+              color: Pallate.mainColor,
+              onTap: () {
+                // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
+              },
+              text: tr('sounds'),
+              iconPath: "assets/icons/volume_filled.svg",
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: SettingsButton(
-                  color: Pallate.redGradient1,
+                    color: Pallate.redGradient1,
                     text: tr('log_out'),
                     iconPath: 'assets/icons/log_out.png',
                     onTap: () {
@@ -90,6 +184,11 @@ class _SettingsPageState extends State<SettingsPage> {
                                               await SharedPreferences
                                                   .getInstance();
                                           await preferences.clear();
+                                          final appDir =
+                                              await getTemporaryDirectory();
+                                          if (appDir.existsSync()) {
+                                            appDir.deleteSync(recursive: true);
+                                          }
                                           // ignore: use_build_context_synchronously
                                           Navigator.pushNamedAndRemoveUntil(
                                               context,
@@ -125,7 +224,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
         ),
-        
       ]),
     );
   }

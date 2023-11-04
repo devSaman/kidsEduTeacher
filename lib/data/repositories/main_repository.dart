@@ -20,7 +20,7 @@ class MainRepository {
 
   static Future<ResponseData> createAccount(
       String name, String psw, String phone, String dtf) async {
-    try {
+    // try {
       final response =
           await http.post(Uri.parse('${ApiPaths.basicUrl}/teachers'),
               headers: {'Content-Type': 'application/json'},
@@ -41,9 +41,9 @@ class MainRepository {
         default:
           throw ErrorModel.fromJson(response.body);
       }
-    } catch (e) {
-      return ResponseError.noInternet;
-    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
   }
 
   static Future<ResponseData> verification(
@@ -123,7 +123,7 @@ class MainRepository {
   }
 
   static Future<ResponseData> forgotPassword(String phone) async {
-    try {
+    // try {
       final response = await http.post(
           Uri.parse('${ApiPaths.basicUrl}/teachers/reset-password'),
           headers: {'Content-Type': 'application/json'},
@@ -139,9 +139,9 @@ class MainRepository {
         default:
           throw ErrorModel.fromJson(response.body);
       }
-    } catch (e) {
-      return ResponseError.noInternet;
-    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
   }
 
   static Future<ResponseData> getVideoCollections() async {

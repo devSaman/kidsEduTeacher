@@ -83,6 +83,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 child: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
                   listener: (context, state) {
                     if (state is ForgotPasswordSuccess) {
+                      print(state.loginData.data);
                       Navigator.pushNamed(context, VerificationPage.routeName,
                           arguments: VerificationPage(
                             phoneNumber: phoneController.text,
@@ -98,6 +99,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           textColor: Colors.white,
                           fontSize: 16.0);
                     }
+                    print(state);
                   },
                   builder: (context, state) {
                     return CustomButton(

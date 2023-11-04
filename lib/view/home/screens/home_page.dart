@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/view/home/widgets/add_child_button.dart';
+import 'package:kids_edu_teacher/view/home/widgets/courses_list_widget.dart';
 
 import '../../../constants/text_styles.dart';
 
@@ -53,6 +54,9 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             SliverToBoxAdapter(
               child: AddChildButton(),
+            ),
+            SliverToBoxAdapter(
+              child: CoursesListWidget(),
             )
           ],
         ),
