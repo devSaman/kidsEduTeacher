@@ -75,6 +75,10 @@
     "number_required":"Raqam bo‘sh yoki yaroqsiz",
     "date_not_valid":"Sana noto‘g‘ri",
     "code_required":"Kod bo'sh yoki yaroqsiz",
-    "sent_code":"Tasdiqlash kodi yuborildi"
+    "sent_code":"Tasdiqlash kodi yuborildi",
+    "add_course_info":"Kursingizni dasturga qo'shmoqchimisiz?",
+    "personal_info":"Shaxsiy ma'lumot",
+    "notifications":"Bildirishnomalar",
+    "sounds":"Musiqa va effektlar"
 
 }

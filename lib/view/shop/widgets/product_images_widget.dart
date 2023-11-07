@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kids_edu_teacher/constants/api_path.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductImagesWidget extends StatelessWidget {
-  ProductImagesWidget({super.key});
+  final List<String> images;
+  ProductImagesWidget({super.key, required this.images});
   final PageController controller = PageController();
 
   @override
@@ -17,7 +19,7 @@ class ProductImagesWidget extends StatelessWidget {
             children: [
               PageView.builder(
                   controller: controller,
-                  itemCount: 5,
+                  itemCount: images.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -25,6 +27,11 @@ class ProductImagesWidget extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width - 40,
                         decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                "${ApiPaths.basicUrl}/files/view?fileId=${images[index]}",
+                              ),
+                              fit: BoxFit.cover),
                           color: Pallate.redGradient1,
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -43,7 +50,7 @@ class ProductImagesWidget extends StatelessWidget {
                   height: 4,
                   child: SmoothPageIndicator(
                     controller: controller,
-                    count: 5,
+                    count: images.length,
                     effect: const WormEffect(
                       dotColor: Pallate.blackColor,
                       activeDotColor: Pallate.mainColor,
@@ -63,12 +70,17 @@ class ProductImagesWidget extends StatelessWidget {
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: 5,
+              itemCount: images.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: Container(
                     decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            "${ApiPaths.basicUrl}/files/view?fileId=${images[index]}",
+                          ),
+                          fit: BoxFit.cover),
                       color: Pallate.darkGreyColor,
                       borderRadius: BorderRadius.circular(16),
                     ),

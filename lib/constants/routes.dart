@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/auth/logic/change_password_bloc/change_password_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/logic/create_account_bloc/create_account_bloc.dart';
@@ -25,6 +26,7 @@ import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart'
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
+import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
@@ -55,6 +57,9 @@ abstract class Routes {
               ),
               BlocProvider(
                 create: (context) => GetDocumentCollectionsBloc(),
+              ),
+              BlocProvider(
+                create: (context) => GetShopDataBloc(),
               ),
             ],
             child: const MainAppScreen(),
@@ -89,7 +94,9 @@ abstract class Routes {
                   collectionInfo: data,
                 ));
       case ProductDetailPage.routeName:
-        return MaterialPageRoute(builder: (_) => const ProductDetailPage());
+        final product = settings.arguments as ProductModel;
+        return MaterialPageRoute(
+            builder: (_) => ProductDetailPage(product: product));
       case CartPage.routeName:
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:

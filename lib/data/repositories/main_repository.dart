@@ -7,6 +7,7 @@ import 'package:kids_edu_teacher/data/models/auth_models/vaerification_model.dar
 import 'package:kids_edu_teacher/data/models/common_models/error_model.dart';
 import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
 import 'package:kids_edu_teacher/data/models/payment_card_models/card_create_model.dart';
+import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/data/responses/error_response.dart';
 import 'package:kids_edu_teacher/data/responses/response_data.dart';
@@ -21,26 +22,25 @@ class MainRepository {
   static Future<ResponseData> createAccount(
       String name, String psw, String phone, String dtf) async {
     // try {
-      final response =
-          await http.post(Uri.parse('${ApiPaths.basicUrl}/teachers'),
-              headers: {'Content-Type': 'application/json'},
-              body: json.encode(
-                {
-                  "fullName": name,
-                  "birthDate": dtf,
-                  "phoneNumber": "998$phone",
-                  "password": name
-                },
-              ));
-      print(response.body);
-      switch (response.statusCode) {
-        case StatusCodes.ok:
-          return CretaedAccountModel.fromJson(response.body);
-        case StatusCodes.alreadyTaken:
-          return ErrorModel.fromJson(response.body);
-        default:
-          throw ErrorModel.fromJson(response.body);
-      }
+    final response = await http.post(Uri.parse('${ApiPaths.basicUrl}/teachers'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "fullName": name,
+            "birthDate": dtf,
+            "phoneNumber": "998$phone",
+            "password": name
+          },
+        ));
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return CretaedAccountModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
     // } catch (e) {
     //   return ResponseError.noInternet;
     // }
@@ -124,21 +124,21 @@ class MainRepository {
 
   static Future<ResponseData> forgotPassword(String phone) async {
     // try {
-      final response = await http.post(
-          Uri.parse('${ApiPaths.basicUrl}/teachers/reset-password'),
-          headers: {'Content-Type': 'application/json'},
-          body: json.encode(
-            {"phoneNumber": "998$phone".replaceAll("-", "")},
-          ));
-      print(response.body);
-      switch (response.statusCode) {
-        case StatusCodes.ok:
-          return CretaedAccountModel.fromJson(response.body);
-        case StatusCodes.alreadyTaken:
-          return ErrorModel.fromJson(response.body);
-        default:
-          throw ErrorModel.fromJson(response.body);
-      }
+    final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/reset-password'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {"phoneNumber": "998$phone".replaceAll("-", "")},
+        ));
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return CretaedAccountModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
     // } catch (e) {
     //   return ResponseError.noInternet;
     // }
@@ -272,6 +272,28 @@ class MainRepository {
       switch (response.statusCode) {
         case StatusCodes.ok:
           return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> getShopData() async {
+    try {
+      final response = await http.get(
+        Uri.parse('${ApiPaths.basicUrl}/categories'),
+        headers: {'Content-Type': 'application/json'},
+      );
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return ShopMainModel.fromJson(response.body);
         case StatusCodes.alreadyTaken:
         case StatusCodes.badRequest:
         case StatusCodes.unathorized:

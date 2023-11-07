@@ -2,15 +2,16 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/add_button.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_card.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_images_widget.dart';
 
-
 class ProductDetailPage extends StatefulWidget {
+  final ProductModel product;
   static const routeName = '/productDetailScreen';
 
-  const ProductDetailPage({super.key});
+  const ProductDetailPage({super.key, required this.product});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -33,8 +34,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-        title: const Text(
-          "Product Name",
+        title: Text(
+          widget.product.name,
           style: TextStyles.s700r24Black,
         ),
         // actions: [
@@ -54,7 +55,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               SliverPadding(
                 padding: const EdgeInsets.only(top: 20),
                 sliver: SliverToBoxAdapter(
-                  child: ProductImagesWidget(),
+                  child: ProductImagesWidget(
+                    images: widget.product.images,
+                  ),
                 ),
               ),
               SliverToBoxAdapter(
@@ -63,13 +66,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Кроссовки Nike Air Max 97",
+                      Text(
+                        widget.product.name,
                         style: TextStyles.s700r20Black,
                       ),
                       const SizedBox(height: 20),
-                      const Text(
-                        "Кроссовки Nike Air Max 97 с оригинальным дизайном ripple, вдохновленным японскими скоростными поездами, позволяют вам развивать свой стиль на полной скорости.",
+                      Text(
+                        widget.product.description,
                         style: TextStyles.s400r14Grey,
                         textAlign: TextAlign.justify,
                       ),
@@ -152,25 +155,34 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           style: TextStyles.s600r18Black,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 20),
-                        child: SizedBox(
-                          height: 220,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: 5,
-                              itemBuilder: (context, index) {
-                                return const Padding(
-                                  padding: EdgeInsets.only(right: 20),
-                                  child: ShopProductCard(
-                                    isWidth: true,
-                                  ),
-                                );
-                              }),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(
+                      //       horizontal: 20, vertical: 20),
+                      //   child: SizedBox(
+                      //     height: 220,
+                      //     child: ListView.builder(
+                      //         scrollDirection: Axis.horizontal,
+                      //         physics: const BouncingScrollPhysics(),
+                      //         itemCount: 5,
+                      //         itemBuilder: (context, index) {
+                      //           return Padding(
+                      //             padding: EdgeInsets.only(right: 20),
+                      //             child: ShopProductCard(
+                      //               product: ProductModel(
+                      //                   id: id,
+                      //                   images: images,
+                      //                   name: name,
+                      //                   description: description,
+                      //                   price: price,
+                      //                   conditions: conditions,
+                      //                   isDeleted: isDeleted,
+                      //                   attributes: attributes),
+                      //               isWidth: true,
+                      //             ),
+                      //           );
+                      //         }),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 50,
                       )

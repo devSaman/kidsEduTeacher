@@ -75,6 +75,10 @@
     "number_required":"Number is emty or not valid",
     "date_not_valid":"Date is not valid",
     "code_required":"Code is emty or not valid",
-    "sent_code":"Sent confirmation code"
+    "sent_code":"Sent confirmation code",
+    "add_course_info":"Want to add your course to the program?",
+    "personal_info":"Personal info",
+    "notifications":"Notifications",
+    "sounds":"Music & Effects"
 
 }

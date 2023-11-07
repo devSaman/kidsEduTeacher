@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
+import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_page.dart';
 
@@ -20,7 +22,10 @@ class _MainAppScreenState extends State<MainAppScreen> {
     const VideoPage(),
     const LibraryPage(),
     const HomePage(),
-    const ShopPage(),
+    BlocProvider(
+      create: (context) => GetShopDataBloc(),
+      child: const ShopPage(),
+    ),
     const ProfilePage(),
   ];
 
