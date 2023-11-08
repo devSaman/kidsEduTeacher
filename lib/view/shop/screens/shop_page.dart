@@ -23,12 +23,10 @@ class ShopPage extends StatefulWidget {
 class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
   late TabController controllerTab;
   List<ProductModel> products = [];
+  List<ChildCategory> categories = [];
+  String category = "";
+  bool isadded = false;
 
-  final _tabs = [
-    Tab(text: 'popular'.tr()),
-    Tab(text: 'clothes'.tr()),
-    Tab(text: 'shoes'.tr()),
-  ];
   @override
   void initState() {
     context.read<GetShopDataBloc>().add(const ShopEvent());
@@ -47,7 +45,16 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
         child: BlocBuilder<GetShopDataBloc, GetShopDataState>(
           builder: (context, state) {
             if (state is GetShopDataSuccess) {
-              categoryName = state.shopMainModel.data[0].name;
+              if (isadded == false) {
+                categoryName = state.shopMainModel.data[0].name;
+                for (var i = 0;
+                    i < state.shopMainModel.data[0].childCategories.length;
+                    i++) {
+                  categories
+                      .add(state.shopMainModel.data[0].childCategories[i]);
+                }
+                isadded = true;
+              }
               print(state.shopMainModel.data);
               return Drawer(
                 child: Padding(
@@ -87,8 +94,17 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                             return Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   products.clear();
+                                  categories.clear();
+                                  for (var i = 0;
+                                      i <
+                                          state.shopMainModel.data[index]
+                                              .childCategories.length;
+                                      i++) {
+                                    categories.add(state.shopMainModel
+                                        .data[index].childCategories[i]);
+                                  }
                                   for (var i = 0;
                                       i <
                                           state.shopMainModel.data[index]
@@ -101,7 +117,9 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                                       state.shopMainModel.data[index].name;
                                   index = state.shopMainModel.data
                                       .indexOf(state.shopMainModel.data[index]);
+                                  category = "";
                                   setState(() {});
+                                  print(categories);
                                   Navigator.pop(context);
                                 },
                                 child: Container(
@@ -215,6 +233,55 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                 ],
               ),
             ),
+            categories.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: categories.length,
+                        itemBuilder: (ctx, idx) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: InkWell(
+                              onTap: () {
+                                products.clear();
+                                category = categories[idx].name;
+                                for (var i = 0;
+                                    i < categories[idx].products.length;
+                                    i++) {
+                                  products.add(categories[idx].products[i]);
+                                }
+                                setState(() {});
+                              },
+                              child: Column(
+                                children: [
+                                  Text(categories[idx].name,
+                                      style: category == categories[idx].name
+                                          ? TextStyles.s600r18Main
+                                          : TextStyles.s600r18Black),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  category == categories[idx].name
+                                      ? Container(
+                                          height: 2,
+                                          color: Pallate.mainColor,
+                                          child: Text(categories[idx].name,
+                                              style: TextStyles.s600r18Black),
+                                        )
+                                      : const Center()
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                : const Center(),
             // Padding(
             //   padding: const EdgeInsets.only(top: 20),
             //   child: TabBar(
@@ -240,19 +307,19 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                             "${products.length} products",
                             style: TextStyles.s700r20Black,
                           ),
-                          const Row(
-                            children: [
-                              Text(
-                                "New",
-                                style: TextStyles.s700r18Main,
-                              ),
-                              SizedBox(width: 5),
-                              Icon(
-                                Icons.filter_list,
-                                color: Pallate.mainColor,
-                              )
-                            ],
-                          )
+                          // const Row(
+                          //   children: [
+                          //     Text(
+                          //       "New",
+                          //       style: TextStyles.s700r18Main,
+                          //     ),
+                          //     SizedBox(width: 5),
+                          //     Icon(
+                          //       Icons.filter_list,
+                          //       color: Pallate.mainColor,
+                          //     )
+                          //   ],
+                          // )
                         ],
                       ),
                     ),
@@ -272,7 +339,10 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                             onTap: () {
                               Navigator.pushNamed(
                                   context, ProductDetailPage.routeName,
-                                  arguments: products[index]);
+                                  arguments: ProductDetailPage(
+                                    product: products[index],
+                                    products: products,
+                                  ));
                             },
                             child: ShopProductCard(
                               product: products[index],

@@ -94,9 +94,12 @@ abstract class Routes {
                   collectionInfo: data,
                 ));
       case ProductDetailPage.routeName:
-        final product = settings.arguments as ProductModel;
+        final data = settings.arguments as ProductDetailPage;
         return MaterialPageRoute(
-            builder: (_) => ProductDetailPage(product: product));
+            builder: (_) => ProductDetailPage(
+                  product: data.product,
+                  products: data.products,
+                ));
       case CartPage.routeName:
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:

@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
@@ -9,18 +10,25 @@ import 'package:kids_edu_teacher/view/shop/widgets/product_images_widget.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
+  final List<ProductModel> products;
   static const routeName = '/productDetailScreen';
 
-  const ProductDetailPage({super.key, required this.product});
+  const ProductDetailPage(
+      {super.key, required this.product, required this.products});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
 }
 
 String? sizeValue;
-List<String> sizes = ["10", "11", "12"];
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  @override
+  void initState() {
+    sizeValue = null;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,41 +84,50 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         style: TextStyles.s400r14Grey,
                         textAlign: TextAlign.justify,
                       ),
-                      const ListTile(
-                        leading: Text(
-                          "Цвет",
-                          style: TextStyles.s600r16Block,
-                        ),
-                        trailing: SizedBox(
-                          height: 50,
-                          width: 120,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor: Pallate.blackColor,
-                              ),
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor: Pallate.redGradient1,
-                              ),
-                              CircleAvatar(
-                                radius: 10,
-                                backgroundColor: Pallate.redGradient2,
-                              ),
-                            ],
-                          ),
-                        ),
+                      // const ListTile(
+                      //   leading: Text(
+                      //     "Цвет",
+                      //     style: TextStyles.s600r16Block,
+                      //   ),
+                      //   trailing: SizedBox(
+                      //     height: 50,
+                      //     width: 120,
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         CircleAvatar(
+                      //           radius: 10,
+                      //           backgroundColor: Pallate.blackColor,
+                      //         ),
+                      //         CircleAvatar(
+                      //           radius: 10,
+                      //           backgroundColor: Pallate.redGradient1,
+                      //         ),
+                      //         CircleAvatar(
+                      //           radius: 10,
+                      //           backgroundColor: Pallate.redGradient2,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      Column(
+                        children: List.generate(
+                            widget.product.attributes.length,
+                            (index) => widget
+                                    .product.attributes[index].items.isNotEmpty
+                                ? ListTile(
+                                    leading: Text(
+                                      widget.product.attributes[index].name,
+                                      style: TextStyles.s600r16Block,
+                                    ),
+                                    trailing: SizedBox(
+                                        width: 120,
+                                        child: sizeDropDown(widget
+                                            .product.attributes[index].items)),
+                                  )
+                                : const Center()),
                       ),
-                      ListTile(
-                        leading: const Text(
-                          "Размер",
-                          style: TextStyles.s600r16Block,
-                        ),
-                        trailing:
-                            SizedBox(width: 120, child: sizeDropDown(sizes)),
-                      )
                     ],
                   ),
                 ),
@@ -136,8 +153,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             ),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
-                            child: const Text(
-                              "520 монет",
+                            child: Text(
+                              "${widget.product.price} ${tr('coins')}",
                               style: TextStyles.s700r20Black,
                             ),
                           ),
@@ -155,34 +172,45 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           style: TextStyles.s600r18Black,
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //       horizontal: 20, vertical: 20),
-                      //   child: SizedBox(
-                      //     height: 220,
-                      //     child: ListView.builder(
-                      //         scrollDirection: Axis.horizontal,
-                      //         physics: const BouncingScrollPhysics(),
-                      //         itemCount: 5,
-                      //         itemBuilder: (context, index) {
-                      //           return Padding(
-                      //             padding: EdgeInsets.only(right: 20),
-                      //             child: ShopProductCard(
-                      //               product: ProductModel(
-                      //                   id: id,
-                      //                   images: images,
-                      //                   name: name,
-                      //                   description: description,
-                      //                   price: price,
-                      //                   conditions: conditions,
-                      //                   isDeleted: isDeleted,
-                      //                   attributes: attributes),
-                      //               isWidth: true,
-                      //             ),
-                      //           );
-                      //         }),
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        child: SizedBox(
+                          height: 220,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: widget.products.length,
+                              itemBuilder: (context, index) {
+                                var product = widget.products[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, ProductDetailPage.routeName,
+                                          arguments: ProductDetailPage(
+                                            product: product,
+                                            products: widget.products,
+                                          ));
+                                    },
+                                    child: ShopProductCard(
+                                      product: ProductModel(
+                                          id: product.id,
+                                          images: product.images,
+                                          name: product.name,
+                                          description: product.description,
+                                          price: product.price,
+                                          conditions: product.conditions,
+                                          isDeleted: product.isDeleted,
+                                          attributes: product.attributes),
+                                      isWidth: true,
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                      ),
                       const SizedBox(
                         height: 50,
                       )
