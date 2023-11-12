@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/profile/screens/cards_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/coins_page.dart';
 import 'package:kids_edu_teacher/view/profile/widgets/settings_button.dart';
 
 class BalancePage extends StatefulWidget {
@@ -101,7 +102,7 @@ class _BalancePageState extends State<BalancePage> {
               child: SettingsButton(
                 color: Pallate.redGradient2,
                 onTap: () {
-                  // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
+                  Navigator.pushNamed(context, CoinsPage.routeName);
                 },
                 text: tr('coins'),
                 iconPath: "assets/icons/notification_filled.svg",

@@ -1,12 +1,14 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/add_button.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_card.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_images_widget.dart';
+import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
@@ -25,6 +27,8 @@ String? sizeValue;
 class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   void initState() {
+    context.read<GetUserDataBloc>().add(GetUserData());
+
     sizeValue = null;
     super.initState();
   }
@@ -225,15 +229,49 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             right: 0,
             left: 0,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Pallate.mainColor,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Pallate.mainColor.withOpacity(.8),
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
               ),
               width: double.infinity,
               height: 40,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      tr('your_balance'),
+                      style: TextStyles.s600r15White,
+                    ),
+                    BlocBuilder<GetUserDataBloc, GetUserDataState>(
+                      builder: (context, state) {
+                        if (state is GetUserDataSuccess) {
+                          return Row(
+                            children: [
+                              Text(
+                                state.userData.data.balance.toString(),
+                                style: TextStyles.s600r15White,
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.add_circle_outlined,
+                                  color: Pallate.greyColor,
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                        return SizedBox();
+                      },
+                    )
+                  ],
+                ),
+              ),
             ),
           )
         ],

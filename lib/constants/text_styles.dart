@@ -8,7 +8,7 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
   );
 
-   static const s700r24Red = TextStyle(
+  static const s700r24Red = TextStyle(
     color: Pallate.redGradient1,
     fontSize: 24,
     fontWeight: FontWeight.w700,
@@ -26,6 +26,12 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
   );
 
+  static const s600r15White = TextStyle(
+    color: Pallate.whiteColor,
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+  );
+
   static const s600r14Main = TextStyle(
     color: Pallate.mainColor,
     fontSize: 14,
@@ -38,13 +44,13 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
   );
 
-   static const s700r20Main = TextStyle(
+  static const s700r20Main = TextStyle(
     color: Pallate.mainColor,
     fontSize: 20,
     fontWeight: FontWeight.w700,
   );
 
-   static const s700r48Black = TextStyle(
+  static const s700r48Black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 48,
     fontWeight: FontWeight.w700,
@@ -56,7 +62,7 @@ abstract class TextStyles {
     fontWeight: FontWeight.w500,
   );
 
-   static const s600r13black = TextStyle(
+  static const s600r13black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 13,
     fontWeight: FontWeight.w600,
@@ -80,7 +86,7 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
   );
 
-   static const s600r16White = TextStyle(
+  static const s600r16White = TextStyle(
     color: Pallate.whiteColor,
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -92,7 +98,7 @@ abstract class TextStyles {
     fontWeight: FontWeight.w600,
   );
 
-   static const s600r16Block = TextStyle(
+  static const s600r16Block = TextStyle(
     color: Pallate.blackColor,
     fontSize: 16,
     fontWeight: FontWeight.w600,
@@ -104,25 +110,23 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
   );
 
-  
   static const s700r18Main = TextStyle(
     color: Pallate.mainColor,
     fontSize: 18,
     fontWeight: FontWeight.w700,
   );
 
-    static const s600r18Main = TextStyle(
+  static const s600r18Main = TextStyle(
     color: Pallate.mainColor,
     fontSize: 18,
     fontWeight: FontWeight.w600,
   );
 
-    static const s600r18Black = TextStyle(
+  static const s600r18Black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 18,
     fontWeight: FontWeight.w600,
   );
-
 
   static const s700r18Black = TextStyle(
     color: Pallate.blackColor,
@@ -141,19 +145,19 @@ abstract class TextStyles {
     fontWeight: FontWeight.w500,
   );
 
-    static const s400r14Grey = TextStyle(
+  static const s400r14Grey = TextStyle(
     color: Pallate.darkGreyColor,
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
 
-      static const s400r18Grey = TextStyle(
+  static const s400r18Grey = TextStyle(
     color: Pallate.darkGreyColor,
     fontSize: 18,
     fontWeight: FontWeight.w400,
   );
 
-    static const s700r32Black = TextStyle(
+  static const s700r32Black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 32,
     fontWeight: FontWeight.w700,

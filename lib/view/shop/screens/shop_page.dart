@@ -24,12 +24,13 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
   late TabController controllerTab;
   List<ProductModel> products = [];
   List<ChildCategory> categories = [];
-  String category = "";
+  String? category;
   bool isadded = false;
 
   @override
   void initState() {
     context.read<GetShopDataBloc>().add(const ShopEvent());
+
     controllerTab = TabController(length: 3, vsync: this);
     super.initState();
   }

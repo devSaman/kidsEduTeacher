@@ -23,6 +23,7 @@ import 'package:kids_edu_teacher/view/profile/logic/add_card_bloc/add_card_bloc.
 import 'package:kids_edu_teacher/view/profile/screens/balance_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/cards_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/coins_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
@@ -96,10 +97,15 @@ abstract class Routes {
       case ProductDetailPage.routeName:
         final data = settings.arguments as ProductDetailPage;
         return MaterialPageRoute(
-            builder: (_) => ProductDetailPage(
-                  product: data.product,
-                  products: data.products,
+            builder: (_) => BlocProvider(
+                  create: (context) => GetUserDataBloc(),
+                  child: ProductDetailPage(
+                    product: data.product,
+                    products: data.products,
+                  ),
                 ));
+      case CoinsPage.routeName:
+        return MaterialPageRoute(builder: (_) => const CoinsPage());
       case CartPage.routeName:
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:

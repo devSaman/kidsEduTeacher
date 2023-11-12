@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/api_path.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
@@ -36,7 +37,7 @@ class ShopProductCard extends StatelessWidget {
             height: 130,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: Text(
               product.name,
               style: TextStyles.s600r13black,
@@ -44,16 +45,16 @@ class ShopProductCard extends StatelessWidget {
           ),
           const Spacer(),
           Padding(
-            padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 6,
                   backgroundColor: Pallate.redGradient1,
                 ),
                 Text(
-                  product.price.toString(),
+                  "${product.price} ${tr('coins')}",
                   style: TextStyles.s600r13black,
                 ),
               ],
