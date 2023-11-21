@@ -53,7 +53,10 @@ class _ConfirmcardSheetState extends State<ConfirmcardSheet> {
               Text(
                 widget.phone,
               ),
-              InputForCard(controller: codeController),
+              InputForCard(
+                controller: codeController,
+                hasborder: true,
+              ),
               BlocConsumer<AddCardBloc, AddCardState>(
                 listener: (context, state) async {
                   print(state);

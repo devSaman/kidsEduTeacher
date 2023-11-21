@@ -80,6 +80,12 @@
     "personal_info":"Shaxsiy ma'lumot",
     "notifications":"Bildirishnomalar",
     "sounds":"Musiqa va effektlar",
-    "your_balance":"Hisobingiz:"
+    "your_balance":"Hisobingiz:",
+    "check_for_payment":"To'lov cheki",
+    "receiver":"Qabul qiluvchi",
+    "amount":"Miqodri",
+    "sender":"Yuboruvchi",
+    "pay":"To'lash",
+    "sum":"So'm"
 
 }

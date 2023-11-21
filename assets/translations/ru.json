@@ -80,5 +80,11 @@
     "personal_info":"Личная информация",
     "notifications":"Уведомления",
     "sounds":"Музыка и эффекты",
-    "your_balance":"Ваш баланс:"
+    "your_balance":"Ваш баланс:",
+    "check_for_payment":"Чек на оплату",
+    "receiver":"Получатель",
+    "amount":"Cумма",
+    "sender":"Отправитель",
+    "pay":"Платить",
+    "sum":"Сум"
 }

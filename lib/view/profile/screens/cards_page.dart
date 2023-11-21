@@ -56,6 +56,8 @@ class _CardsPageState extends State<CardsPage> {
             return Padding(
               padding: const EdgeInsets.all(20.0),
               child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
                 slivers: [
                   SliverToBoxAdapter(
                     child: Column(

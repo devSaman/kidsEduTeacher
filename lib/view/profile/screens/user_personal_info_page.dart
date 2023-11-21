@@ -27,6 +27,8 @@ class _UserPesonalInfoPageState extends State<UserPesonalInfoPage> {
         iconTheme: const IconThemeData(color: Pallate.blackColor),
       ),
       body: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
         slivers: [
           SliverToBoxAdapter(
             child: Padding(

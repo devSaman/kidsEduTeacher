@@ -50,6 +50,8 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
           slivers: [
             SliverToBoxAdapter(
               child: Padding(

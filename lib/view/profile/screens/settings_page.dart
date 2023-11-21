@@ -33,7 +33,11 @@ class _SettingsPageState extends State<SettingsPage> {
         elevation: 0,
         iconTheme: const IconThemeData(color: Pallate.blackColor),
       ),
-      body: CustomScrollView(slivers: [
+      body: CustomScrollView(
+        
+          physics: const BouncingScrollPhysics(),
+        
+        slivers: [
         SliverToBoxAdapter(
           child: Padding(
             padding:

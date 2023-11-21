@@ -80,6 +80,12 @@
     "personal_info":"Personal info",
     "notifications":"Notifications",
     "sounds":"Music & Effects",
-    "your_balance":"Your Balance:"
+    "your_balance":"Your Balance:",
+    "check_for_payment":"Check For Payment",
+    "receiver":"Receiver",
+    "amount":"Amount",
+    "sender":"Sender",
+    "pay":"Pay",
+    "sum":"Soum"
 
 }

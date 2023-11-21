@@ -35,6 +35,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
           slivers: [
             SliverToBoxAdapter(
               child: Text(

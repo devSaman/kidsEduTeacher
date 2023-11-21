@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
+          
           physics: BouncingScrollPhysics(),
           slivers: [
             SliverToBoxAdapter(

@@ -39,6 +39,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
           slivers: [
             SliverToBoxAdapter(
               child: Text(

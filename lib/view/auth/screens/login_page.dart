@@ -42,6 +42,8 @@ class _LoginPageState extends State<LoginPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
           slivers: [
             SliverToBoxAdapter(
               child: Text(

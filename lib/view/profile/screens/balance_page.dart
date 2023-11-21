@@ -30,6 +30,8 @@ class _BalancePageState extends State<BalancePage> {
         iconTheme: const IconThemeData(color: Pallate.blackColor),
       ),
       body: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+
         slivers: [
           SliverToBoxAdapter(
             child: Padding(

@@ -9,10 +9,14 @@ class InputForCard extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatter;
   final TextInputType? inputType;
   final int? maxLength;
+  final bool hasborder;
+  final Function(String)? onChanged;
   const InputForCard(
       {super.key,
       required this.controller,
+      this.onChanged,
       this.hintText,
+      required this.hasborder,
       this.inputFormatter,
       this.inputType,
       this.maxLength});
@@ -25,6 +29,7 @@ class _InputForCardState extends State<InputForCard> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       maxLength: widget.maxLength,
       keyboardType: widget.inputType,
       inputFormatters: widget.inputFormatter,
@@ -32,16 +37,21 @@ class _InputForCardState extends State<InputForCard> {
       cursorColor: Pallate.mainColor,
       controller: widget.controller,
       decoration: InputDecoration(
-        hintText: widget.hintText,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: Pallate.mainColor.withOpacity(.4)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Pallate.mainColor),
-        ),
-      ),
+          border: widget.hasborder ? null : InputBorder.none,
+          hintText: widget.hintText,
+          enabledBorder: widget.hasborder
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide:
+                      BorderSide(color: Pallate.mainColor.withOpacity(.4)),
+                )
+              : null,
+          focusedBorder: widget.hasborder
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(color: Pallate.mainColor),
+                )
+              : null),
     );
   }
 }

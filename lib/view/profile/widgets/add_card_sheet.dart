@@ -54,8 +54,11 @@ class _AddCardSheetState extends State<AddCardSheet> {
             children: [
               const SizedBox(height: 10),
               InputForCard(
-                  hintText: "Uzcard", controller: widget.typeController),
+                  hasborder: true,
+                  hintText: "Uzcard",
+                  controller: widget.typeController),
               InputForCard(
+                hasborder: true,
                 inputFormatter: [
                   FilteringTextInputFormatter.digitsOnly,
                   numberFormatter
@@ -66,6 +69,7 @@ class _AddCardSheetState extends State<AddCardSheet> {
                 hintText: "8600 9860 8600 9860",
               ),
               InputForCard(
+                hasborder: true,
                 inputFormatter: [
                   FilteringTextInputFormatter.digitsOnly,
                   dateFormatter
@@ -99,14 +103,14 @@ class _AddCardSheetState extends State<AddCardSheet> {
                       },
                     );
                   } else if (state is AddCardFail) {
-                      Fluttertoast.showToast(
-                        msg: state.errorData.msg.toString(),
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.TOP,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Pallate.mainColor,
-                        textColor: Colors.white,
-                      );
+                    Fluttertoast.showToast(
+                      msg: state.errorData.msg.toString(),
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.TOP,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Pallate.mainColor,
+                      textColor: Colors.white,
+                    );
                   }
                 },
                 builder: (context, state) {
