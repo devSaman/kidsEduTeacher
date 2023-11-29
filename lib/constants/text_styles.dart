@@ -20,8 +20,26 @@ abstract class TextStyles {
     fontWeight: FontWeight.w700,
   );
 
+  static const s600r10White = TextStyle(
+    color: Pallate.whiteColor,
+    fontSize: 10,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final s600r10Black = TextStyle(
+    color: Pallate.blackColor.withOpacity(.6),
+    fontSize: 10,
+    fontWeight: FontWeight.w600,
+  );
+
   static const s700r16Main = TextStyle(
     color: Pallate.mainColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const s700r16Black = TextStyle(
+    color: Pallate.blackColor,
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
@@ -41,6 +59,12 @@ abstract class TextStyles {
   static const s700r20Black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 20,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const s700r22Black = TextStyle(
+    color: Pallate.blackColor,
+    fontSize: 22,
     fontWeight: FontWeight.w700,
   );
 

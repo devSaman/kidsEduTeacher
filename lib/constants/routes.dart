@@ -12,6 +12,7 @@ import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/forgot_password.dart';
 import 'package:kids_edu_teacher/view/auth/screens/login_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
+import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bloc.dart';
 
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/logic/get_document_collections_bloc/get_document_collections_bloc.dart';
@@ -63,6 +64,8 @@ abstract class Routes {
               BlocProvider(
                 create: (context) => GetShopDataBloc(),
               ),
+
+              
             ],
             child: const MainAppScreen(),
           ),
@@ -178,7 +181,8 @@ abstract class Routes {
       case UserPesonalInfoPage.routeName:
         return MaterialPageRoute(builder: (_) => const UserPesonalInfoPage());
       default:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(
+            builder: (_) => const HomePage());
     }
   }
 }

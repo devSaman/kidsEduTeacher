@@ -86,6 +86,10 @@
     "amount":"Amount",
     "sender":"Sender",
     "pay":"Pay",
-    "sum":"Soum"
+    "sum":"Soum",
+    "courses":"Courses",
+    "see_all":"See all",
+    "lessons":"Lessons",
+    "author":"Author:"
 
 }

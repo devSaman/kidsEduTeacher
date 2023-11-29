@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bloc.dart';
 import 'package:kids_edu_teacher/view/home/widgets/add_child_button.dart';
 import 'package:kids_edu_teacher/view/home/widgets/courses_list_widget.dart';
 
@@ -15,6 +17,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<AllCoursesBloc>().add(AllCoursesDataEvent());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,17 +55,25 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
-          
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: AddChildButton(),
             ),
             SliverToBoxAdapter(
-              child: CoursesListWidget(),
+              child: BlocBuilder<AllCoursesBloc, AllCoursesState>(
+                builder: (context, state) {
+                  if (state is AllCoursesSuccess) {
+                    return CoursesListWidget(
+                      courses: state.courseData.data.data,
+                    );
+                  }
+                  return const Center();
+                },
+              ),
             )
           ],
         ),

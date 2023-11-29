@@ -86,6 +86,10 @@
     "amount":"Miqodri",
     "sender":"Yuboruvchi",
     "pay":"To'lash",
-    "sum":"So'm"
+    "sum":"So'm",
+    "courses":"Kurslar",
+    "see_all":"Barchasini ko'rish",
+    "lessons":"Darslar",
+    "author":"Avtor:"
 
 }

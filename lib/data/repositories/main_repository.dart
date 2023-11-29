@@ -16,6 +16,8 @@ import 'package:kids_edu_teacher/data/responses/status_codes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/common_models/courses_model.dart';
+
 class MainRepository {
   MainRepository._();
 
@@ -174,6 +176,26 @@ class MainRepository {
     switch (response.statusCode) {
       case StatusCodes.ok:
         return VideoCollectionsModel.fromJson(response.body);
+      case StatusCodes.alreadyTaken:
+        return ErrorModel.fromJson(response.body);
+      default:
+        throw ErrorModel.fromJson(response.body);
+    }
+    // } catch (e) {
+    //   return ResponseError.noInternet;
+    // }
+  }
+
+  static Future<ResponseData> allCourses() async {
+    // try {
+    final response = await http.get(
+      Uri.parse('${ApiPaths.basicUrl}/teachers/courses'),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print(response.body);
+    switch (response.statusCode) {
+      case StatusCodes.ok:
+        return CoursesModel.fromJson(response.body);
       case StatusCodes.alreadyTaken:
         return ErrorModel.fromJson(response.body);
       default:

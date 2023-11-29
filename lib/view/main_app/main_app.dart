@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bloc.dart';
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
@@ -21,7 +22,10 @@ class _MainAppScreenState extends State<MainAppScreen> {
   final List<Widget> _listOfScreens = [
     const VideoPage(),
     const LibraryPage(),
-    const HomePage(),
+    BlocProvider(
+      create: (context) => AllCoursesBloc(),
+      child: const HomePage(),
+    ),
     BlocProvider(
       create: (context) => GetShopDataBloc(),
       child: const ShopPage(),
