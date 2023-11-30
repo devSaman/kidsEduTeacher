@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kids_edu_teacher/data/models/common_models/courses_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/auth/logic/change_password_bloc/change_password_bloc.dart';
@@ -13,8 +14,13 @@ import 'package:kids_edu_teacher/view/auth/screens/forgot_password.dart';
 import 'package:kids_edu_teacher/view/auth/screens/login_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
 import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bloc.dart';
+import 'package:kids_edu_teacher/view/home/screens/course_info_page.dart';
+import 'package:kids_edu_teacher/view/home/screens/courses_list.dart';
 
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
+import 'package:kids_edu_teacher/view/home/screens/lesson_content_page.dart';
+import 'package:kids_edu_teacher/view/home/screens/lesson_info_page.dart';
+import 'package:kids_edu_teacher/view/home/screens/lesson_slider.dart';
 import 'package:kids_edu_teacher/view/library/logic/get_document_collections_bloc/get_document_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/library/screens/collection_info_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
@@ -64,14 +70,32 @@ abstract class Routes {
               BlocProvider(
                 create: (context) => GetShopDataBloc(),
               ),
-
-              
             ],
             child: const MainAppScreen(),
           ),
         );
       case LibraryPage.routeName:
         return MaterialPageRoute(builder: (_) => const LibraryPage());
+      case CoursesListPage.routeName:
+        final lessons = settings.arguments as List<Course>;
+        return MaterialPageRoute(
+            builder: (_) => CoursesListPage(courses: lessons));
+      case CourseInfoPage.routeName:
+        final course = settings.arguments as Course;
+        return MaterialPageRoute(
+            builder: (_) => CourseInfoPage(course: course));
+      case LessonInfoPage.routeName:
+        final lesson = settings.arguments as Lesson;
+        return MaterialPageRoute(
+            builder: (_) => LessonInfoPage(lesson: lesson));
+      case LessonSliderPage.routeName:
+        final slides = settings.arguments as List<VideoCoverModel>;
+        return MaterialPageRoute(
+            builder: (_) => LessonSliderPage(slides: slides));
+      case LessonContrentPage.routeName:
+        final content = settings.arguments as LessonContent;
+        return MaterialPageRoute(
+            builder: (_) => LessonContrentPage(content: content));
       case VideoPage.routeName:
         return MaterialPageRoute(builder: (_) => const VideoPage());
       case ShopPage.routeName:
@@ -181,8 +205,7 @@ abstract class Routes {
       case UserPesonalInfoPage.routeName:
         return MaterialPageRoute(builder: (_) => const UserPesonalInfoPage());
       default:
-        return MaterialPageRoute(
-            builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) => const HomePage());
     }
   }
 }

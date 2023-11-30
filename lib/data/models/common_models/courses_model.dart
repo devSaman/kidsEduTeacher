@@ -25,10 +25,10 @@ class CoursesModel extends ResponseData {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'data': data.toMap()});
     result.addAll({'message': message});
-  
+
     return result;
   }
 
@@ -41,7 +41,8 @@ class CoursesModel extends ResponseData {
 
   String toJson() => json.encode(toMap());
 
-  factory CoursesModel.fromJson(String source) => CoursesModel.fromMap(json.decode(source));
+  factory CoursesModel.fromJson(String source) =>
+      CoursesModel.fromMap(json.decode(source));
 
   @override
   String toString() => 'CoursesModel(data: $data, message: $message)';
@@ -49,10 +50,10 @@ class CoursesModel extends ResponseData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is CoursesModel &&
-      other.data == data &&
-      other.message == message;
+        other.data == data &&
+        other.message == message;
   }
 
   @override
@@ -83,11 +84,11 @@ class CourseModel {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'code': code});
     result.addAll({'message': message});
     result.addAll({'data': data.map((x) => x.toMap()).toList()});
-  
+
     return result;
   }
 
@@ -101,19 +102,21 @@ class CourseModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CourseModel.fromJson(String source) => CourseModel.fromMap(json.decode(source));
+  factory CourseModel.fromJson(String source) =>
+      CourseModel.fromMap(json.decode(source));
 
   @override
-  String toString() => 'CourseModel(code: $code, message: $message, data: $data)';
+  String toString() =>
+      'CourseModel(code: $code, message: $message, data: $data)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is CourseModel &&
-      other.code == code &&
-      other.message == message &&
-      listEquals(other.data, data);
+        other.code == code &&
+        other.message == message &&
+        listEquals(other.data, data);
   }
 
   @override
@@ -172,7 +175,7 @@ class Course {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'id': id});
     result.addAll({'auditory': auditory});
     result.addAll({'name': name});
@@ -183,7 +186,7 @@ class Course {
     result.addAll({'createdAt': createdAt});
     result.addAll({'updatedAt': updatedAt});
     result.addAll({'lessons': lessons.map((x) => x.toMap()).toList()});
-  
+
     return result;
   }
 
@@ -214,32 +217,32 @@ class Course {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Course &&
-      other.id == id &&
-      listEquals(other.auditory, auditory) &&
-      other.name == name &&
-      other.cover == cover &&
-      other.author == author &&
-      other.recommendationAge == recommendationAge &&
-      other.isDeleted == isDeleted &&
-      other.createdAt == createdAt &&
-      other.updatedAt == updatedAt &&
-      listEquals(other.lessons, lessons);
+        other.id == id &&
+        listEquals(other.auditory, auditory) &&
+        other.name == name &&
+        other.cover == cover &&
+        other.author == author &&
+        other.recommendationAge == recommendationAge &&
+        other.isDeleted == isDeleted &&
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt &&
+        listEquals(other.lessons, lessons);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      auditory.hashCode ^
-      name.hashCode ^
-      cover.hashCode ^
-      author.hashCode ^
-      recommendationAge.hashCode ^
-      isDeleted.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode ^
-      lessons.hashCode;
+        auditory.hashCode ^
+        name.hashCode ^
+        cover.hashCode ^
+        author.hashCode ^
+        recommendationAge.hashCode ^
+        isDeleted.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode ^
+        lessons.hashCode;
   }
 }
 
