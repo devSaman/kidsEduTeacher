@@ -90,6 +90,8 @@
     "courses":"Courses",
     "see_all":"See all",
     "lessons":"Lessons",
-    "author":"Author:"
+    "author":"Author:",
+    "payment_desc":"By clicking “Pay”, You agree with",
+    "public_offer":" Public offer"
 
 }

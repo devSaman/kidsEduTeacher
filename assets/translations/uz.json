@@ -90,6 +90,8 @@
     "courses":"Kurslar",
     "see_all":"Barchasini ko'rish",
     "lessons":"Darslar",
-    "author":"Avtor:"
+    "author":"Avtor:",
+    "payment_desc":"To'lash tugmasini bosish orqali siz rozilik bildirasiz",
+    "public_offer":" Ommaviy taklif"
 
 }

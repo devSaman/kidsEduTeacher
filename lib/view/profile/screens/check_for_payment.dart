@@ -1,9 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
+import 'package:kids_edu_teacher/view/profile/logic/top_up_balance_bloc/top_up_balance_bloc.dart';
+import 'package:kids_edu_teacher/view/profile/widgets/payment_card_widget.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CheckForPayment extends StatefulWidget {
   final String coinCount;
@@ -23,6 +28,11 @@ class _CheckForPaymentState extends State<CheckForPayment> {
     context.read<GetUserDataBloc>().add(GetUserData());
     super.initState();
   }
+
+  final controller = PageController(viewportFraction: 1);
+  String teacherId = "";
+  int cardIndex = 0;
+  List<UserCardsModel> cards = [];
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +128,7 @@ class _CheckForPaymentState extends State<CheckForPayment> {
                             BlocBuilder<GetUserDataBloc, GetUserDataState>(
                               builder: (context, state) {
                                 if (state is GetUserDataSuccess) {
+                                  teacherId = state.userData.data.id.toString();
                                   return Text(
                                     state.userData.data.fullName.toString(),
                                     style: TextStyles.s700r16Main,
@@ -133,24 +144,119 @@ class _CheckForPaymentState extends State<CheckForPayment> {
               ),
             ),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Pallate.mainColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    width: double.infinity,
-                    height: 50,
-                    child: Text(
-                      tr('pay'),
-                      style: TextStyles.s700r16White,
+              child: Column(
+                children: [
+                  const SizedBox(height: 150),
+                  RichText(
+                    text: TextSpan(
+                      text: tr('payment_desc'),
+                      style: TextStyles.s400r16Black,
+                      children: [
+                        TextSpan(
+                            text: tr('public_offer'),
+                            style: const TextStyle(color: Pallate.mainColor)),
+                      ],
                     ),
                   ),
-                ),
+                  const SizedBox(height: 20),
+                  BlocBuilder<GetUserDataBloc, GetUserDataState>(
+                    builder: (context, state) {
+                      if (state is GetUserDataSuccess) {
+                        cards.clear();
+                        for (var i = 0;
+                            i < state.userData.data.cards!.length;
+                            i++) {
+                          if (state.userData.data.cards![i].isVerified!) {
+                            cards.add(state.userData.data.cards![i]);
+                          }
+                        }
+                        return Stack(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              height: 140,
+                              width: double.infinity,
+                              child: PageView.builder(
+                                onPageChanged: (data) {
+                                  setState(() {
+                                    cardIndex = data;
+                                  });
+                                },
+                                scrollDirection: Axis.horizontal,
+                                itemCount: cards.length,
+                                physics: const BouncingScrollPhysics(),
+                                controller: controller,
+                                itemBuilder: (context, index) {
+                                  return PaymentCardWidget(
+                                    isForPayment: true,
+                                    cardData: cards[index],
+                                  );
+                                },
+                              ),
+                            ),
+                            Positioned(
+                              right: 0,
+                              left: 0,
+                              bottom: 0,
+                              child: Container(
+                                alignment: Alignment.bottomCenter,
+                                height: 4,
+                                child: SmoothPageIndicator(
+                                  controller: controller,
+                                  count: cards.length,
+                                  effect: const WormEffect(
+                                    dotColor: Pallate.redGradient1,
+                                    activeDotColor: Pallate.mainColor,
+                                    dotHeight: 5,
+                                    dotWidth: 10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: Pallate.mainColor,
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  BlocConsumer<TopUpBalanceBloc, TopUpBalanceState>(
+                    listener: (context, state) {
+                      if (state is TopUpBalanceSuccess) {
+                        print("SUCCES BRO");
+                      }
+                    },
+                    builder: (context, state) {
+                      return InkWell(
+                        onTap: () {
+                          context.read<TopUpBalanceBloc>().add(
+                              TopUpBalanceDataEvent(
+                                  teacherId: teacherId,
+                                  cardNumber:
+                                      cards[cardIndex].number.toString(),
+                                  amount: int.parse(widget.coinCount) * 1000));
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Pallate.mainColor,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          width: double.infinity,
+                          height: 50,
+                          child: Text(
+                            tr('pay'),
+                            style: TextStyles.s700r16White,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             )
           ],

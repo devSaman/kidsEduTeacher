@@ -27,6 +27,7 @@ import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
 import 'package:kids_edu_teacher/view/profile/logic/add_card_bloc/add_card_bloc.dart';
+import 'package:kids_edu_teacher/view/profile/logic/top_up_balance_bloc/top_up_balance_bloc.dart';
 import 'package:kids_edu_teacher/view/profile/screens/balance_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/cards_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
@@ -137,8 +138,15 @@ abstract class Routes {
       case CheckForPayment.routeName:
         final coin = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => GetUserDataBloc(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => GetUserDataBloc(),
+              ),
+              BlocProvider(
+                create: (context) => TopUpBalanceBloc(),
+              ),
+            ],
             child: CheckForPayment(coinCount: coin),
           ),
         );

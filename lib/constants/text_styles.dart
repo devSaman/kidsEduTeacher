@@ -181,6 +181,12 @@ abstract class TextStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const s400r16Black = TextStyle(
+    color: Pallate.blackColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
+
   static const s700r32Black = TextStyle(
     color: Pallate.blackColor,
     fontSize: 32,

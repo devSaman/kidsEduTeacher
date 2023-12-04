@@ -64,6 +64,7 @@ class _CardsPageState extends State<CardsPage> {
                       children: List.generate(
                         cards.length,
                         (index) => PaymentCardWidget(
+                          isForPayment: false,
                           cardData: cards[index],
                         ),
                       ),

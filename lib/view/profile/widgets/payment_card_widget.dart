@@ -6,7 +6,9 @@ import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
 
 class PaymentCardWidget extends StatelessWidget {
   final UserCardsModel cardData;
-  const PaymentCardWidget({super.key, required this.cardData});
+  final bool isForPayment;
+  const PaymentCardWidget(
+      {super.key, required this.cardData, required this.isForPayment});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,19 @@ class PaymentCardWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+            margin: isForPayment ? EdgeInsets.all(10) : null,
             width: double.infinity,
             height: 115,
             decoration: BoxDecoration(
+              color: Pallate.whiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -51,7 +63,9 @@ class PaymentCardWidget extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  "${cardData.number.toString().substring(0, 4)} **** **** ${cardData.number.toString().substring(12, 16)}",
+                                  isForPayment
+                                      ? "${cardData.number.toString().substring(0, 4)} **** ${cardData.number.toString().substring(12, 16)}"
+                                      : "${cardData.number.toString().substring(0, 4)} **** **** ${cardData.number.toString().substring(12, 16)}",
                                   style: TextStyles.s700r18Black,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -61,7 +75,7 @@ class PaymentCardWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${cardData.type}  •  ${cardData.expiration.toString().substring(0,2)}/${cardData.expiration.toString().substring(2,4)} ",
+                          "${cardData.type}  •  ${cardData.expiration.toString().substring(0, 2)}/${cardData.expiration.toString().substring(2, 4)} ",
                           style: TextStyles.s500r10Grey,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

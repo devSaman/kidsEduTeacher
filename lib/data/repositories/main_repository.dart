@@ -327,4 +327,37 @@ class MainRepository {
       return ResponseError.noInternet;
     }
   }
+
+  static Future<ResponseData> topUpBalance(
+      String teacherId, String cardNumber, int amount) async {
+    try {
+      print(teacherId);
+      print(cardNumber);
+      print(amount);
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/topUpBalance'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "teacherId": teacherId,
+            "cardNumber": cardNumber,
+            "amount": amount,
+          },
+        ),
+      );
+      print(response.body);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
 }
