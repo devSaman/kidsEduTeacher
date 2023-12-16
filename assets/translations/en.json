@@ -92,6 +92,13 @@
     "lessons":"Lessons",
     "author":"Author:",
     "payment_desc":"By clicking “Pay”, You agree with",
-    "public_offer":" Public offer"
+    "public_offer":" Public offer",
+    "push_notifications":"Enable Push Notification",
+    "payment_notification":"Payment & Subscriptions",
+    "update_notification":"App Updates",
+    "news_notification":"News & Promotion",
+    "music":"Music",
+    "sound_effects":"Sound Effects",
+    "vibration":"Vibration"
 
 }

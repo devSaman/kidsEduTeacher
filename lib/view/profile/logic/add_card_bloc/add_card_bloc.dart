@@ -32,7 +32,6 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
     emit(ConfirmCardInitial());
     final response = await MainRepository.confirmCard(event.number, event.code);
     if (response is SuccessfulResponse) {
-      print("CONFIRMED SUCCES");
       emit(const ConfirmCardSuccess());
     } else if (response is ErrorModel) {
       emit(ConfirmCardFail(errorData: response));

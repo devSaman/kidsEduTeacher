@@ -33,6 +33,8 @@ import 'package:kids_edu_teacher/view/profile/screens/cards_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/check_for_payment.dart';
 import 'package:kids_edu_teacher/view/profile/screens/coins_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/music_and_effects.dart';
+import 'package:kids_edu_teacher/view/profile/screens/notification_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
@@ -150,6 +152,11 @@ abstract class Routes {
             child: CheckForPayment(coinCount: coin),
           ),
         );
+      case NotificationSettingsPage.routeName:
+        return MaterialPageRoute(
+            builder: (_) => const NotificationSettingsPage());
+      case MusicAndEffectsPage.routeName:
+        return MaterialPageRoute(builder: (_) => const MusicAndEffectsPage());
       case CartPage.routeName:
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:

@@ -32,7 +32,7 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   void initState() {
     controllerTab = TabController(length: 2, vsync: this);
     context.read<GetVideoCollectionsBloc>().add(GetVideoCollectionsDataEvent());
-    context.read<GetUserDataBloc>().add(  GetUserData());
+    context.read<GetUserDataBloc>().add(GetUserData());
     super.initState();
   }
 
@@ -91,44 +91,53 @@ class _VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
                       GetVideoCollectionsState>(
                     builder: (context, state) {
                       if (state is GetVideoCollectionsSuccess) {
-                        return CustomScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          slivers: [
-                            SliverToBoxAdapter(
-                              child: Text(
-                                "${state.videoCollections.data!.length.toString()} ${"collections".tr()}",
-                                style: TextStyles.s700r20Black,
-                              ),
-                            ),
-                            SliverPadding(
-                              padding: const EdgeInsets.only(top: 20),
-                              sliver: SliverGrid(
-                                gridDelegate:
-                                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                                        childAspectRatio: 1.6,
-                                        crossAxisSpacing: 16.0,
-                                        maxCrossAxisExtent: 180.0,
-                                        mainAxisSpacing: 20.0),
-                                delegate: SliverChildBuilderDelegate(
-                                  (context, index) {
-                                    return InkWell(
-                                        onTap: () {
-                                          Navigator.pushNamed(context,
-                                              CollectionInfoPage.routeName,
-                                              arguments: state.videoCollections
-                                                  .data![index]);
-                                        },
-                                        child: CollectionWidget(
-                                          data: state
-                                              .videoCollections.data![index],
-                                        ));
-                                  },
-                                  childCount:
-                                      state.videoCollections.data!.length,
+                        return RefreshIndicator(
+                          color: Pallate.mainColor,
+                          onRefresh: () async {
+                            context
+                                .read<GetVideoCollectionsBloc>()
+                                .add(GetVideoCollectionsDataEvent());
+                          },
+                          child: CustomScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            slivers: [
+                              SliverToBoxAdapter(
+                                child: Text(
+                                  "${state.videoCollections.data!.length.toString()} ${"collections".tr()}",
+                                  style: TextStyles.s700r20Black,
                                 ),
                               ),
-                            )
-                          ],
+                              SliverPadding(
+                                padding: const EdgeInsets.only(top: 20),
+                                sliver: SliverGrid(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithMaxCrossAxisExtent(
+                                          childAspectRatio: 1.6,
+                                          crossAxisSpacing: 16.0,
+                                          maxCrossAxisExtent: 180.0,
+                                          mainAxisSpacing: 20.0),
+                                  delegate: SliverChildBuilderDelegate(
+                                    (context, index) {
+                                      return InkWell(
+                                          onTap: () {
+                                            Navigator.pushNamed(context,
+                                                CollectionInfoPage.routeName,
+                                                arguments: state
+                                                    .videoCollections
+                                                    .data![index]);
+                                          },
+                                          child: CollectionWidget(
+                                            data: state
+                                                .videoCollections.data![index],
+                                          ));
+                                    },
+                                    childCount:
+                                        state.videoCollections.data!.length,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         );
                       }
                       return const CupertinoActivityIndicator(

@@ -26,8 +26,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   TextEditingController passwordControoller = TextEditingController();
   TextEditingController rePasswordControoller = TextEditingController();
   TextEditingController birthController = TextEditingController();
-  bool _isVisible = false;
-  bool _isVisible1 = false;
+  bool _isVisible = true;
+  bool _isVisible1 = true;
 
   var dateFormatter = MaskTextInputFormatter(
       mask: '##/##/####',
@@ -93,8 +93,22 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   inputType: TextInputType.number,
                   hintText: tr('hint_date'),
                   suffixIcon: InkWell(
-                    onTap: () {
-                      print("ddd");
+                    onTap: () async {
+                      DateTime? selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now());
+                      setState(
+                        () {
+                          if (selectedDate == null) {
+                            return;
+                          } else {
+                            birthController.text =
+                                DateFormat('MM/dd/yyyy').format(selectedDate);
+                          }
+                        },
+                      );
                     },
                     child: const Icon(
                       Icons.calendar_month,

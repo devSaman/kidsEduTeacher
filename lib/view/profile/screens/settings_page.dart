@@ -5,6 +5,8 @@ import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
 import 'package:kids_edu_teacher/view/main_app/info_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/change_language_page.dart';
+import 'package:kids_edu_teacher/view/profile/screens/music_and_effects.dart';
+import 'package:kids_edu_teacher/view/profile/screens/notification_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
 import 'package:kids_edu_teacher/view/profile/widgets/settings_button.dart';
 import 'package:path_provider/path_provider.dart';
@@ -20,6 +22,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
         elevation: 0,
         iconTheme: const IconThemeData(color: Pallate.blackColor),
       ),
-      body: CustomScrollView(
-        
-          physics: const BouncingScrollPhysics(),
-        
-        slivers: [
+      body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
         SliverToBoxAdapter(
           child: Padding(
             padding:
@@ -110,7 +109,8 @@ class _SettingsPageState extends State<SettingsPage> {
             child: SettingsButton(
               color: Pallate.redGradient2,
               onTap: () {
-                // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
+                Navigator.pushNamed(
+                    context, NotificationSettingsPage.routeName);
               },
               text: tr('notifications'),
               iconPath: "assets/icons/notification_filled.svg",
@@ -123,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: SettingsButton(
               color: Pallate.mainColor,
               onTap: () {
-                // Navigator.pushNamed(context, ChangeLanguagePage.routeName);
+                Navigator.pushNamed(context, MusicAndEffectsPage.routeName);
               },
               text: tr('sounds'),
               iconPath: "assets/icons/volume_filled.svg",

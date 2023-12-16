@@ -92,6 +92,13 @@
     "lessons":"Darslar",
     "author":"Avtor:",
     "payment_desc":"To'lash tugmasini bosish orqali siz rozilik bildirasiz",
-    "public_offer":" Ommaviy taklif"
+    "public_offer":" Ommaviy taklif",
+    "push_notifications":"Bildirishnomalar",
+    "payment_notification":"To'lov va obunalar",
+    "update_notification":"Yangilanish bildirishnomasi",
+    "news_notification":"Yangiliklar",
+    "music":"Musiqa",
+    "sound_effects":"Ovoz effektlari",
+    "vibration":"Vibratsiya"
 
 }

@@ -16,7 +16,6 @@ class GetShopDataBloc extends Bloc<GetShopDataEvent, GetShopDataState> {
     emit(GetShopDataInitial());
     final response = await MainRepository.getShopData();
     if (response is ShopMainModel) {
-      print("CONFIRMED SUCCES");
       emit(GetShopDataSuccess(shopMainModel: response));
     } else if (response is ErrorModel) {
       emit(GetShopDataFail(errorModel: response));

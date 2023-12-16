@@ -16,7 +16,7 @@ class CollectionWidget extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: CachedNetworkImageProvider(
-                  data.cover!.additionalParameters![2].cover3.toString(),
+                  data.cover?.additionalParameters?[2].cover3?.toString() ?? '',
                 ),
                 fit: BoxFit.cover),
             color: Pallate.blueGradient2,

@@ -92,5 +92,12 @@
     "lessons":"Уроки",
     "author":"Автор:",
     "payment_desc":"Нажимая «Оплатить», вы соглашаетесь с",
-    "public_offer":" Публичная оферта"
+    "public_offer":" Публичная оферта",
+    "push_notifications":"Включить уведомление",
+    "payment_notification":"Оплата и подписки",
+    "update_notification":"Обновления приложений",
+    "news_notification":"Новости и продвижение",
+    "music":"Музыка",
+    "sound_effects":"Звуковые эффекты",
+    "vibration":"Вибрация"
 }

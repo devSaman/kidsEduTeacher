@@ -32,13 +32,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Pallate.blackColor,
-            )),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Pallate.blackColor,
+          ),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [

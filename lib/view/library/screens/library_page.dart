@@ -96,43 +96,51 @@ class _LibraryPageState extends State<LibraryPage>
                       builder: (context, state) {
                         if (state is GetDocumentCollectionsSuccess) {
                           var document = state.documentCollections.data;
-                          return CustomScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            slivers: [
-                              SliverToBoxAdapter(
-                                child: Text(
-                                  "${document!.length} ${"collections".tr()}",
-                                  style: TextStyles.s700r20Black,
-                                ),
-                              ),
-                              SliverPadding(
-                                padding: const EdgeInsets.only(top: 20),
-                                sliver: SliverGrid(
-                                  gridDelegate:
-                                      const SliverGridDelegateWithMaxCrossAxisExtent(
-                                          childAspectRatio: 1.6,
-                                          crossAxisSpacing: 16.0,
-                                          maxCrossAxisExtent: 180.0,
-                                          mainAxisSpacing: 20.0),
-                                  delegate: SliverChildBuilderDelegate(
-                                    (context, index) {
-                                      return InkWell(
-                                          onTap: () {
-                                            Navigator.pushNamed(
-                                                context,
-                                                LibraryCollectionScreen
-                                                    .routeName,
-                                                arguments: document[index]);
-                                          },
-                                          child: CollectionWidget(
-                                            data: document[index],
-                                          ));
-                                    },
-                                    childCount: document.length,
+                          return RefreshIndicator(
+                            color: Pallate.mainColor,
+                            onRefresh: () async {
+                              context
+                                  .read<GetDocumentCollectionsBloc>()
+                                  .add(GetDocumentCollectionsDataEvent());
+                            },
+                            child: CustomScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              slivers: [
+                                SliverToBoxAdapter(
+                                  child: Text(
+                                    "${document!.length} ${"collections".tr()}",
+                                    style: TextStyles.s700r20Black,
                                   ),
                                 ),
-                              )
-                            ],
+                                SliverPadding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  sliver: SliverGrid(
+                                    gridDelegate:
+                                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                                            childAspectRatio: 1.6,
+                                            crossAxisSpacing: 16.0,
+                                            maxCrossAxisExtent: 180.0,
+                                            mainAxisSpacing: 20.0),
+                                    delegate: SliverChildBuilderDelegate(
+                                      (context, index) {
+                                        return InkWell(
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                  context,
+                                                  LibraryCollectionScreen
+                                                      .routeName,
+                                                  arguments: document[index]);
+                                            },
+                                            child: CollectionWidget(
+                                              data: document[index],
+                                            ));
+                                      },
+                                      childCount: document.length,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           );
                         }
                         return const CupertinoActivityIndicator(
