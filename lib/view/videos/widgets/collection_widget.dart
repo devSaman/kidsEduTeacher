@@ -28,7 +28,7 @@ class CollectionWidget extends StatelessWidget {
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [0.1, 0.5, 0.6, 0.9],
+              stops: [0.1, 0.2, 0.3, 0.9],
               colors: [
                 Colors.transparent,
                 Colors.transparent,
@@ -42,9 +42,13 @@ class CollectionWidget extends StatelessWidget {
         Positioned(
           bottom: 12,
           left: 12,
-          child: Text(
-            data.name.toString(),
-            style: TextStyles.s700r16White,
+          child: SizedBox(
+            width: 150,
+            child: Text(
+              data.name.toString(),
+              maxLines: 2,
+              style: TextStyles.s700r16White,
+            ),
           ),
         ),
       ],

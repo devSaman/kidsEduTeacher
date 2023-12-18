@@ -117,20 +117,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       // ),
                       Column(
                         children: List.generate(
-                            widget.product.attributes.length,
-                            (index) => widget
-                                    .product.attributes[index].items.isNotEmpty
-                                ? ListTile(
-                                    leading: Text(
-                                      widget.product.attributes[index].name,
-                                      style: TextStyles.s600r16Block,
-                                    ),
-                                    trailing: SizedBox(
-                                        width: 120,
-                                        child: sizeDropDown(widget
-                                            .product.attributes[index].items)),
-                                  )
-                                : const Center()),
+                          widget.product.attributes.length,
+                          (index) => widget
+                                  .product.attributes[index].items.isNotEmpty
+                              ? ListTile(
+                                  leading: Text(
+                                    widget.product.attributes[index].name,
+                                    style: TextStyles.s600r16Block,
+                                  ),
+                                  trailing: SizedBox(
+                                    width: 120,
+                                    child: sizeDropDown(
+                                        widget.product.attributes[index].items),
+                                  ),
+                                )
+                              : const Center(),
+                        ),
                       ),
                     ],
                   ),

@@ -99,5 +99,6 @@
     "news_notification":"Новости и продвижение",
     "music":"Музыка",
     "sound_effects":"Звуковые эффекты",
-    "vibration":"Вибрация"
+    "vibration":"Вибрация",
+    "empty_list":"Эта категория пуста"
 }

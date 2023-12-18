@@ -39,7 +39,9 @@ import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
 import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
+import 'package:kids_edu_teacher/view/shop/screens/banner_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
+import 'package:kids_edu_teacher/view/shop/screens/categories_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
@@ -152,11 +154,18 @@ abstract class Routes {
             child: CheckForPayment(coinCount: coin),
           ),
         );
+      case BannerPage.routeName:
+      
+        return MaterialPageRoute(builder: (_) => const BannerPage());
       case NotificationSettingsPage.routeName:
         return MaterialPageRoute(
             builder: (_) => const NotificationSettingsPage());
       case MusicAndEffectsPage.routeName:
         return MaterialPageRoute(builder: (_) => const MusicAndEffectsPage());
+      case ShopCategoriesPage.routeName:
+        final category = settings.arguments as ShopMaincategories;
+        return MaterialPageRoute(
+            builder: (_) => ShopCategoriesPage(categoryData: category));
       case CartPage.routeName:
         return MaterialPageRoute(builder: (_) => const CartPage());
       case InfoScreen.routeName:

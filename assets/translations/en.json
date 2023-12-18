@@ -99,6 +99,7 @@
     "news_notification":"News & Promotion",
     "music":"Music",
     "sound_effects":"Sound Effects",
-    "vibration":"Vibration"
+    "vibration":"Vibration",
+    "empty_list":"This category is empty"
 
 }

@@ -79,6 +79,16 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
+                          color: Pallate.whiteColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset: const Offset(
+                                  0, 0), // changes position of shadow
+                            ),
+                          ],
                           borderRadius: BorderRadius.circular(20),
                         ),
                         width: double.infinity,
@@ -89,6 +99,10 @@ class _CourseInfoPageState extends State<CourseInfoPage> {
                               height: 85,
                               width: 140,
                               decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  bottomLeft: Radius.circular(20),
+                                ),
                                 image: DecorationImage(
                                     image: CachedNetworkImageProvider(
                                       widget.course.lessons[index].cover

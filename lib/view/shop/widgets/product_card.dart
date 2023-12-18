@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_edu_teacher/constants/api_path.dart';
@@ -27,8 +28,9 @@ class ShopProductCard extends StatelessWidget {
             margin: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(
+                  image: CachedNetworkImageProvider(
                     "${ApiPaths.basicUrl}/files/view?fileId=${product.images[0]}",
+                    
                   ),
                   fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(16),

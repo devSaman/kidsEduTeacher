@@ -10,6 +10,7 @@ import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
+import 'package:kids_edu_teacher/view/shop/screens/categories_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_card.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/collection_widget.dart';
@@ -23,8 +24,7 @@ class ShopPage extends StatefulWidget {
   State<ShopPage> createState() => _ShopPageState();
 }
 
-class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
-  late TabController controllerTab;
+class _ShopPageState extends State<ShopPage> {
   List<ProductModel> products = [];
   List<ChildCategory> categories = [];
   String? category;
@@ -33,8 +33,6 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
   @override
   void initState() {
     context.read<GetShopDataBloc>().add(const ShopEvent());
-
-    controllerTab = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -257,7 +255,12 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                             delegate: SliverChildBuilderDelegate(
                               (context, index) {
                                 return InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, ShopCategoriesPage.routeName,
+                                        arguments:
+                                            state.shopMainModel.data[index]);
+                                  },
                                   child: CollectionWidget(
                                     data: VideoCollectionModel(
                                       name:
@@ -284,8 +287,10 @@ class _ShopPageState extends State<ShopPage> with TickerProviderStateMixin {
                     ),
                   );
                 }
-                return Center(
-                  child: CupertinoActivityIndicator(),
+                return Expanded(
+                  child: Center(
+                    child: CupertinoActivityIndicator(),
+                  ),
                 );
               },
             ),

@@ -6,6 +6,7 @@ import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
+import 'package:lottie/lottie.dart';
 
 class LibraryCollectionScreen extends StatefulWidget {
   final VideoCollectionModel collectionInfo;
@@ -51,7 +52,6 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
-
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
@@ -74,31 +74,52 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
               ),
             ),
             SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.only(top: 18),
-                child: Text(
-                  "${widget.collectionInfo.documents!.length} ${tr('books')}",
-                  style: TextStyles.s700r20Black,
-                ),
-              ),
+              child: widget.collectionInfo.documents!.isNotEmpty
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 18),
+                      child: Text(
+                        "${widget.collectionInfo.documents!.length} ${tr('books')}",
+                        style: TextStyles.s700r20Black,
+                      ),
+                    )
+                  : Center(),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.only(top: 20),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: widget.collectionInfo.documents!.length,
-                  (context, index) => InkWell(
-                      onTap: () {
-                        // Navigator.pushNamed(
-                        //     context, VideoPlayerScreen.routeName);
-                      },
-                      child: FavoritedVideoWidget(
-                        isLibrary: true,
-                        video: widget.collectionInfo.documents![index],
-                      )),
-                ),
-              ),
-            )
+            widget.collectionInfo.documents!.isNotEmpty
+                ? SliverPadding(
+                    padding: const EdgeInsets.only(top: 20),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: widget.collectionInfo.documents!.length,
+                        (context, index) => InkWell(
+                            onTap: () {
+                              // Navigator.pushNamed(
+                              //     context, VideoPlayerScreen.routeName);
+                            },
+                            child: FavoritedVideoWidget(
+                              isLibrary: true,
+                              video: widget.collectionInfo.documents![index],
+                            )),
+                      ),
+                    ),
+                  )
+                : SliverToBoxAdapter(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Lottie.asset(
+                            'assets/animations/sleep_panda.json',
+                            repeat: true,
+                            width: double.infinity,
+                          ),
+                          Text(
+                            tr('empty_list'),
+                            style: TextStyles.s500r18grey,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
           ],
         ),
       ),
