@@ -100,6 +100,9 @@
     "music":"Musiqa",
     "sound_effects":"Ovoz effektlari",
     "vibration":"Vibratsiya",
-    "empty_list":"Ushbu kategoriya bo'sh"
-
+    "empty_list":"Ushbu ro'yxat bo'sh",
+    "success_payment":"Muvaffaqiyatli!",
+    "success_payment_description":"Hisobingizga {} tanga qo'shildi!",
+    "fail_payment":"Muvaffaqiyatsiz!",
+    "retry":"Qayta urinib ko'rish"
 }

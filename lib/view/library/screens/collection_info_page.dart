@@ -91,6 +91,7 @@ class _LibraryCollectionScreenState extends State<LibraryCollectionScreen> {
                       delegate: SliverChildBuilderDelegate(
                         childCount: widget.collectionInfo.documents!.length,
                         (context, index) => InkWell(
+                            splashColor: Colors.transparent,
                             onTap: () {
                               // Navigator.pushNamed(
                               //     context, VideoPlayerScreen.routeName);

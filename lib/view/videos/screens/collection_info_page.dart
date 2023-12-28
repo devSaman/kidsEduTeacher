@@ -6,6 +6,7 @@ import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_player_page.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
+import 'package:lottie/lottie.dart';
 
 class CollectionInfoPage extends StatefulWidget {
   final VideoCollectionModel data;
@@ -145,35 +146,60 @@ class _CollectionInfoPageState extends State<CollectionInfoPage> {
                       style: TextStyles.s500r18grey,
                     ),
                     const SizedBox(height: 24),
-                    Text(
-                      'videos'.tr(),
-                      style: TextStyles.s700r20Black,
-                    )
+                    widget.data.videos!.isEmpty
+                        ? const Center()
+                        : Text(
+                            'videos'.tr(),
+                            style: TextStyles.s700r20Black,
+                          )
                   ],
                 ),
               ),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.only(top: 20),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: widget.data.videos!.length,
-                  (context, index) => InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, VideoPlayerScreen.routeName,
-                            arguments: VideoPlayerScreen(
-                              video: widget.data.videos![index],
-                              listOfVideos: widget.data.videos!,
-                            ));
-                      },
-                      child: FavoritedVideoWidget(
-                        video: widget.data.videos![index],
-                        isLibrary: false,
-                      )),
-                ),
-              ),
-            )
+
+            widget.data.videos!.isNotEmpty
+                ? SliverPadding(
+                    padding: const EdgeInsets.only(top: 20),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: widget.data.videos!.length,
+                        (context, index) => InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              VideoPlayerScreen.routeName,
+                              arguments: VideoPlayerScreen(
+                                video: widget.data.videos![index],
+                                listOfVideos: widget.data.videos!,
+                              ),
+                            );
+                          },
+                          child: FavoritedVideoWidget(
+                            video: widget.data.videos![index],
+                            isLibrary: false,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : SliverToBoxAdapter(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Lottie.asset(
+                            'assets/animations/empty_panda.json',
+                            repeat: true,
+                            width: double.infinity,
+                          ),
+                          Text(
+                            tr('empty_list'),
+                            style: TextStyles.s500r18grey,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
           ],
         ),
       ),

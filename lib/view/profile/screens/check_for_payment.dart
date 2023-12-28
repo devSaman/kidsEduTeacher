@@ -5,10 +5,12 @@ import 'package:http/http.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
+import 'package:kids_edu_teacher/view/main_app/main_app.dart';
 import 'package:kids_edu_teacher/view/profile/logic/top_up_balance_bloc/top_up_balance_bloc.dart';
 import 'package:kids_edu_teacher/view/profile/widgets/payment_card_widget.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class CheckForPayment extends StatefulWidget {
   final String coinCount;
@@ -33,6 +35,7 @@ class _CheckForPaymentState extends State<CheckForPayment> {
   String teacherId = "";
   int cardIndex = 0;
   List<UserCardsModel> cards = [];
+  bool isButtonPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -227,33 +230,78 @@ class _CheckForPaymentState extends State<CheckForPayment> {
                   BlocConsumer<TopUpBalanceBloc, TopUpBalanceState>(
                     listener: (context, state) {
                       if (state is TopUpBalanceSuccess) {
+                        isButtonPressed = false;
+                        AwesomeDialog(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                          ),
+                          dismissOnTouchOutside: false,
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.rightSlide,
+                          title: tr('success_payment'),
+                          desc: tr('success_payment_description',
+                              args: [widget.coinCount.toString()]),
+                          // btnCancelOnPress: () {},
+                          btnOkColor: Pallate.green,
+                          btnOkOnPress: () async {
+                            Navigator.pushNamedAndRemoveUntil(context,
+                                MainAppScreen.routeName, (route) => false);
+                          },
+                        ).show();
                         print("SUCCES BRO");
+                      } else if (state is TopUpBalanceFail) {
+                        isButtonPressed = false;
+                        AwesomeDialog(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                ),
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: tr('fail_payment'),
+                                desc: state.errorModel.message,
+                                btnCancelText: tr('retry'),
+                                btnCancelColor: Pallate.orange,
+                                btnCancelOnPress: () {})
+                            .show();
+                        setState(() {});
                       }
                     },
                     builder: (context, state) {
-                      return InkWell(
-                        onTap: () {
-                          context.read<TopUpBalanceBloc>().add(
-                              TopUpBalanceDataEvent(
-                                  teacherId: teacherId,
-                                  cardNumber:
-                                      cards[cardIndex].number.toString(),
-                                  amount: int.parse(widget.coinCount) * 1000));
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Pallate.mainColor,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          width: double.infinity,
-                          height: 50,
-                          child: Text(
-                            tr('pay'),
-                            style: TextStyles.s700r16White,
-                          ),
-                        ),
-                      );
+                      return isButtonPressed
+                          ? const CircularProgressIndicator.adaptive()
+                          : InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isButtonPressed = true;
+                                });
+
+                                context.read<TopUpBalanceBloc>().add(
+                                      TopUpBalanceDataEvent(
+                                          teacherId: teacherId,
+                                          cardNumber: cards[cardIndex]
+                                              .number
+                                              .toString(),
+                                          amount: int.parse(widget.coinCount)),
+                                    );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Pallate.mainColor,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                width: double.infinity,
+                                height: 50,
+                                child: isButtonPressed
+                                    ? const CircularProgressIndicator.adaptive()
+                                    : Text(
+                                        tr('pay'),
+                                        style: TextStyles.s700r16White,
+                                      ),
+                              ),
+                            );
                     },
                   ),
                 ],

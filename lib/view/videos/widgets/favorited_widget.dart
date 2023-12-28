@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/constants/hive_service.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/hive_models/hive_favourite_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 
 class FavoritedVideoWidget extends StatelessWidget {
@@ -31,10 +34,11 @@ class FavoritedVideoWidget extends StatelessWidget {
                       video.cover!.additionalParameters![2].cover3.toString(),
                     ),
                     fit: BoxFit.cover),
-                color: Pallate.redGradient1,
+                // color: Pallate.redGradient1,
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    bottomLeft: Radius.circular(12)),
+                  topLeft: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
+                ),
               ),
               height: 115,
               width: 140,
@@ -60,8 +64,31 @@ class FavoritedVideoWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          SvgPicture.asset(
-                            'assets/icons/star.svg',
+                          GestureDetector(
+                            onTap: () {
+                              HiveService.isItemInHive(video.id ?? "")
+                                  ? HiveService.deleteProduct(video.id ?? "",
+                                      isLibrary ? "library" : "video")
+                                  : HiveService.addToBox(video.id ?? "",
+                                      isLibrary ? "library" : "video");
+                            },
+                            child: ValueListenableBuilder<
+                                    Box<HiveFavouriteModel>>(
+                                valueListenable:
+                                    Hive.box<HiveFavouriteModel>('favourites')
+                                        .listenable(),
+                                builder: (ctx, box, __) {
+                                  return HiveService.isItemInHive(
+                                          video.id ?? "")
+                                      ? SvgPicture.asset(
+                                          "assets/icons/star_filled.svg",
+                                          width: 30,
+                                        )
+                                      : SvgPicture.asset(
+                                          "assets/icons/star.svg",
+                                          width: 30,
+                                        );
+                                }),
                           ),
                         ],
                       ),

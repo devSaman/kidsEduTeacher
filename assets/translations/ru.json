@@ -100,5 +100,9 @@
     "music":"Музыка",
     "sound_effects":"Звуковые эффекты",
     "vibration":"Вибрация",
-    "empty_list":"Эта категория пуста"
+    "empty_list":"Эта список пуста",
+    "success_payment":"Успешный!",
+    "success_payment_description":"На ваш счет добавлено {} монет!",
+    "fail_payment":"Неуспешный!",
+    "retry":"Попробуйте еще раз"
 }

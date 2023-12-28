@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/data/models/hive_models/basket_model.dart';
+import 'package:kids_edu_teacher/data/models/hive_models/hive_favourite_model.dart';
 import 'package:kids_edu_teacher/view/library/logic/get_document_collections_bloc/get_document_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/main_app/initial_page.dart';
 import 'package:kids_edu_teacher/view/main_app/main_app.dart';
@@ -10,6 +12,7 @@ import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_d
 import 'package:kids_edu_teacher/view/videos/logic/get_video_collections_bloc/get_video_collections_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'constants/routes.dart';
 
@@ -17,9 +20,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   final appDir = await getTemporaryDirectory();
+
   if (appDir.existsSync()) {
     appDir.deleteSync(recursive: true);
   }
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(BasketModelAdapter());
+  Hive.registerAdapter(HiveFavouriteModelAdapter());
+
+  await Hive.openBox<BasketModel>('basket');
+  await Hive.openBox<HiveFavouriteModel>('favourites');
+
   SharedPreferences _prefs = await SharedPreferences.getInstance();
   bool hasVerified = _prefs.getString('userId') != null;
   runApp(

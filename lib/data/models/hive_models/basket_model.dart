@@ -1,4 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
+part 'basket_model.g.dart';
+
 
 @HiveType(typeId: 0)
 class BasketModel extends HiveObject {

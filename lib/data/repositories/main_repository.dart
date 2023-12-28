@@ -360,4 +360,120 @@ class MainRepository {
       return ResponseError.noInternet;
     }
   }
+
+  static Future<ResponseData> addVideoFavourites(String videoId) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var userId = _prefs.getString('userId');
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/addFavouriteVideos'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "teacherId": userId,
+            "videoIds": [videoId],
+          },
+        ),
+      );
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> removeVideoFavourites(String videoId) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var userId = _prefs.getString('userId');
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/removeFavouriteVideos'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "teacherId": userId,
+            "videoIds": [videoId],
+          },
+        ),
+      );
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> removeDocumentFavourites(String videoId) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var userId = _prefs.getString('userId');
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/removeFavouriteDocuments'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "teacherId": userId,
+            "documentIds": [videoId],
+          },
+        ),
+      );
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> addDocumentFavourites(String videoId) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var userId = _prefs.getString('userId');
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/addFavouriteDocuments'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "teacherId": userId,
+            "documentIds": [videoId],
+          },
+        ),
+      );
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
+        case StatusCodes.badRequest:
+        case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
 }

@@ -1,8 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/constants/hive_service.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/hive_models/hive_favourite_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/videos/widgets/favorited_widget.dart';
 
@@ -45,8 +48,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: SvgPicture.asset(
-              'assets/icons/star.svg',
+            child: GestureDetector(
+              onTap: () {
+                HiveService.isItemInHive(widget.video.id ?? "")
+                    ? HiveService.deleteProduct(widget.video.id ?? "", "video")
+                    : HiveService.addToBox(widget.video.id ?? "", "video");
+              },
+              child: ValueListenableBuilder<Box<HiveFavouriteModel>>(
+                valueListenable:
+                    Hive.box<HiveFavouriteModel>('favourites').listenable(),
+                builder: (ctx, box, __) {
+                  return HiveService.isItemInHive(widget.video.id ?? "")
+                      ? SvgPicture.asset("assets/icons/star_filled.svg",
+                          width: 30)
+                      : SvgPicture.asset("assets/icons/star.svg", width: 30);
+                },
+              ),
             ),
           ),
           Padding(

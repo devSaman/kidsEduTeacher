@@ -1,12 +1,12 @@
 name: kids_edu_teacher
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.2 <4.0.0'
+  sdk: ">=3.1.2 <4.0.0"
 
 dependencies:
   flutter:
@@ -30,20 +30,18 @@ dependencies:
   cached_network_image: ^3.3.0
   shared_preferences: ^2.2.2
   path_provider: ^2.1.1
+  hive_generator: ^2.0.1
+  hive_flutter: ^1.1.0
+  awesome_dialog: ^3.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
- 
   flutter_lints: ^2.0.0
-  hive_flutter: ^1.1.0
   build_runner: ^2.4.6
 
-
 flutter:
-
-
   uses-material-design: true
 
   assets:
