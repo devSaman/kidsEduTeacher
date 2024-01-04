@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="kids_edu_teacher"
+        android:label="Kids Edu Teacher"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
