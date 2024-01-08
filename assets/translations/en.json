@@ -104,6 +104,23 @@
     "success_payment":"Successful!",
     "success_payment_description":"{} coins have been added to your account!",
     "fail_payment":"Failed!",
-    "retry":"Try again"
+    "retry":"Try again",
+    "thanks_for_purchase":"Thank you for your purchase!",
+    "operator_call_you":"An operator will contact you immediately to place your order.",
+    "contact_us":"If you have any questions, please contact us.",
+    "all_the_best":"All the best.",
+    "add_to_basket":"Add to basket",
+    "call_us":"Contact us",
+    "back_to_home":"Back to home",
+    "basket":"Basket",
+    "products":"Products",
+    "price":"Price",
+    "check":"Check",
+    "total":"Total:",
+    "to_shopping":"To Shopping",
+    "make_order":"Make Order",
+    "product_add_basket_success":"Product successfully added to basket",
+    "product_remove_basket":"Product deleted from basket!",
+    "not_enough_coin":"You don't have enough coins!"      
 
 }

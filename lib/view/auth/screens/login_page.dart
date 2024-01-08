@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/constants/hive_service.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
+import 'package:kids_edu_teacher/data/repositories/main_repository.dart';
 import 'package:kids_edu_teacher/view/auth/logic/login_bloc/login_bloc.dart';
 import 'package:kids_edu_teacher/view/auth/screens/forgot_password.dart';
 import 'package:kids_edu_teacher/view/auth/widgets/custom_button.dart';
@@ -43,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
-
           slivers: [
             SliverToBoxAdapter(
               child: Text(
@@ -115,9 +117,29 @@ class _LoginPageState extends State<LoginPage> {
                 child: BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
                     if (state is LoginSuccess) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, MainAppScreen.routeName, (route) => false,
-                          arguments: phoneController.text);
+                      MainRepository.getUserData().then(
+                        (res) {
+                          if (res is UserModel) {
+                            var favDocuments = res.data.favoritedDocuments;
+                            var favVideos = res.data.favoritedVidoes;
+                            for (var i = 0; i < favDocuments!.length; i++) {
+                              HiveService.isItemInHive(favDocuments[i].id ?? "")
+                                  ? null
+                                  : HiveService.addToBox(
+                                      favDocuments[i].id ?? "", "library");
+                            }
+                            for (var i = 0; i < favVideos!.length; i++) {
+                              HiveService.isItemInHive(favVideos[i].id ?? "")
+                                  ? null
+                                  : HiveService.addToBox(
+                                      favVideos[i].id ?? "", "video");
+                            }
+                          }
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              MainAppScreen.routeName, (route) => false,
+                              arguments: phoneController.text);
+                        },
+                      );
                     } else if (state is LoginFail) {
                       Fluttertoast.showToast(
                           msg: state.errorData.message.toString(),

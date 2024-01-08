@@ -104,5 +104,22 @@
     "success_payment":"Muvaffaqiyatli!",
     "success_payment_description":"Hisobingizga {} tanga qo'shildi!",
     "fail_payment":"Muvaffaqiyatsiz!",
-    "retry":"Qayta urinib ko'rish"
+    "retry":"Qayta urinib ko'rish",
+    "thanks_for_purchase":"Xaridingiz uchun rahmat!",
+    "operator_call_you":"Operator darhol buyurtni tasdiqlash uchun siz bilan bog'lanadi.",
+    "contact_us":"Agar sizda biron bir savol bo'lsa, iltimos biz bilan bog'laning.",
+    "all_the_best":"Bizda eng yaxshisi!",
+    "add_to_basket":"Savatga qo'shish",
+    "call_us":"Biz bilan bog'lanish",
+    "back_to_home":"Bosh sahifa",
+    "basket":"Savat",
+    "products":"Mahsulotlar",
+    "price":"Narx",
+    "check":"Chek",
+    "total":"Jami:",
+    "to_shopping":"Xarid",
+    "make_order":"Buyurtma berish" ,
+    "product_add_basket_success":"Mahsulot savatga muvaffaqiyatli qo‘shildi",
+    "product_remove_basket":"Mahsulot savatdan o'chirildi!" ,
+    "not_enough_coin":"Sizda yetarli tanga mavjud emas!" 
 }

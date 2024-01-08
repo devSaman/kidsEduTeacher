@@ -18,26 +18,26 @@ class ProductImagesWidget extends StatelessWidget {
           child: Stack(
             children: [
               PageView.builder(
-                  controller: controller,
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.width - 40,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                "${ApiPaths.basicUrl}/files/view?fileId=${images[index]}",
-                              ),
-                              fit: BoxFit.cover),
-                          color: Pallate.redGradient1,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                controller: controller,
+                itemCount: images.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.width - 40,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              "${ApiPaths.basicUrl}/files/view?fileId=${images[index]}",
+                            ),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                    );
-                  }),
+                    ),
+                  );
+                },
+              ),
               Positioned(
                 right: 0,
                 left: 0,

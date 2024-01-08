@@ -13,6 +13,7 @@ import 'package:kids_edu_teacher/view/videos/screens/video_page.dart';
 
 class MainAppScreen extends StatefulWidget {
   static const routeName = '/mainAppPage';
+
   const MainAppScreen({super.key});
   @override
   State<MainAppScreen> createState() => _MainAppScreenState();

@@ -9,6 +9,7 @@ import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
+import 'package:kids_edu_teacher/view/shop/screens/basket_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/categories_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
@@ -194,8 +195,20 @@ class _ShopPageState extends State<ShopPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, BasketPage.routeName);
+              },
+              child: SvgPicture.asset(
+                'assets/icons/basket_icon.svg',
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
             child: SvgPicture.asset(
               'assets/icons/search.svg',
+              width: 20,
             ),
           ),
         ],

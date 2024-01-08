@@ -8,6 +8,7 @@ import 'package:kids_edu_teacher/data/models/common_models/error_model.dart';
 import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
 import 'package:kids_edu_teacher/data/models/payment_card_models/card_create_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
+import 'package:kids_edu_teacher/data/models/shop_models/make_order_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/data/responses/error_response.dart';
 import 'package:kids_edu_teacher/data/responses/response_data.dart';
@@ -79,15 +80,16 @@ class MainRepository {
 
   static Future<ResponseData> login(String phone, String psw) async {
     try {
-      final response =
-          await http.post(Uri.parse('${ApiPaths.basicUrl}/teachers/login'),
-              headers: {'Content-Type': 'application/json'},
-              body: json.encode(
-                {
-                  "phoneNumber": "998$phone".replaceAll("-", ""),
-                  "password": psw
-                },
-              ));
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/teachers/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "phoneNumber": "998$phone".replaceAll("-", ""),
+            "password": psw,
+          },
+        ),
+      );
       print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
@@ -125,37 +127,18 @@ class MainRepository {
   }
 
   static Future<ResponseData> forgotPassword(String phone) async {
-    // try {
-    final response = await http.post(
+    try {
+      final response = await http.post(
         Uri.parse('${ApiPaths.basicUrl}/teachers/reset-password'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(
           {"phoneNumber": "998$phone".replaceAll("-", "")},
-        ));
-    print(response.body);
-    switch (response.statusCode) {
-      case StatusCodes.ok:
-        return CretaedAccountModel.fromJson(response.body);
-      case StatusCodes.alreadyTaken:
-        return ErrorModel.fromJson(response.body);
-      default:
-        throw ErrorModel.fromJson(response.body);
-    }
-    // } catch (e) {
-    //   return ResponseError.noInternet;
-    // }
-  }
-
-  static Future<ResponseData> getVideoCollections() async {
-    try {
-      final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}/teachers/video-collections'),
-        headers: {'Content-Type': 'application/json'},
+        ),
       );
       print(response.body);
       switch (response.statusCode) {
         case StatusCodes.ok:
-          return VideoCollectionsModel.fromJson(response.body);
+          return CretaedAccountModel.fromJson(response.body);
         case StatusCodes.alreadyTaken:
           return ErrorModel.fromJson(response.body);
         default:
@@ -166,44 +149,112 @@ class MainRepository {
     }
   }
 
-  static Future<ResponseData> getDocumentCollections() async {
-    // try {
-    final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}/teachers/document-collections'),
-      headers: {'Content-Type': 'application/json'},
-    );
-    print(response.body);
-    switch (response.statusCode) {
-      case StatusCodes.ok:
-        return VideoCollectionsModel.fromJson(response.body);
-      case StatusCodes.alreadyTaken:
-        return ErrorModel.fromJson(response.body);
-      default:
-        throw ErrorModel.fromJson(response.body);
+  static Future<ResponseData> getVideoCollections() async {
+    String fileName = "videoCollectionsCache.json";
+    var cacheDir = await getTemporaryDirectory();
+    if (await File("${cacheDir.path}/$fileName").exists()) {
+      print("Loading from cache");
+      var jsonData = File("${cacheDir.path}/$fileName").readAsStringSync();
+      VideoCollectionsModel response = VideoCollectionsModel.fromJson(jsonData);
+      return response;
+    } else {
+      try {
+        final response = await http.get(
+          Uri.parse('${ApiPaths.basicUrl}/teachers/video-collections'),
+          headers: {'Content-Type': 'application/json'},
+        );
+        print(response.body);
+        switch (response.statusCode) {
+          case StatusCodes.ok:
+            var tempDir = await getTemporaryDirectory();
+            File file = File("${tempDir.path}/$fileName");
+            if (!await file.exists()) {
+              file.createSync(recursive: true);
+            }
+            file.writeAsString(response.body,
+                flush: true, mode: FileMode.write);
+            return VideoCollectionsModel.fromJson(response.body);
+          case StatusCodes.alreadyTaken:
+            return ErrorModel.fromJson(response.body);
+          default:
+            throw ErrorModel.fromJson(response.body);
+        }
+      } catch (e) {
+        return ResponseError.noInternet;
+      }
     }
-    // } catch (e) {
-    //   return ResponseError.noInternet;
-    // }
+  }
+
+  static Future<ResponseData> getDocumentCollections() async {
+    String fileName = "documentCollectionsCache.json";
+    var cacheDir = await getTemporaryDirectory();
+    if (await File("${cacheDir.path}/$fileName").exists()) {
+      print("Loading from cache");
+      var jsonData = File("${cacheDir.path}/$fileName").readAsStringSync();
+      VideoCollectionsModel response = VideoCollectionsModel.fromJson(jsonData);
+      return response;
+    } else {
+      try {
+        final response = await http.get(
+          Uri.parse('${ApiPaths.basicUrl}/teachers/document-collections'),
+          headers: {'Content-Type': 'application/json'},
+        );
+        print(response.body);
+        switch (response.statusCode) {
+          case StatusCodes.ok:
+            var tempDir = await getTemporaryDirectory();
+            File file = File("${tempDir.path}/$fileName");
+            if (!await file.exists()) {
+              file.createSync(recursive: true);
+            }
+            file.writeAsString(response.body,
+                flush: true, mode: FileMode.write);
+            return VideoCollectionsModel.fromJson(response.body);
+          case StatusCodes.alreadyTaken:
+            return ErrorModel.fromJson(response.body);
+          default:
+            throw ErrorModel.fromJson(response.body);
+        }
+      } catch (e) {
+        return ResponseError.noInternet;
+      }
+    }
   }
 
   static Future<ResponseData> allCourses() async {
-    // try {
-    final response = await http.get(
-      Uri.parse('${ApiPaths.basicUrl}/teachers/courses'),
-      headers: {'Content-Type': 'application/json'},
-    );
-    print(response.body);
-    switch (response.statusCode) {
-      case StatusCodes.ok:
-        return CoursesModel.fromJson(response.body);
-      case StatusCodes.alreadyTaken:
-        return ErrorModel.fromJson(response.body);
-      default:
-        throw ErrorModel.fromJson(response.body);
+    String fileName = "allCoursesCache.json";
+    var cacheDir = await getTemporaryDirectory();
+    if (await File("${cacheDir.path}/$fileName").exists()) {
+      print("Loading from cache");
+      var jsonData = File("${cacheDir.path}/$fileName").readAsStringSync();
+      CoursesModel response = CoursesModel.fromJson(jsonData);
+      return response;
+    } else {
+      try {
+        final response = await http.get(
+          Uri.parse('${ApiPaths.basicUrl}/teachers/courses'),
+          headers: {'Content-Type': 'application/json'},
+        );
+        print(response.body);
+        switch (response.statusCode) {
+          case StatusCodes.ok:
+            var tempDir = await getTemporaryDirectory();
+            File file = File("${tempDir.path}/$fileName");
+            if (!await file.exists()) {
+              file.createSync(recursive: true);
+            }
+            file.writeAsString(response.body,
+                flush: true, mode: FileMode.write);
+            return CoursesModel.fromJson(response.body);
+          case StatusCodes.alreadyTaken:
+            return ErrorModel.fromJson(response.body);
+          default:
+            throw ErrorModel.fromJson(response.body);
+        }
+      } catch (e) {
+        return ResponseError.noInternet;
+      }
     }
-    // } catch (e) {
-    //   return ResponseError.noInternet;
-    // }
   }
 
   static Future<ResponseData> getUserData() async {
@@ -307,24 +358,40 @@ class MainRepository {
   }
 
   static Future<ResponseData> getShopData() async {
-    try {
-      final response = await http.get(
-        Uri.parse('${ApiPaths.basicUrl}/categories'),
-        headers: {'Content-Type': 'application/json'},
-      );
-      print(response.body);
-      switch (response.statusCode) {
-        case StatusCodes.ok:
-          return ShopMainModel.fromJson(response.body);
-        case StatusCodes.alreadyTaken:
-        case StatusCodes.badRequest:
-        case StatusCodes.unathorized:
-          return ErrorModel.fromJson(response.body);
-        default:
-          throw ErrorModel.fromJson(response.body);
+    String fileName = "shopDataCache.json";
+    var cacheDir = await getTemporaryDirectory();
+    if (await File("${cacheDir.path}/$fileName").exists()) {
+      print("Loading from cache");
+      var jsonData = File("${cacheDir.path}/$fileName").readAsStringSync();
+      ShopMainModel response = ShopMainModel.fromJson(jsonData);
+      return response;
+    } else {
+      try {
+        final response = await http.get(
+          Uri.parse('${ApiPaths.basicUrl}/categories'),
+          headers: {'Content-Type': 'application/json'},
+        );
+        print(response.body);
+        switch (response.statusCode) {
+          case StatusCodes.ok:
+            var tempDir = await getTemporaryDirectory();
+            File file = File("${tempDir.path}/$fileName");
+            if (!await file.exists()) {
+              file.createSync(recursive: true);
+            }
+            file.writeAsString(response.body,
+                flush: true, mode: FileMode.write);
+            return ShopMainModel.fromJson(response.body);
+          case StatusCodes.alreadyTaken:
+          case StatusCodes.badRequest:
+          case StatusCodes.unathorized:
+            return ErrorModel.fromJson(response.body);
+          default:
+            throw ErrorModel.fromJson(response.body);
+        }
+      } catch (e) {
+        return ResponseError.noInternet;
       }
-    } catch (e) {
-      return ResponseError.noInternet;
     }
   }
 
@@ -468,6 +535,49 @@ class MainRepository {
         case StatusCodes.alreadyTaken:
         case StatusCodes.badRequest:
         case StatusCodes.unathorized:
+          return ErrorModel.fromJson(response.body);
+        default:
+          throw ErrorModel.fromJson(response.body);
+      }
+    } catch (e) {
+      return ResponseError.noInternet;
+    }
+  }
+
+  static Future<ResponseData> makeOrder(MakeOrderModel order) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    var userId = _prefs.getString('userId');
+    var list = [];
+
+    for (var i = 0; i < order.productIds.length; i++) {
+      Map<String, dynamic> data = {
+        "productId": order.productIds[i].productId,
+        "count": order.productIds[i].count,
+        "option": {
+          order.productIds[i].optionName: order.productIds[i].optionValue
+        }
+      };
+      list.add(data);
+    }
+
+    try {
+      final response = await http.post(
+        Uri.parse('${ApiPaths.basicUrl}/orders'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(
+          {
+            "teacherId": userId,
+            "orderAmount": order.amount,
+            "productIds": list
+          },
+        ),
+      );
+      // print(response.body);
+      print(response.statusCode);
+      switch (response.statusCode) {
+        case StatusCodes.ok:
+          return SuccessfulResponse();
+        case StatusCodes.alreadyTaken:
           return ErrorModel.fromJson(response.body);
         default:
           throw ErrorModel.fromJson(response.body);

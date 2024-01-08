@@ -10,9 +10,13 @@ class HiveService {
     var item;
     for (var prod in savedItemList) {
       if (prod.id == itemId) {
+        // print("PROD ID ${prod.id}");
+        // print("ITEM ID $itemId");
         item = prod;
       }
     }
+
+     print(item != null);
     return item != null;
   }
 
@@ -32,14 +36,16 @@ class HiveService {
                   }
                 },
               )
-            : MainRepository.removeDocumentFavourites(item.id).then((response) {
-                if (response is SuccessfulResponse) {
-                  print("HERE SAVED PRODUCT IS DELETE FUCNTION IS WORKING");
-                  itemList.delete(item.key);
-                } else {
-                  print(response.toString());
-                }
-              });
+            : MainRepository.removeDocumentFavourites(item.id).then(
+                (response) {
+                  if (response is SuccessfulResponse) {
+                    print("HERE SAVED PRODUCT IS DELETE FUCNTION IS WORKING");
+                    itemList.delete(item.key);
+                  } else {
+                    print(response.toString());
+                  }
+                },
+              );
         break;
       }
     }

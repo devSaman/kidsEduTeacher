@@ -13,7 +13,6 @@ import 'package:kids_edu_teacher/view/auth/screens/create_account_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/forgot_password.dart';
 import 'package:kids_edu_teacher/view/auth/screens/login_page.dart';
 import 'package:kids_edu_teacher/view/auth/screens/verification_page.dart';
-import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bloc.dart';
 import 'package:kids_edu_teacher/view/home/screens/course_info_page.dart';
 import 'package:kids_edu_teacher/view/home/screens/courses_list.dart';
 
@@ -39,11 +38,14 @@ import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/settings_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/user_personal_info_page.dart';
 import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
+import 'package:kids_edu_teacher/view/shop/logic/make_order_bloc/make_order_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/screens/banner_page.dart';
+import 'package:kids_edu_teacher/view/shop/screens/basket_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/categories_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/product_detail_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
+import 'package:kids_edu_teacher/view/shop/screens/successfully_purchased.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_video_collections_bloc/get_video_collections_bloc.dart';
 import 'package:kids_edu_teacher/view/videos/screens/collection_info_page.dart';
@@ -79,6 +81,22 @@ abstract class Routes {
             child: const MainAppScreen(),
           ),
         );
+      case BasketPage.routeName:
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => GetUserDataBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => MakeOrderBloc(),
+                    ),
+                  ],
+                  child: const BasketPage(),
+                ));
+      case SuccessfullyPurchasedPage.routeName:
+        return MaterialPageRoute(
+            builder: (_) => const SuccessfullyPurchasedPage());
       case LibraryPage.routeName:
         return MaterialPageRoute(builder: (_) => const LibraryPage());
       case CoursesListPage.routeName:
@@ -155,7 +173,6 @@ abstract class Routes {
           ),
         );
       case BannerPage.routeName:
-      
         return MaterialPageRoute(builder: (_) => const BannerPage());
       case NotificationSettingsPage.routeName:
         return MaterialPageRoute(
@@ -227,7 +244,11 @@ abstract class Routes {
       case ChangeLanguagePage.routeName:
         return MaterialPageRoute(builder: (_) => const ChangeLanguagePage());
       case UserPesonalInfoPage.routeName:
-        return MaterialPageRoute(builder: (_) => const UserPesonalInfoPage());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => GetUserDataBloc(),
+                  child: const UserPesonalInfoPage(),
+                ));
       default:
         return MaterialPageRoute(builder: (_) => const HomePage());
     }

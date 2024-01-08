@@ -32,16 +32,16 @@ class AddChildButton extends StatelessWidget {
                 style: TextStyles.s700r16White,
               ),
             ),
-            Container(
-              alignment: Alignment.center,
-              width: 110,
-              height: 32,
-              decoration: BoxDecoration(
-                color: Pallate.whiteColor,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Text("${tr('add')} +", style: TextStyles.s600r14Main,),
-            )
+            // Container(
+            //   alignment: Alignment.center,
+            //   width: 110,
+            //   height: 32,
+            //   decoration: BoxDecoration(
+            //     color: Pallate.whiteColor,
+            //     borderRadius: BorderRadius.circular(100),
+            //   ),
+            //   child: Text("${tr('add')} +", style: TextStyles.s600r14Main,),
+            // )
           ],
         ),
       ),

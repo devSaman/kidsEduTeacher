@@ -2,13 +2,21 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
+import 'package:kids_edu_teacher/constants/routes.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
+import 'package:kids_edu_teacher/data/models/hive_models/basket_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
+import 'package:kids_edu_teacher/view/main_app/main_app.dart';
+import 'package:kids_edu_teacher/view/profile/screens/coins_page.dart';
+import 'package:kids_edu_teacher/view/shop/screens/successfully_purchased.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/add_button.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_card.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_images_widget.dart';
 import 'package:kids_edu_teacher/view/videos/logic/get_user_data_bloc/get_user_data_bloc.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final ProductModel product;
@@ -166,10 +174,102 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ],
                       ),
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                        child: AddButton(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 20),
+                        child: ValueListenableBuilder<Box<BasketModel>>(
+                          valueListenable:
+                              Hive.box<BasketModel>('basket').listenable(),
+                          builder: (ctx, box, index) {
+                            return isProductInHive(widget.product.id)
+                                ? Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child: AddButton(
+                                          onTap: () {
+                                            if (getDrugQty(widget.product.id) >
+                                                1) {
+                                              decreaseQuantity(
+                                                  widget.product.id);
+                                            } else {
+                                              deleteProduct(widget.product.id);
+                                              showTopSnackBar(
+                                                displayDuration:
+                                                    const Duration(seconds: 3),
+                                                Overlay.of(context),
+                                                CustomSnackBar.info(
+                                                  backgroundColor:
+                                                      Pallate.orange,
+                                                  message: tr(
+                                                      'product_remove_basket'),
+                                                ),
+                                              );
+                                            }
+
+                                            setState(() {});
+                                          },
+                                          text: "-",
+                                          isFilled: true,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child: AddButton(
+                                          onTap: () {},
+                                          text: getDrugQty(widget.product.id)
+                                              .toString(),
+                                          isFilled: false,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child: AddButton(
+                                          onTap: () {
+                                            increaseQuantity(widget.product.id);
+                                            setState(() {});
+                                          },
+                                          text: "+",
+                                          isFilled: true,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : AddButton(
+                                    isFilled: true,
+                                    text: tr('add_to_basket'),
+                                    onTap: () {
+                                      addToBox(
+                                          widget.product.id,
+                                          widget.product.name,
+                                          widget.product.attributes.isNotEmpty
+                                              ? widget
+                                                  .product.attributes[0].name
+                                              : "",
+                                          sizeValue ?? "",
+                                          widget.product.price,
+                                          widget.product.images.isNotEmpty
+                                              ? widget.product.images[0]
+                                              : "",
+                                          1);
+                                      showTopSnackBar(
+                                        displayDuration:
+                                            const Duration(seconds: 3),
+                                        Overlay.of(context),
+                                        CustomSnackBar.success(
+                                          message:
+                                              tr('product_add_basket_success'),
+                                        ),
+                                      );
+                                    },
+                                  );
+                          },
+                        ),
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -259,7 +359,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 style: TextStyles.s600r15White,
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, CoinsPage.routeName);
+                                },
                                 icon: const Icon(
                                   Icons.add_circle_outlined,
                                   color: Pallate.greyColor,
@@ -279,6 +382,74 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ],
       ),
     );
+  }
+
+  void increaseQuantity(String productId) {
+    final box = Hive.box<BasketModel>('basket').values.toList();
+    for (var product in box) {
+      if (productId == product.id) {
+        product.qty++;
+        break;
+      }
+    }
+  }
+
+  void decreaseQuantity(String productId) {
+    final box = Hive.box<BasketModel>('basket').values.toList();
+    for (var product in box) {
+      if (productId == product.id) {
+        product.qty--;
+        break;
+      }
+    }
+  }
+
+  bool isProductInHive(String productId) {
+    final savedProductList = Hive.box<BasketModel>('basket').values.toList();
+    var product;
+    for (var prod in savedProductList) {
+      if (prod.id == productId) {
+        product = prod;
+      }
+    }
+    return product != null;
+  }
+
+  num getDrugQty(String productId) {
+    num qty = 0;
+    final basket = Hive.box<BasketModel>('basket').values.toList();
+    for (var prod in basket) {
+      if (prod.id == productId) {
+        qty = prod.qty;
+      }
+    }
+    return qty;
+  }
+
+  void addToBox(id, name, attribute, attributeValue, price, image, qty) {
+    final product = BasketModel()
+      ..id = id
+      ..name = name
+      ..attribute = attribute
+      ..attributeValue = attributeValue
+      ..price = price
+      ..image = image
+      ..id = id
+      ..qty = qty;
+
+    final box = Hive.box<BasketModel>('basket');
+    box.add(product);
+  }
+
+  void deleteProduct(String productId) {
+    final box = Hive.box<BasketModel>('basket').values.toList();
+    final listProducts = Hive.box<BasketModel>('basket');
+    for (var product in box) {
+      if (productId == product.id) {
+        listProducts.delete(product.key);
+        break;
+      }
+    }
   }
 
   Widget sizeDropDown(List<String> data) {

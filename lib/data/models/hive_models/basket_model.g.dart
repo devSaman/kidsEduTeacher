@@ -17,18 +17,19 @@ class BasketModelAdapter extends TypeAdapter<BasketModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return BasketModel()
-      ..id = fields[0] as String
-      ..name = fields[1] as String
-      ..attribute = fields[2] as String
-      ..attributeValue = fields[3] as String
-      ..price = fields[4] as String
-      ..image = fields[5] as String;
+      ..id = fields[0] as dynamic
+      ..name = fields[1] as dynamic
+      ..attribute = fields[2] as dynamic
+      ..attributeValue = fields[3] as dynamic
+      ..price = fields[4] as dynamic
+      ..image = fields[5] as dynamic
+      ..qty = fields[6] as dynamic;
   }
 
   @override
   void write(BinaryWriter writer, BasketModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -40,7 +41,9 @@ class BasketModelAdapter extends TypeAdapter<BasketModel> {
       ..writeByte(4)
       ..write(obj.price)
       ..writeByte(5)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(6)
+      ..write(obj.qty);
   }
 
   @override

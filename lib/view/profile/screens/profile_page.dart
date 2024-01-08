@@ -69,6 +69,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       leading: CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.blue.shade600,
+                        child: SvgPicture.asset(
+                          "assets/icons/profile_filled.svg",
+                          color: Pallate.whiteColor,
+                          height: 25,
+                          width: 25,
+                        ),
                       ),
                       title: Text(state.userData.data.fullName.toString(),
                           style: TextStyles.s700r20Black),

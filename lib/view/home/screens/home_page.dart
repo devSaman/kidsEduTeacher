@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bloc.dart';
 import 'package:kids_edu_teacher/view/home/widgets/add_child_button.dart';
 import 'package:kids_edu_teacher/view/home/widgets/courses_list_widget.dart';
+import 'package:kids_edu_teacher/view/home/widgets/search_widget.dart';
 
 import '../../../constants/text_styles.dart';
 
@@ -30,11 +31,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: FractionallySizedBox(
-            widthFactor: .5,
-            heightFactor: .5,
-            child: SvgPicture.asset(
-              'assets/images/main_logo.svg',
-            )),
+          widthFactor: .5,
+          heightFactor: .5,
+          child: SvgPicture.asset(
+            'assets/images/main_logo.svg',
+          ),
+        ),
         centerTitle: false,
         title: const Text(
           "Kids EDU",
@@ -43,8 +45,16 @@ class _HomePageState extends State<HomePage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
-            child: SvgPicture.asset(
-              'assets/icons/search.svg',
+            child: InkWell(
+              onTap: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchHouses(context),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/icons/search.svg',
+              ),
             ),
           ),
           Padding(

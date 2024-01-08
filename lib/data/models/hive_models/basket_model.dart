@@ -1,19 +1,20 @@
 import 'package:hive_flutter/adapters.dart';
 part 'basket_model.g.dart';
 
-
 @HiveType(typeId: 0)
 class BasketModel extends HiveObject {
   @HiveField(0)
-  late String id;
+  dynamic id;
   @HiveField(1)
-  late String name;
+  dynamic name;
   @HiveField(2)
-  late String attribute;
+  dynamic attribute;
   @HiveField(3)
-  late String attributeValue;
+  dynamic attributeValue;
   @HiveField(4)
-  late String price;
+  dynamic price;
   @HiveField(5)
-  late String image;
+  dynamic image;
+  @HiveField(6)
+  dynamic qty;
 }

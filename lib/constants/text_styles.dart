@@ -31,6 +31,11 @@ abstract class TextStyles {
     fontSize: 10,
     fontWeight: FontWeight.w600,
   );
+  static final s600r17Black = TextStyle(
+    color: Pallate.blackColor,
+    fontSize: 17,
+    fontWeight: FontWeight.w600,
+  );
 
   static const s700r16Main = TextStyle(
     color: Pallate.mainColor,
@@ -52,6 +57,17 @@ abstract class TextStyles {
 
   static const s600r14Main = TextStyle(
     color: Pallate.mainColor,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  );
+  static const s600r14Black = TextStyle(
+    color: Pallate.blackColor,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const s600r14Grey = TextStyle(
+    color: Pallate.darkGreyColor,
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
@@ -124,6 +140,12 @@ abstract class TextStyles {
 
   static const s600r16Block = TextStyle(
     color: Pallate.blackColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const s600r16Main = TextStyle(
+    color: Pallate.mainColor,
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
