@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import 'package:kids_edu_teacher/constants/colors.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
+import 'package:kids_edu_teacher/view/shop/logic/get_banners_bloc/get_banners_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
+import 'package:kids_edu_teacher/view/shop/screens/banner_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/basket_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/cart_page.dart';
 import 'package:kids_edu_teacher/view/shop/screens/categories_page.dart';
@@ -34,6 +37,7 @@ class _ShopPageState extends State<ShopPage> {
   @override
   void initState() {
     context.read<GetShopDataBloc>().add(const ShopEvent());
+    context.read<GetBannersBloc>().add(const GetAllBannersData());
     super.initState();
   }
 
@@ -217,39 +221,53 @@ class _ShopPageState extends State<ShopPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 215,
-              decoration: BoxDecoration(
-                color: Pallate.whiteColor,
-                border: Border.all(color: Pallate.mainColor),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(5),
-                    width: double.infinity,
-                    height: 176,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
-                          image: AssetImage('assets/images/banner.png'),
-                          fit: BoxFit.cover),
-                      // color: Pallate.blueGradient1,
-                      borderRadius: BorderRadius.circular(16),
+            BlocBuilder<GetBannersBloc, GetBannersState>(
+              builder: (context, state) {
+                if (state is GetBannersSuccess) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, BannerPage.routeName,
+                          arguments: state.bannersData.data?[0]);
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 215,
+                      decoration: BoxDecoration(
+                        color: Pallate.whiteColor,
+                        border: Border.all(color: Pallate.mainColor),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              margin: const EdgeInsets.all(5),
+                              width: double.infinity,
+                              height: 176,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(
+                                      "${ApiPaths.basicUrl}/files/view?fileId=${state.bannersData.data?[0].images?[0]}",
+                                    ),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(20),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 20,
+                            ),
+                            child: Text(state.bannersData.data?[0].title ?? ""),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      left: 20,
-                    ),
-                    child: Text("News from Apple"),
-                  ),
-                ],
-              ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              },
             ),
-
             BlocBuilder<GetShopDataBloc, GetShopDataState>(
               builder: (context, state) {
                 if (state is GetShopDataSuccess) {
@@ -300,138 +318,13 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   );
                 }
-                return Expanded(
+                return const Expanded(
                   child: Center(
                     child: CupertinoActivityIndicator(),
                   ),
                 );
               },
-            ),
-
-            // categories.isNotEmpty
-            //     ? Padding(
-            //         padding: const EdgeInsets.only(top: 20),
-            //         child: SizedBox(
-            //           height: 40,
-            //           width: double.infinity,
-            //           child: ListView.builder(
-            //             scrollDirection: Axis.horizontal,
-            //             itemCount: categories.length,
-            //             itemBuilder: (ctx, idx) {
-            //               return Padding(
-            //                 padding: const EdgeInsets.only(right: 20),
-            //                 child: InkWell(
-            //                   onTap: () {
-            //                     products.clear();
-            //                     category = categories[idx].name;
-            //                     for (var i = 0;
-            //                         i < categories[idx].products.length;
-            //                         i++) {
-            //                       products.add(categories[idx].products[i]);
-            //                     }
-            //                     setState(() {});
-            //                   },
-            //                   child: Column(
-            //                     children: [
-            //                       Text(categories[idx].name,
-            //                           style: category == categories[idx].name
-            //                               ? TextStyles.s600r18Main
-            //                               : TextStyles.s600r18Black),
-            //                       const SizedBox(
-            //                         height: 5,
-            //                       ),
-            //                       category == categories[idx].name
-            //                           ? Container(
-            //                               height: 2,
-            //                               color: Pallate.mainColor,
-            //                               child: Text(categories[idx].name,
-            //                                   style: TextStyles.s600r18Black),
-            //                             )
-            //                           : const Center()
-            //                     ],
-            //                   ),
-            //                 ),
-            //               );
-            //             },
-            //           ),
-            //         ),
-            //       )
-            //     : const Center(),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 20),
-            //   child: TabBar(
-            //     controller: controllerTab,
-            //     indicatorColor: Pallate.mainColor,
-            //     labelColor: Pallate.mainColor,
-            //     labelStyle: TextStyles.s600r18Main,
-            //     unselectedLabelColor: Pallate.darkGreyColor,
-            //     tabs: _tabs,
-            //   ),
-            // ),
-            //   Expanded(
-            //     child: CustomScrollView(
-            //       physics: const BouncingScrollPhysics(),
-            //       slivers: [
-            //         SliverToBoxAdapter(
-            //           child: Padding(
-            //             padding: const EdgeInsets.only(top: 20),
-            //             child: Row(
-            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //               children: [
-            //                 Text(
-            //                   "${products.length} products",
-            //                   style: TextStyles.s700r20Black,
-            //                 ),
-            //                 // const Row(
-            //                 //   children: [
-            //                 //     Text(
-            //                 //       "New",
-            //                 //       style: TextStyles.s700r18Main,
-            //                 //     ),
-            //                 //     SizedBox(width: 5),
-            //                 //     Icon(
-            //                 //       Icons.filter_list,
-            //                 //       color: Pallate.mainColor,
-            //                 //     )
-            //                 //   ],
-            //                 // )
-            //               ],
-            //             ),
-            //           ),
-            //         ),
-            //         SliverPadding(
-            //           padding: const EdgeInsets.only(top: 10, bottom: 20),
-            //           sliver: SliverGrid(
-            //             gridDelegate:
-            //                 const SliverGridDelegateWithMaxCrossAxisExtent(
-            //                     childAspectRatio: .8,
-            //                     crossAxisSpacing: 30.0,
-            //                     maxCrossAxisExtent: 180.0,
-            //                     mainAxisSpacing: 20.0),
-            //             delegate: SliverChildBuilderDelegate(
-            //               (context, index) {
-            //                 return InkWell(
-            //                   onTap: () {
-            //                     Navigator.pushNamed(
-            //                         context, ProductDetailPage.routeName,
-            //                         arguments: ProductDetailPage(
-            //                           product: products[index],
-            //                           products: products,
-            //                         ));
-            //                   },
-            //                   child: ShopProductCard(
-            //                     product: products[index],
-            //                     isWidth: false,
-            //                   ),
-            //                 );
-            //               },
-            //               childCount: products.length,
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   )
+            )
           ],
         ),
       ),

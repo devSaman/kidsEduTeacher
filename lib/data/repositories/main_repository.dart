@@ -7,6 +7,7 @@ import 'package:kids_edu_teacher/data/models/auth_models/vaerification_model.dar
 import 'package:kids_edu_teacher/data/models/common_models/error_model.dart';
 import 'package:kids_edu_teacher/data/models/common_models/get_user_model.dart';
 import 'package:kids_edu_teacher/data/models/payment_card_models/card_create_model.dart';
+import 'package:kids_edu_teacher/data/models/shop_models/banner_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/make_order_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
@@ -392,6 +393,44 @@ class MainRepository {
       } catch (e) {
         return ResponseError.noInternet;
       }
+    }
+  }
+
+  static Future<ResponseData> getAllBanners() async {
+    String fileName = "bannersDataCache.json";
+    var cacheDir = await getTemporaryDirectory();
+    if (await File("${cacheDir.path}/$fileName").exists()) {
+      print("Loading from cache");
+      var jsonData = File("${cacheDir.path}/$fileName").readAsStringSync();
+      BannersModel response = BannersModel.fromJson(jsonData);
+      return response;
+    } else {
+      // try {
+        final response = await http.get(
+          Uri.parse('${ApiPaths.basicUrl}/banners'),
+          headers: {'Content-Type': 'application/json'},
+        );
+        print(response.body);
+        switch (response.statusCode) {
+          case StatusCodes.ok:
+            var tempDir = await getTemporaryDirectory();
+            File file = File("${tempDir.path}/$fileName");
+            if (!await file.exists()) {
+              file.createSync(recursive: true);
+            }
+            file.writeAsString(response.body,
+                flush: true, mode: FileMode.write);
+            return BannersModel.fromJson(response.body);
+          case StatusCodes.alreadyTaken:
+          case StatusCodes.badRequest:
+          case StatusCodes.unathorized:
+            return ErrorModel.fromJson(response.body);
+          default:
+            throw ErrorModel.fromJson(response.body);
+        }
+      // } catch (e) {
+      //   return ResponseError.noInternet;
+      // }
     }
   }
 

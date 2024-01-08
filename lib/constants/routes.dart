@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kids_edu_teacher/data/models/common_models/courses_model.dart';
+import 'package:kids_edu_teacher/data/models/shop_models/banner_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
 import 'package:kids_edu_teacher/data/models/video_models/get_all_collections_model.dart';
 import 'package:kids_edu_teacher/view/auth/logic/change_password_bloc/change_password_bloc.dart';
@@ -173,7 +174,9 @@ abstract class Routes {
           ),
         );
       case BannerPage.routeName:
-        return MaterialPageRoute(builder: (_) => const BannerPage());
+        final bannerId = settings.arguments as BannerModel;
+        return MaterialPageRoute(
+            builder: (_) => BannerPage(bannerId: bannerId));
       case NotificationSettingsPage.routeName:
         return MaterialPageRoute(
             builder: (_) => const NotificationSettingsPage());

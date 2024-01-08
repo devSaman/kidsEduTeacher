@@ -7,6 +7,7 @@ import 'package:kids_edu_teacher/view/home/logic/all_courses_bloc/all_courses_bl
 import 'package:kids_edu_teacher/view/home/screens/home_page.dart';
 import 'package:kids_edu_teacher/view/library/screens/library_page.dart';
 import 'package:kids_edu_teacher/view/profile/screens/profile_page.dart';
+import 'package:kids_edu_teacher/view/shop/logic/get_banners_bloc/get_banners_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/logic/get_shop_data_bloc/get_shop_data_bloc.dart';
 import 'package:kids_edu_teacher/view/shop/screens/shop_page.dart';
 import 'package:kids_edu_teacher/view/videos/screens/video_page.dart';
@@ -27,8 +28,15 @@ class _MainAppScreenState extends State<MainAppScreen> {
       create: (context) => AllCoursesBloc(),
       child: const HomePage(),
     ),
-    BlocProvider(
-      create: (context) => GetShopDataBloc(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetShopDataBloc(),
+        ),
+        BlocProvider(
+          create: (context) => GetBannersBloc(),
+        ),
+      ],
       child: const ShopPage(),
     ),
     const ProfilePage(),
