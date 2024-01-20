@@ -4,13 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:kids_edu_teacher/constants/colors.dart';
-import 'package:kids_edu_teacher/constants/routes.dart';
 import 'package:kids_edu_teacher/constants/text_styles.dart';
 import 'package:kids_edu_teacher/data/models/hive_models/basket_model.dart';
 import 'package:kids_edu_teacher/data/models/shop_models/main_model.dart';
-import 'package:kids_edu_teacher/view/main_app/main_app.dart';
 import 'package:kids_edu_teacher/view/profile/screens/coins_page.dart';
-import 'package:kids_edu_teacher/view/shop/screens/successfully_purchased.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/add_button.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_card.dart';
 import 'package:kids_edu_teacher/view/shop/widgets/product_images_widget.dart';
@@ -36,7 +33,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   void initState() {
     context.read<GetUserDataBloc>().add(GetUserData());
-
     sizeValue = null;
     super.initState();
   }

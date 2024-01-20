@@ -62,8 +62,6 @@ class KidsEduApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      // initialRoute:
-      //     hasVerified ? MainAppScreen.routeName : InitialPage.routeName,
       onGenerateRoute: Routes.generateRoute,
       home: hasVerified
           ? MultiBlocProvider(
